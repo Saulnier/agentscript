@@ -3,46 +3,71 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Arizona Public Service – Customer Service Script</title>
+<title>GMR Transport Coordination Script</title>
 
 <style>
   :root {
-    --primary: #00629B;
-    --primary-light: #E3F2FD;
-    --bg: #F5F5F5;
+    --primary: #005DAA;
+    --primary-dark: #003d73;
+    --primary-light: #E8F2FA;
+    --accent: #00A3E0;
+    --bg: #F5F7FA;
     --card-bg: #ffffff;
     --text-main: #1f2d3d;
     --text-muted: #5f6c7b;
-    --radius: 14px;
+    --radius: 12px;
     --shadow: 0 4px 14px rgba(0,0,0,0.08);
     --danger: #D32F2F;
     --danger-light: #FFEBEE;
-    --success: #388E3C;
+    --success: #2E7D32;
     --success-light: #E8F5E9;
+    --warning: #F57C00;
+    --warning-light: #FFF3E0;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-main);
     padding: 20px 16px;
   }
 
   .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
   }
 
   .header {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
-    padding: 16px 24px;
+    padding: 20px 24px;
     border-radius: var(--radius);
-    font-size: 1.25rem;
-    font-weight: 600;
     margin-bottom: 22px;
-    text-align: center;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .header-subtitle {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 4px;
   }
 
   /* -------------------- TABS --------------------- */
@@ -95,7 +120,7 @@
     color: var(--text-muted);
   }
 
-  input, select {
+  input, select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #cbd7e3;
@@ -106,13 +131,6 @@
   }
 
   textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd7e3;
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-    font-size: 0.92rem;
-    box-sizing: border-box;
     resize: vertical;
     min-height: 80px;
   }
@@ -123,8 +141,18 @@
     gap: 24px;
   }
 
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+
   @media (max-width: 700px) {
-    .grid-2 { grid-template-columns: 1fr; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
   }
 
   /* ---------------- CHECKBOXES ------------------ */
@@ -142,38 +170,6 @@
     margin: 0;
   }
 
-  /* Identity verification status indicator */
-  .verification-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-  }
-
-  .verification-status.verified {
-    background: var(--success-light);
-    border-left: 4px solid var(--success);
-  }
-
-  .verification-status.not-verified {
-    background: var(--danger-light);
-    border-left: 4px solid var(--danger);
-  }
-
-  .verification-status input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-  }
-
-  .verification-status label {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
   /* ---------------- ACTION BUTTONS -------------- */
   .actions {
     display: grid;
@@ -189,13 +185,46 @@
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   .btn-danger { background: var(--danger); color: #fff; }
   .btn-danger:hover { background: #B71C1C; }
 
   .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: #004E7A; }
+  .btn-primary:hover { background: var(--primary-dark); }
+
+  .btn-accent { background: var(--accent); color: #fff; }
+  .btn-accent:hover { background: #0082b3; }
+
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-success:hover { background: #1B5E20; }
+
+  /* ---------------- PRIORITY BADGES -------------- */
+  .priority-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .priority-urgent {
+    background: #FFEBEE;
+    color: #C62828;
+  }
+
+  .priority-scheduled {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  .priority-next-available {
+    background: #FFF9C4;
+    color: #F57F17;
+  }
 
   /* ---------------- SUPERVISOR ACTION CARD -------------- */
   .supervisor-card {
@@ -216,6 +245,20 @@
 
   .supervisor-option:hover {
     text-decoration: underline;
+  }
+
+  /* ---------------- COMPLIANCE ALERT -------------- */
+  .compliance-alert {
+    background: var(--warning-light);
+    border-left: 4px solid var(--warning);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  .compliance-alert strong {
+    color: var(--warning);
   }
 
   /* ---------------- TIMELINE -------------------- */
@@ -266,25 +309,6 @@
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  /* -------------- RATE DETAILS TABLE ------------------- */
-  .rate-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-
-  .rate-table td {
-    padding: 8px;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 0.9rem;
-  }
-
-  .rate-table td:first-child {
-    font-weight: 600;
-    color: var(--text-muted);
-    width: 40%;
-  }
-
 </style>
 </head>
 
@@ -295,132 +319,266 @@
 
 <div class="container">
 
-  <div class="header">Arizona Public Service – Customer Service Script</div>
-
-  <div class="tabs">
-    <div class="tab active" data-tab="customer">Customer Information</div>
-    <div class="tab" data-tab="workflow">Call Workflow</div>
-    <div class="tab" data-tab="account">Account Details</div>
-    <div class="tab" data-tab="history">Contact History</div>
-  </div>
-
-  <!-- ---------------- TAB: CUSTOMER INFORMATION ---------------- -->
-  <div id="customer" class="tab-content active">
-    <div class="card">
-      <h3>Customer Information</h3>
-
-      <div class="grid-2">
-        <div><label>First Name</label><input id="firstName" readonly></div>
-        <div><label>Last Name</label><input id="lastName" readonly></div>
-
-        <div><label>Phone Number</label><input id="phoneNumber" readonly></div>
-        <div><label>Account Number</label><input id="accountNumber" readonly></div>
-
-        <div style="grid-column: 1 / -1;">
-          <label>Address</label>
-          <input id="address" readonly>
-        </div>
-
-        <div><label>Start of Service Date</label><input id="serviceStartDate" readonly></div>
-        <div><label>Account Balance</label><input id="accountBalance" readonly></div>
-      </div>
-
-      <!-- Identity Verification Status -->
-      <div id="verificationStatus" class="verification-status not-verified">
-        <input type="checkbox" id="identityVerified" onchange="updateVerificationStatus()">
-        <label for="identityVerified">Identity Verified</label>
-      </div>
-
-      <!-- Caller Intent -->
+  <div class="header">
+    <div class="header-left">
       <div>
-        <label>Caller Intent</label>
-        <textarea id="callerIntent" placeholder="Document the reason for the customer's call..."></textarea>
+        <div class="header-title">GMR Transport Coordination</div>
+        <div class="header-subtitle">Global Medical Response</div>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: CALL WORKFLOW ---------------- -->
+  <!-- COMPLIANCE ALERT -->
+  <div class="compliance-alert">
+    <strong>⚠️ HIPAA Reminder:</strong> All patient information is confidential and protected under HIPAA regulations. Verify caller identity before discussing medical details.
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="caller">Caller Information</div>
+    <div class="tab" data-tab="pickup">Pickup Details</div>
+    <div class="tab" data-tab="destination">Destination Details</div>
+    <div class="tab" data-tab="transport">Transport Details</div>
+    <div class="tab" data-tab="workflow">Workflow</div>
+    <div class="tab" data-tab="history">Call History</div>
+  </div>
+
+  <!-- ---------------- TAB: CALLER INFORMATION ---------------- -->
+  <div id="caller" class="tab-content active">
+    <div class="card">
+      <h3>Caller Information</h3>
+
+      <div class="grid-2">
+        <div><label>Caller's First Name *</label><input id="callerFirstName"></div>
+        <div><label>Caller's Last Name (Optional)</label><input id="callerLastName"></div>
+
+        <div><label>Caller's Facility Name</label><input id="callerFacilityName"></div>
+        <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
+      </div>
+
+      <div>
+        <label>Caller's Address</label>
+        <input id="address">
+      </div>
+
+      <div>
+        <label>Reason for Transport *</label>
+        <select id="reasonForTransport">
+          <option value="">Select reason...</option>
+          <option value="discharge">Discharge</option>
+          <option value="going-home">Going Home</option>
+          <option value="appointment">Appointment</option>
+          <option value="facility-transfer">Facility Transfer</option>
+          <option value="dialysis">Dialysis</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: PICKUP DETAILS ---------------- -->
+  <div id="pickup" class="tab-content">
+    <div class="card">
+      <h3>Pickup Details</h3>
+
+      <div class="grid-2">
+        <div>
+          <label>Type of Ambulance *</label>
+          <select id="ambulanceType">
+            <option value="">Select type...</option>
+            <option value="BLS">Basic Life Support (BLS)</option>
+            <option value="ALS">Advanced Life Support (ALS)</option>
+            <option value="CCT">Critical Care Transport (CCT)</option>
+            <option value="Air">Air Ambulance</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Priority *</label>
+          <select id="priority" onchange="updatePriorityBadge()">
+            <option value="">Select priority...</option>
+            <option value="scheduled">Scheduled in Future</option>
+            <option value="next-available">Next Available</option>
+            <option value="urgent">Urgent</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="priorityBadgeContainer" style="margin-bottom: 16px;"></div>
+
+      <div>
+        <label>Pickup Facility Name *</label>
+        <input id="pickupFacilityName" placeholder="Enter facility name">
+      </div>
+
+      <div>
+        <label>Pickup Facility Address</label>
+        <input id="pickupAddress" placeholder="Street address, city, state, zip">
+      </div>
+
+      <div class="grid-2">
+        <div><label>Pickup Facility Department</label><input id="pickupDepartment"></div>
+        <div><label>Pickup Facility Room</label><input id="pickupRoom"></div>
+      </div>
+
+      <div class="grid-2">
+        <div><label>Pickup Facility Bed Number (Optional)</label><input id="pickupBedNumber"></div>
+        <div>
+          <label>Date and Time of Pickup *</label>
+          <input id="pickupDateTime" type="datetime-local">
+        </div>
+      </div>
+
+      <div>
+        <label>Name of Sending Physician</label>
+        <input id="sendingPhysician">
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: DESTINATION DETAILS ---------------- -->
+  <div id="destination" class="tab-content">
+    <div class="card">
+      <h3>Destination Details</h3>
+
+      <div>
+        <label>Destination Facility Name *</label>
+        <input id="destinationFacilityName" placeholder="Enter destination facility">
+      </div>
+
+      <div>
+        <label>Destination Facility Address</label>
+        <textarea id="destinationAddress" placeholder="If not a facility, enter home address or other destination address"></textarea>
+      </div>
+
+      <div class="grid-2">
+        <div><label>Destination Facility Department (Optional)</label><input id="destinationDepartment"></div>
+        <div><label>Destination Facility Room (Optional)</label><input id="destinationRoom"></div>
+      </div>
+
+      <div>
+        <label>Destination Facility Bed Number (Optional)</label>
+        <input id="destinationBedNumber">
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: TRANSPORT DETAILS ---------------- -->
+  <div id="transport" class="tab-content">
+    <div class="card">
+      <h3>Transport & Medical Information</h3>
+
+      <div>
+        <label>Special Equipment Requirements</label>
+        <select id="specialEquipment">
+          <option value="">Select if applicable...</option>
+          <option value="oxygen">Oxygen</option>
+          <option value="iv-pump">IV Pump</option>
+          <option value="cardiac-monitor">Cardiac Monitor</option>
+          <option value="ventilator">Ventilator</option>
+          <option value="bariatric">Bariatric Equipment</option>
+          <option value="isolation">Isolation Precautions</option>
+          <option value="wheelchair">Wheelchair Transport</option>
+          <option value="stretcher">Stretcher Only</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Patient Mobility/Assistance Level</label>
+        <select id="patientMobility">
+          <option value="">Select level...</option>
+          <option value="ambulatory">Ambulatory (Can Walk)</option>
+          <option value="assistance">Needs Assistance</option>
+          <option value="wheelchair">Wheelchair Bound</option>
+          <option value="stretcher">Stretcher/Gurney</option>
+          <option value="critical">Critical/Unstable</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Account/Member Number</label>
+        <input id="accountNumber" placeholder="Member ID or account number">
+      </div>
+
+      <div>
+        <label>Start of Service Date</label>
+        <input id="startDate" type="date">
+      </div>
+
+      <div>
+        <label>Additional Notes / Special Instructions</label>
+        <textarea id="specialInstructions" placeholder="Weight restrictions, allergies, isolation precautions, family contacts, etc."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: WORKFLOW ---------------- -->
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Call Workflow Checklist</h3>
+      <h3>Transport Coordination Workflow</h3>
 
-      <div class="check-item"><input type="checkbox">Verify customer identity (Name + Account Number or Last 4 SSN)</div>
-      <div class="check-item"><input type="checkbox">Confirm service address</div>
-      <div class="check-item"><input type="checkbox">Document caller intent in notes</div>
-      <div class="check-item"><input type="checkbox">Review current account balance and payment status</div>
-      <div class="check-item"><input type="checkbox">Address customer inquiry or concern</div>
-      <div class="check-item"><input type="checkbox">Offer payment options if balance is outstanding</div>
-      <div class="check-item"><input type="checkbox">Provide next steps and confirm customer understanding</div>
-      <div class="check-item"><input type="checkbox">Update account notes with call summary</div>
+      <div class="check-item"><input type="checkbox">Verify caller identity and facility</div>
+      <div class="check-item"><input type="checkbox">Confirm patient name and date of birth</div>
+      <div class="check-item"><input type="checkbox">Obtain complete pickup information</div>
+      <div class="check-item"><input type="checkbox">Obtain complete destination information</div>
+      <div class="check-item"><input type="checkbox">Confirm transport type (BLS/ALS/CCT)</div>
+      <div class="check-item"><input type="checkbox">Verify date and time of transport</div>
+      <div class="check-item"><input type="checkbox">Document special equipment needs</div>
+      <div class="check-item"><input type="checkbox">Obtain physician authorization if required</div>
+      <div class="check-item"><input type="checkbox">Provide estimated time of arrival (ETA)</div>
+      <div class="check-item"><input type="checkbox">Assign transport to crew</div>
+      <div class="check-item"><input type="checkbox">Send confirmation to facility</div>
+      <div class="check-item"><input type="checkbox">Update transport management system</div>
 
       <div class="actions">
+        <button class="btn btn-success" onclick="showToast('Transport request submitted successfully')">Submit Transport Request</button>
+        <button class="btn btn-accent" onclick="showToast('Confirmation sent to facility')">Send Confirmation</button>
         <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Supervisor</button>
 
         <div id="supervisorCard" class="supervisor-card">
-          <div class="supervisor-option">Notify Supervisor Immediately</div>
-          <div class="supervisor-option">Request Live Call Monitoring</div>
-          <div class="supervisor-option">Flag Call for Quality Review</div>
-          <div class="supervisor-option">Transfer to Supervisor Queue</div>
+          <div class="supervisor-option">Transfer to Supervisor</div>
+          <div class="supervisor-option">Request Dispatch Override</div>
+          <div class="supervisor-option">Escalate Critical Transport</div>
+          <div class="supervisor-option">Report System Issue</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: ACCOUNT DETAILS ---------------- -->
-  <div id="account" class="tab-content">
-    <div class="card">
-      <h3>Account & Rate Plan Details</h3>
-
-      <table class="rate-table">
-        <tr><td><strong>Rate Plan:</strong></td><td id="ratePlan">-</td></tr>
-        <tr><td><strong>Service Type:</strong></td><td id="serviceType">Residential</td></tr>
-        <tr><td><strong>Current Rate (per kWh):</strong></td><td id="currentRate">$0.1287</td></tr>
-        <tr><td><strong>Peak Rate (Summer):</strong></td><td id="peakRate">$0.2145</td></tr>
-        <tr><td><strong>Off-Peak Rate:</strong></td><td id="offPeakRate">$0.0897</td></tr>
-        <tr><td><strong>Monthly Service Charge:</strong></td><td id="serviceCharge">$15.00</td></tr>
-        <tr><td><strong>Billing Cycle:</strong></td><td id="billingCycle">Monthly</td></tr>
-        <tr><td><strong>Next Billing Date:</strong></td><td id="nextBilling">03/15/2026</td></tr>
-        <tr><td><strong>Average Monthly Usage:</strong></td><td id="avgUsage">850 kWh</td></tr>
-        <tr><td><strong>Payment Method on File:</strong></td><td id="paymentMethod">Auto-Pay (Bank Account)</td></tr>
-      </table>
-
-      <div class="actions">
-        <button class="btn btn-primary" onclick="showToast('Rate plan details updated')">Update Rate Plan</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ---------------- TAB: CONTACT HISTORY ---------------- -->
+  <!-- ---------------- TAB: CALL HISTORY ---------------- -->
   <div id="history" class="tab-content">
     <div class="card">
-      <h3>Customer Contact History</h3>
+      <h3>Transport Request History</h3>
 
       <div class="timeline">
         <div class="event">
-          <div class="date">Jan 28, 2026</div>
-          <div class="type">Inbound Call</div>
-          <div class="summary">Customer inquired about high winter bill. Explained heating usage impact.</div>
+          <div class="date">Feb 5, 2026 - 14:32</div>
+          <div class="type">BLS Transport</div>
+          <div class="summary">Completed: Discharge transport from Memorial Hospital to patient residence. Crew: Unit 247.</div>
         </div>
         <div class="event">
-          <div class="date">Jan 15, 2026</div>
-          <div class="type">Email</div>
-          <div class="summary">Sent billing statement and payment reminder.</div>
+          <div class="date">Feb 3, 2026 - 09:15</div>
+          <div class="type">ALS Transport</div>
+          <div class="summary">Completed: Dialysis transport to Fresenius Kidney Care. Returned to facility.</div>
         </div>
         <div class="event">
-          <div class="date">Jan 10, 2026</div>
-          <div class="type">SMS</div>
-          <div class="summary">Payment confirmation - $187.43 received.</div>
+          <div class="date">Jan 30, 2026 - 16:45</div>
+          <div class="type">Scheduled BLS</div>
+          <div class="summary">Cancelled: Patient transported by family. Cancellation fee waived.</div>
         </div>
         <div class="event">
-          <div class="date">Dec 20, 2025</div>
-          <div class="type">Inbound Call</div>
-          <div class="summary">Enrolled in budget billing plan. Set monthly amount at $165.</div>
+          <div class="date">Jan 28, 2026 - 11:20</div>
+          <div class="type">CCT Transport</div>
+          <div class="summary">Completed: ICU to ICU transfer. Cardiac monitoring required. Crew: CCT Unit 5.</div>
         </div>
         <div class="event">
-          <div class="date">Dec 5, 2025</div>
-          <div class="type">Outbound Call</div>
-          <div class="summary">Past due notice follow-up. Customer committed to payment by Dec 10.</div>
+          <div class="date">Jan 25, 2026 - 08:00</div>
+          <div class="type">BLS Transport</div>
+          <div class="summary">Completed: Routine dialysis transport. No complications reported.</div>
         </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-accent" onclick="showToast('Full transport history exported')">Export Full History</button>
       </div>
     </div>
   </div>
@@ -460,14 +618,13 @@
 
   /* ----- Defaults ----- */
   const defaults = {
-    firstName: "Maria",
-    lastName: "Gonzalez",
-    phoneNumber: "(602) 555-1234",
-    accountNumber: "APS-8847291",
-    address: "4521 E Camelback Rd, Phoenix, AZ 85018",
-    serviceStartDate: "2018-03-15",
-    accountBalance: "$187.43",
-    ratePlan: "E-27 Time-of-Use (Residential)"
+    callerFirstName: "Jennifer",
+    callerLastName: "Rodriguez",
+    callerFacilityName: "St. Mary's Medical Center",
+    phoneNumber: "(214) 555-3847",
+    address: "4400 Hwy 121, Suite 700, Lewisville, TX 75056",
+    pickupFacilityName: "St. Mary's Medical Center",
+    destinationFacilityName: "Home"
   };
 
   function setField(id, val) {
@@ -475,38 +632,45 @@
     if (el) el.value = val;
   }
 
-  function setTextContent(id, val) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val;
-  }
-
   /* ----- Field Mapping ----- */
-  setField("firstName", getQP("firstName","FirstName","fname","FNAME") || defaults.firstName);
-  setField("lastName", getQP("lastName","LastName","lname","LNAME") || defaults.lastName);
-  setField("phoneNumber", cleanPhone(getQP("phoneNumber","phone","PHONE","Mobile")) || defaults.phoneNumber);
-  setField("accountNumber", getQP("accountNumber","AccountNumber","account","ACCOUNT") || defaults.accountNumber);
-  setField("address", getQP("address","Address","serviceAddress","SERVICE_ADDRESS") || defaults.address);
-  setField("serviceStartDate", getQP("serviceStartDate","startDate","START_DATE") || defaults.serviceStartDate);
-  setField("accountBalance", getQP("accountBalance","balance","BALANCE") || defaults.accountBalance);
-  setField("callerIntent", getQP("callerIntent","intent","INTENT") || "");
+  setField("callerFirstName", getQP("FNAME","firstName","fname") || defaults.callerFirstName);
+  setField("callerLastName", getQP("LNAME","lastName","lname") || defaults.callerLastName);
+  setField("phoneNumber", cleanPhone(getQP("PHONE","phone","phoneNumber")) || defaults.phoneNumber);
+  setField("address", getQP("ADDRESS","address") || defaults.address);
+  setField("accountNumber", getQP("ACCOUNT","account","accountNumber") || "");
+  setField("startDate", getQP("START_DATE","startDate","serviceStart") || "");
 
-  setTextContent("ratePlan", getQP("ratePlan","RATE_PLAN","plan") || defaults.ratePlan);
-
-  /* ----- Identity Verification Status ----- */
-  function updateVerificationStatus() {
-    const checkbox = document.getElementById("identityVerified");
-    const statusDiv = document.getElementById("verificationStatus");
+  /* ----- Priority Badge ----- */
+  function updatePriorityBadge() {
+    const priority = document.getElementById("priority").value;
+    const container = document.getElementById("priorityBadgeContainer");
     
-    if (checkbox.checked) {
-      statusDiv.classList.remove("not-verified");
-      statusDiv.classList.add("verified");
-      showToast("Customer identity verified");
-    } else {
-      statusDiv.classList.remove("verified");
-      statusDiv.classList.add("not-verified");
+    if (!priority) {
+      container.innerHTML = "";
+      return;
     }
+
+    let badgeClass = "";
+    let badgeText = "";
+
+    switch(priority) {
+      case "urgent":
+        badgeClass = "priority-urgent";
+        badgeText = "🚨 Urgent Priority";
+        break;
+      case "next-available":
+        badgeClass = "priority-next-available";
+        badgeText = "⏱️ Next Available";
+        break;
+      case "scheduled":
+        badgeClass = "priority-scheduled";
+        badgeText = "📅 Scheduled";
+        break;
+    }
+
+    container.innerHTML = `<span class="priority-badge ${badgeClass}">${badgeText}</span>`;
   }
-  window.updateVerificationStatus = updateVerificationStatus;
+  window.updatePriorityBadge = updatePriorityBadge;
 
   /* ----- Supervisor Action Card Toggle ----- */
   function toggleSupervisorCard() {
@@ -548,7 +712,7 @@
   const headerColor = getQP("headerColor","HeaderColor");
 
   if (bgColor) document.body.style.backgroundColor = bgColor;
-  if (headerColor) document.querySelector(".header").style.backgroundColor = headerColor;
+  if (headerColor) document.querySelector(".header").style.background = headerColor;
   if (buttonColor) {
     document.querySelectorAll(".btn-primary").forEach(btn => {
       btn.style.backgroundColor = buttonColor;
