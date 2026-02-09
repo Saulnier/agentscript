@@ -385,7 +385,7 @@
           <label>Type of Ambulance *</label>
           <select id="ambulanceType">
             <option value="">Select type...</option>
-            <option value="BLS">Basic Life Support (BLS)</option>
+            <option value="BLS" selected>Basic Life Support (BLS)</option>
             <option value="ALS">Advanced Life Support (ALS)</option>
             <option value="CCT">Critical Care Transport (CCT)</option>
             <option value="Air">Air Ambulance</option>
@@ -397,7 +397,7 @@
           <select id="priority" onchange="updatePriorityBadge()">
             <option value="">Select priority...</option>
             <option value="scheduled">Scheduled in Future</option>
-            <option value="next-available">Next Available</option>
+            <option value="next-available" selected>Next Available</option>
             <option value="urgent">Urgent</option>
           </select>
         </div>
@@ -620,10 +620,10 @@
   const defaults = {
     callerFirstName: "Jennifer",
     callerLastName: "Rodriguez",
-    callerFacilityName: "St. Mary's Medical Center",
+    callerFacilityName: "Littleton Hospital",
     phoneNumber: "(214) 555-3847",
     address: "4400 Hwy 121, Suite 700, Lewisville, TX 75056",
-    pickupFacilityName: "St. Mary's Medical Center",
+    pickupFacilityName: "Littleton Hospital",
     destinationFacilityName: "Home"
   };
 
@@ -635,10 +635,15 @@
   /* ----- Field Mapping ----- */
   setField("callerFirstName", getQP("FNAME","firstName","fname") || defaults.callerFirstName);
   setField("callerLastName", getQP("LNAME","lastName","lname") || defaults.callerLastName);
+  setField("callerFacilityName", getQP("FACILITY","facility","facilityName") || defaults.callerFacilityName);
   setField("phoneNumber", cleanPhone(getQP("PHONE","phone","phoneNumber")) || defaults.phoneNumber);
   setField("address", getQP("ADDRESS","address") || defaults.address);
   setField("accountNumber", getQP("ACCOUNT","account","accountNumber") || "");
   setField("startDate", getQP("START_DATE","startDate","serviceStart") || "");
+  setField("pickupFacilityName", getQP("PICKUP_FACILITY","pickupFacility") || defaults.pickupFacilityName);
+
+  /* ----- Trigger priority badge on load ----- */
+  updatePriorityBadge();
 
   /* ----- Priority Badge ----- */
   function updatePriorityBadge() {
