@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GMR Transport Coordination Script</title>
+<title>New American Funding - Loan Officer Script</title>
 
 <style>
   :root {
-    --primary: #005DAA;
-    --primary-dark: #003d73;
+    --primary: #00589C;
+    --primary-dark: #003d6b;
     --primary-light: #E8F2FA;
-    --accent: #00A3E0;
+    --accent: #F47920;
     --bg: #F5F7FA;
     --card-bg: #ffffff;
     --text-main: #1f2d3d;
@@ -195,13 +195,13 @@
   .btn-primary:hover { background: var(--primary-dark); }
 
   .btn-accent { background: var(--accent); color: #fff; }
-  .btn-accent:hover { background: #0082b3; }
+  .btn-accent:hover { background: #d66618; }
 
   .btn-success { background: var(--success); color: #fff; }
   .btn-success:hover { background: #1B5E20; }
 
-  /* ---------------- PRIORITY BADGES -------------- */
-  .priority-badge {
+  /* ---------------- LOAN TYPE BADGES -------------- */
+  .loan-badge {
     display: inline-block;
     padding: 6px 14px;
     border-radius: 999px;
@@ -211,18 +211,18 @@
     text-transform: uppercase;
   }
 
-  .priority-urgent {
-    background: #FFEBEE;
-    color: #C62828;
-  }
-
-  .priority-scheduled {
+  .loan-purchase {
     background: #E8F5E9;
     color: #2E7D32;
   }
 
-  .priority-next-available {
-    background: #FFF9C4;
+  .loan-refinance {
+    background: #E3F2FD;
+    color: #1565C0;
+  }
+
+  .loan-heloc {
+    background: #FFF3E0;
     color: #F57F17;
   }
 
@@ -309,6 +309,25 @@
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
+  /* -------------- INFO TABLE ------------------- */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .info-table td {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+  }
+
+  .info-table td:first-child {
+    font-weight: 600;
+    color: var(--text-muted);
+    width: 40%;
+  }
+
 </style>
 </head>
 
@@ -322,191 +341,268 @@
   <div class="header">
     <div class="header-left">
       <div>
-        <div class="header-title">GMR Transport Coordination</div>
-        <div class="header-subtitle">Global Medical Response</div>
+        <div class="header-title">New American Funding</div>
+        <div class="header-subtitle">Loan Officer Call Script</div>
       </div>
     </div>
   </div>
 
   <!-- COMPLIANCE ALERT -->
   <div class="compliance-alert">
-    <strong>⚠️ HIPAA Reminder:</strong> All patient information is confidential and protected under HIPAA regulations. Verify caller identity before discussing medical details.
+    <strong>⚠️ Compliance Reminder:</strong> Ensure all federal lending disclosures are provided. Follow TRID timelines, verify income documentation, and document all customer interactions per CFPB guidelines.
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-tab="caller">Caller Information</div>
-    <div class="tab" data-tab="pickup">Pickup Details</div>
-    <div class="tab" data-tab="destination">Destination Details</div>
-    <div class="tab" data-tab="transport">Transport Details</div>
-    <div class="tab" data-tab="workflow">Workflow</div>
-    <div class="tab" data-tab="history">Call History</div>
+    <div class="tab active" data-tab="borrower">Borrower Information</div>
+    <div class="tab" data-tab="loan">Loan Details</div>
+    <div class="tab" data-tab="property">Property Information</div>
+    <div class="tab" data-tab="financial">Financial Profile</div>
+    <div class="tab" data-tab="workflow">Call Workflow</div>
+    <div class="tab" data-tab="history">Contact History</div>
   </div>
 
-  <!-- ---------------- TAB: CALLER INFORMATION ---------------- -->
-  <div id="caller" class="tab-content active">
+  <!-- ---------------- TAB: BORROWER INFORMATION ---------------- -->
+  <div id="borrower" class="tab-content active">
     <div class="card">
-      <h3>Caller Information</h3>
+      <h3>Borrower Information</h3>
 
       <div class="grid-2">
-        <div><label>Caller's First Name *</label><input id="callerFirstName"></div>
-        <div><label>Caller's Last Name (Optional)</label><input id="callerLastName"></div>
+        <div><label>First Name *</label><input id="firstName"></div>
+        <div><label>Last Name *</label><input id="lastName"></div>
 
-        <div><label>Caller's Facility Name</label><input id="callerFacilityName"></div>
         <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
+        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
+
+        <div><label>Date of Birth</label><input id="dateOfBirth" type="date"></div>
+        <div><label>Social Security Number (Last 4)</label><input id="ssnLast4" maxlength="4" placeholder="xxxx"></div>
       </div>
 
       <div>
-        <label>Caller's Address</label>
-        <input id="address">
+        <label>Current Address</label>
+        <input id="currentAddress" placeholder="Street address, city, state, zip">
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label>Marital Status</label>
+          <select id="maritalStatus">
+            <option value="">Select status...</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="divorced">Divorced</option>
+            <option value="widowed">Widowed</option>
+            <option value="separated">Separated</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Co-Borrower?</label>
+          <select id="coBorrower">
+            <option value="no">No</option>
+            <option value="yes">Yes - Spouse</option>
+            <option value="yes-other">Yes - Other</option>
+          </select>
+        </div>
       </div>
 
       <div>
-        <label>Reason for Transport *</label>
-        <select id="reasonForTransport">
-          <option value="">Select reason...</option>
-          <option value="discharge">Discharge</option>
-          <option value="going-home">Going Home</option>
-          <option value="appointment">Appointment</option>
-          <option value="facility-transfer">Facility Transfer</option>
-          <option value="dialysis">Dialysis</option>
+        <label>How Did You Hear About Us?</label>
+        <select id="referralSource">
+          <option value="">Select source...</option>
+          <option value="realtor">Real Estate Agent Referral</option>
+          <option value="online">Online Search</option>
+          <option value="social-media">Social Media</option>
+          <option value="friend-family">Friend or Family</option>
+          <option value="existing-customer">Existing NAF Customer</option>
+          <option value="advertisement">Advertisement</option>
           <option value="other">Other</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: PICKUP DETAILS ---------------- -->
-  <div id="pickup" class="tab-content">
+  <!-- ---------------- TAB: LOAN DETAILS ---------------- -->
+  <div id="loan" class="tab-content">
     <div class="card">
-      <h3>Pickup Details</h3>
+      <h3>Loan Request Details</h3>
 
       <div class="grid-2">
         <div>
-          <label>Type of Ambulance *</label>
-          <select id="ambulanceType">
+          <label>Loan Purpose *</label>
+          <select id="loanPurpose" onchange="updateLoanBadge()">
+            <option value="">Select purpose...</option>
+            <option value="purchase" selected>Purchase</option>
+            <option value="refinance">Refinance (Rate & Term)</option>
+            <option value="cash-out">Cash-Out Refinance</option>
+            <option value="heloc">HELOC</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Loan Type</label>
+          <select id="loanType">
             <option value="">Select type...</option>
-            <option value="BLS" selected>Basic Life Support (BLS)</option>
-            <option value="ALS">Advanced Life Support (ALS)</option>
-            <option value="CCT">Critical Care Transport (CCT)</option>
-            <option value="Air">Air Ambulance</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Priority *</label>
-          <select id="priority" onchange="updatePriorityBadge()">
-            <option value="">Select priority...</option>
-            <option value="scheduled">Scheduled in Future</option>
-            <option value="next-available" selected>Next Available</option>
-            <option value="urgent">Urgent</option>
+            <option value="conventional">Conventional</option>
+            <option value="fha">FHA</option>
+            <option value="va">VA</option>
+            <option value="usda">USDA</option>
+            <option value="jumbo">Jumbo</option>
+            <option value="non-qm">Non-QM</option>
           </select>
         </div>
       </div>
 
-      <div id="priorityBadgeContainer" style="margin-bottom: 16px;"></div>
+      <div id="loanBadgeContainer" style="margin-bottom: 16px;"></div>
 
-      <div>
-        <label>Pickup Facility Name *</label>
-        <input id="pickupFacilityName" placeholder="Enter facility name">
-      </div>
-
-      <div>
-        <label>Pickup Facility Address</label>
-        <input id="pickupAddress" placeholder="Street address, city, state, zip">
+      <div class="grid-3">
+        <div><label>Estimated Purchase Price / Home Value</label><input id="purchasePrice" type="number" placeholder="$"></div>
+        <div><label>Desired Loan Amount</label><input id="loanAmount" type="number" placeholder="$"></div>
+        <div><label>Down Payment Amount</label><input id="downPayment" type="number" placeholder="$"></div>
       </div>
 
       <div class="grid-2">
-        <div><label>Pickup Facility Department</label><input id="pickupDepartment"></div>
-        <div><label>Pickup Facility Room</label><input id="pickupRoom"></div>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Pickup Facility Bed Number (Optional)</label><input id="pickupBedNumber"></div>
         <div>
-          <label>Date and Time of Pickup *</label>
-          <input id="pickupDateTime" type="datetime-local">
+          <label>Property Type</label>
+          <select id="propertyType">
+            <option value="">Select type...</option>
+            <option value="single-family">Single Family Home</option>
+            <option value="condo">Condominium</option>
+            <option value="townhome">Townhome</option>
+            <option value="multi-unit">Multi-Unit (2-4 units)</option>
+            <option value="manufactured">Manufactured Home</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Occupancy</label>
+          <select id="occupancy">
+            <option value="primary">Primary Residence</option>
+            <option value="second-home">Second Home</option>
+            <option value="investment">Investment Property</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label>Credit Score (Estimated)</label>
+          <select id="creditScore">
+            <option value="">Select range...</option>
+            <option value="740+">Excellent (740+)</option>
+            <option value="700-739">Good (700-739)</option>
+            <option value="660-699">Fair (660-699)</option>
+            <option value="620-659">Below Average (620-659)</option>
+            <option value="<620">Poor (<620)</option>
+            <option value="unknown">Not Sure</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Desired Closing Timeline</label>
+          <select id="closingTimeline">
+            <option value="">Select timeline...</option>
+            <option value="asap">ASAP (Under 30 days)</option>
+            <option value="30-45">30-45 days</option>
+            <option value="45-60">45-60 days</option>
+            <option value="60+">60+ days</option>
+            <option value="flexible">Flexible</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: PROPERTY INFORMATION ---------------- -->
+  <div id="property" class="tab-content">
+    <div class="card">
+      <h3>Property Information</h3>
+
+      <div>
+        <label>Property Address (If Known)</label>
+        <textarea id="propertyAddress" placeholder="Street address, city, state, zip (leave blank if still searching)"></textarea>
+      </div>
+
+      <div class="grid-2">
+        <div><label>City/Area Interested In</label><input id="targetCity" placeholder="e.g., Irvine, CA"></div>
+        <div><label>MLS Number (If Available)</label><input id="mlsNumber" placeholder="Optional"></div>
+      </div>
+
+      <div class="grid-3">
+        <div><label>Bedrooms</label><input id="bedrooms" type="number" placeholder="#"></div>
+        <div><label>Bathrooms</label><input id="bathrooms" type="number" step="0.5" placeholder="#"></div>
+        <div><label>Square Footage</label><input id="sqft" type="number" placeholder="sq ft"></div>
+      </div>
+
+      <div class="grid-2">
+        <div><label>Year Built</label><input id="yearBuilt" type="number" placeholder="YYYY"></div>
+        <div>
+          <label>Working with Realtor?</label>
+          <select id="hasRealtor">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+            <option value="need-referral">Need Realtor Referral</option>
+          </select>
         </div>
       </div>
 
       <div>
-        <label>Name of Sending Physician</label>
-        <input id="sendingPhysician">
+        <label>Realtor Name & Contact (If Applicable)</label>
+        <input id="realtorInfo" placeholder="Name, phone, email">
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: DESTINATION DETAILS ---------------- -->
-  <div id="destination" class="tab-content">
+  <!-- ---------------- TAB: FINANCIAL PROFILE ---------------- -->
+  <div id="financial" class="tab-content">
     <div class="card">
-      <h3>Destination Details</h3>
+      <h3>Financial Profile</h3>
 
-      <div>
-        <label>Destination Facility Name *</label>
-        <input id="destinationFacilityName" placeholder="Enter destination facility">
-      </div>
+      <div class="grid-2">
+        <div><label>Employment Status</label>
+          <select id="employmentStatus">
+            <option value="">Select status...</option>
+            <option value="w2">W-2 Employee</option>
+            <option value="self-employed">Self-Employed</option>
+            <option value="1099">1099 Contractor</option>
+            <option value="retired">Retired</option>
+            <option value="other">Other Income Source</option>
+          </select>
+        </div>
 
-      <div>
-        <label>Destination Facility Address</label>
-        <textarea id="destinationAddress" placeholder="If not a facility, enter home address or other destination address"></textarea>
+        <div><label>Employer Name</label><input id="employerName" placeholder="Company name"></div>
       </div>
 
       <div class="grid-2">
-        <div><label>Destination Facility Department (Optional)</label><input id="destinationDepartment"></div>
-        <div><label>Destination Facility Room (Optional)</label><input id="destinationRoom"></div>
+        <div><label>Years at Current Job</label><input id="yearsEmployed" type="number" step="0.5" placeholder="Years"></div>
+        <div><label>Annual Gross Income</label><input id="annualIncome" type="number" placeholder="$"></div>
       </div>
 
       <div>
-        <label>Destination Facility Bed Number (Optional)</label>
-        <input id="destinationBedNumber">
-      </div>
-    </div>
-  </div>
-
-  <!-- ---------------- TAB: TRANSPORT DETAILS ---------------- -->
-  <div id="transport" class="tab-content">
-    <div class="card">
-      <h3>Transport & Medical Information</h3>
-
-      <div>
-        <label>Special Equipment Requirements</label>
-        <select id="specialEquipment">
-          <option value="">Select if applicable...</option>
-          <option value="oxygen">Oxygen</option>
-          <option value="iv-pump">IV Pump</option>
-          <option value="cardiac-monitor">Cardiac Monitor</option>
-          <option value="ventilator">Ventilator</option>
-          <option value="bariatric">Bariatric Equipment</option>
-          <option value="isolation">Isolation Precautions</option>
-          <option value="wheelchair">Wheelchair Transport</option>
-          <option value="stretcher">Stretcher Only</option>
-        </select>
+        <label>Additional Income Sources</label>
+        <textarea id="additionalIncome" placeholder="e.g., rental income, bonuses, alimony, investment income"></textarea>
       </div>
 
-      <div>
-        <label>Patient Mobility/Assistance Level</label>
-        <select id="patientMobility">
-          <option value="">Select level...</option>
-          <option value="ambulatory">Ambulatory (Can Walk)</option>
-          <option value="assistance">Needs Assistance</option>
-          <option value="wheelchair">Wheelchair Bound</option>
-          <option value="stretcher">Stretcher/Gurney</option>
-          <option value="critical">Critical/Unstable</option>
-        </select>
+      <div class="grid-2">
+        <div><label>Total Monthly Debt Payments</label><input id="monthlyDebt" type="number" placeholder="$ (car, student loans, credit cards)"></div>
+        <div><label>Cash Reserves Available</label><input id="cashReserves" type="number" placeholder="$"></div>
       </div>
 
-      <div>
-        <label>Account/Member Number</label>
-        <input id="accountNumber" placeholder="Member ID or account number">
-      </div>
+      <div class="grid-2">
+        <div>
+          <label>Bankruptcy in Last 7 Years?</label>
+          <select id="bankruptcy">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
 
-      <div>
-        <label>Start of Service Date</label>
-        <input id="startDate" type="date">
-      </div>
-
-      <div>
-        <label>Additional Notes / Special Instructions</label>
-        <textarea id="specialInstructions" placeholder="Weight restrictions, allergies, isolation precautions, family contacts, etc."></textarea>
+        <div>
+          <label>Foreclosure in Last 7 Years?</label>
+          <select id="foreclosure">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -514,71 +610,68 @@
   <!-- ---------------- TAB: WORKFLOW ---------------- -->
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Transport Coordination Workflow</h3>
+      <h3>Loan Officer Workflow</h3>
 
-      <div class="check-item"><input type="checkbox">Verify caller identity and facility</div>
-      <div class="check-item"><input type="checkbox">Confirm patient name and date of birth</div>
-      <div class="check-item"><input type="checkbox">Obtain complete pickup information</div>
-      <div class="check-item"><input type="checkbox">Obtain complete destination information</div>
-      <div class="check-item"><input type="checkbox">Confirm transport type (BLS/ALS/CCT)</div>
-      <div class="check-item"><input type="checkbox">Verify date and time of transport</div>
-      <div class="check-item"><input type="checkbox">Document special equipment needs</div>
-      <div class="check-item"><input type="checkbox">Obtain physician authorization if required</div>
-      <div class="check-item"><input type="checkbox">Provide estimated time of arrival (ETA)</div>
-      <div class="check-item"><input type="checkbox">Assign transport to crew</div>
-      <div class="check-item"><input type="checkbox">Send confirmation to facility</div>
-      <div class="check-item"><input type="checkbox">Update transport management system</div>
+      <div class="check-item"><input type="checkbox">Introduce yourself and NAF</div>
+      <div class="check-item"><input type="checkbox">Verify borrower contact information</div>
+      <div class="check-item"><input type="checkbox">Identify loan purpose and property type</div>
+      <div class="check-item"><input type="checkbox">Discuss estimated purchase price and down payment</div>
+      <div class="check-item"><input type="checkbox">Review employment and income</div>
+      <div class="check-item"><input type="checkbox">Check credit score estimate</div>
+      <div class="check-item"><input type="checkbox">Explain pre-qualification vs pre-approval</div>
+      <div class="check-item"><input type="checkbox">Discuss NAF advantages (servicing, NAF Cash, concierge)</div>
+      <div class="check-item"><input type="checkbox">Review current mortgage rates</div>
+      <div class="check-item"><input type="checkbox">Set expectations for timeline and process</div>
+      <div class="check-item"><input type="checkbox">Send pre-qual letter (if applicable)</div>
+      <div class="check-item"><input type="checkbox">Schedule follow-up or application appointment</div>
+      <div class="check-item"><input type="checkbox">Log interaction in CRM</div>
 
       <div class="actions">
-        <button class="btn btn-success" onclick="showToast('Transport request submitted successfully')">Submit Transport Request</button>
-        <button class="btn btn-accent" onclick="showToast('Confirmation sent to facility')">Send Confirmation</button>
-        <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Supervisor</button>
+        <button class="btn btn-success" onclick="showToast('Pre-qualification letter generated')">Generate Pre-Qual Letter</button>
+        <button class="btn btn-accent" onclick="showToast('Application link sent to borrower')">Send Application Link</button>
+        <button class="btn btn-primary" onclick="showToast('Follow-up scheduled')">Schedule Follow-Up</button>
+        <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Manager</button>
 
         <div id="supervisorCard" class="supervisor-card">
-          <div class="supervisor-option">Transfer to Supervisor</div>
-          <div class="supervisor-option">Request Dispatch Override</div>
-          <div class="supervisor-option">Escalate Critical Transport</div>
-          <div class="supervisor-option">Report System Issue</div>
+          <div class="supervisor-option">Transfer to Branch Manager</div>
+          <div class="supervisor-option">Request Underwriting Consultation</div>
+          <div class="supervisor-option">Escalate Complex Scenario</div>
+          <div class="supervisor-option">Compliance Review Needed</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: CALL HISTORY ---------------- -->
+  <!-- ---------------- TAB: CONTACT HISTORY ---------------- -->
   <div id="history" class="tab-content">
     <div class="card">
-      <h3>Transport Request History</h3>
+      <h3>Borrower Contact History</h3>
 
       <div class="timeline">
         <div class="event">
-          <div class="date">Feb 5, 2026 - 14:32</div>
-          <div class="type">BLS Transport</div>
-          <div class="summary">Completed: Discharge transport from Memorial Hospital to patient residence. Crew: Unit 247.</div>
+          <div class="date">Feb 8, 2026 - 10:15 AM</div>
+          <div class="type">Inbound Call</div>
+          <div class="summary">Initial inquiry about purchase loan. Pre-qualified for $450K. Sent pre-qual letter.</div>
         </div>
         <div class="event">
-          <div class="date">Feb 3, 2026 - 09:15</div>
-          <div class="type">ALS Transport</div>
-          <div class="summary">Completed: Dialysis transport to Fresenius Kidney Care. Returned to facility.</div>
+          <div class="date">Feb 6, 2026</div>
+          <div class="type">Email</div>
+          <div class="summary">Sent rate sheet and NAF Cash information packet.</div>
         </div>
         <div class="event">
-          <div class="date">Jan 30, 2026 - 16:45</div>
-          <div class="type">Scheduled BLS</div>
-          <div class="summary">Cancelled: Patient transported by family. Cancellation fee waived.</div>
+          <div class="date">Feb 5, 2026 - 2:30 PM</div>
+          <div class="type">Web Lead</div>
+          <div class="summary">Submitted online rate quote request. Interested in FHA loan for first-time purchase.</div>
         </div>
         <div class="event">
-          <div class="date">Jan 28, 2026 - 11:20</div>
-          <div class="type">CCT Transport</div>
-          <div class="summary">Completed: ICU to ICU transfer. Cardiac monitoring required. Crew: CCT Unit 5.</div>
-        </div>
-        <div class="event">
-          <div class="date">Jan 25, 2026 - 08:00</div>
-          <div class="type">BLS Transport</div>
-          <div class="summary">Completed: Routine dialysis transport. No complications reported.</div>
+          <div class="date">Feb 3, 2026</div>
+          <div class="type">SMS</div>
+          <div class="summary">Follow-up text sent with calculator link and application portal access.</div>
         </div>
       </div>
 
       <div class="actions">
-        <button class="btn btn-accent" onclick="showToast('Full transport history exported')">Export Full History</button>
+        <button class="btn btn-accent" onclick="showToast('Full history exported')">Export Contact History</button>
       </div>
     </div>
   </div>
@@ -618,13 +711,11 @@
 
   /* ----- Defaults ----- */
   const defaults = {
-    callerFirstName: "Jennifer",
-    callerLastName: "Rodriguez",
-    callerFacilityName: "Littleton Hospital",
-    phoneNumber: "(214) 555-3847",
-    address: "4400 Hwy 121, Suite 700, Lewisville, TX 75056",
-    pickupFacilityName: "Littleton Hospital",
-    destinationFacilityName: "Home"
+    firstName: "Sarah",
+    lastName: "Martinez",
+    phoneNumber: "(714) 555-9284",
+    emailAddress: "sarah.martinez@email.com",
+    currentAddress: "123 Main St, Tustin, CA 92780"
   };
 
   function setField(id, val) {
@@ -633,24 +724,21 @@
   }
 
   /* ----- Field Mapping ----- */
-  setField("callerFirstName", getQP("FNAME","firstName","fname") || defaults.callerFirstName);
-  setField("callerLastName", getQP("LNAME","lastName","lname") || defaults.callerLastName);
-  setField("callerFacilityName", getQP("FACILITY","facility","facilityName") || defaults.callerFacilityName);
+  setField("firstName", getQP("FNAME","firstName","fname") || defaults.firstName);
+  setField("lastName", getQP("LNAME","lastName","lname") || defaults.lastName);
   setField("phoneNumber", cleanPhone(getQP("PHONE","phone","phoneNumber")) || defaults.phoneNumber);
-  setField("address", getQP("ADDRESS","address") || defaults.address);
-  setField("accountNumber", getQP("ACCOUNT","account","accountNumber") || "");
-  setField("startDate", getQP("START_DATE","startDate","serviceStart") || "");
-  setField("pickupFacilityName", getQP("PICKUP_FACILITY","pickupFacility") || defaults.pickupFacilityName);
+  setField("emailAddress", getQP("EMAIL","email") || defaults.emailAddress);
+  setField("currentAddress", getQP("ADDRESS","address") || defaults.currentAddress);
 
-  /* ----- Trigger priority badge on load ----- */
-  updatePriorityBadge();
+  /* ----- Trigger loan badge on load ----- */
+  updateLoanBadge();
 
-  /* ----- Priority Badge ----- */
-  function updatePriorityBadge() {
-    const priority = document.getElementById("priority").value;
-    const container = document.getElementById("priorityBadgeContainer");
+  /* ----- Loan Purpose Badge ----- */
+  function updateLoanBadge() {
+    const purpose = document.getElementById("loanPurpose").value;
+    const container = document.getElementById("loanBadgeContainer");
     
-    if (!priority) {
+    if (!purpose) {
       container.innerHTML = "";
       return;
     }
@@ -658,24 +746,28 @@
     let badgeClass = "";
     let badgeText = "";
 
-    switch(priority) {
-      case "urgent":
-        badgeClass = "priority-urgent";
-        badgeText = "🚨 Urgent Priority";
+    switch(purpose) {
+      case "purchase":
+        badgeClass = "loan-purchase";
+        badgeText = "🏠 Purchase";
         break;
-      case "next-available":
-        badgeClass = "priority-next-available";
-        badgeText = "⏱️ Next Available";
+      case "refinance":
+        badgeClass = "loan-refinance";
+        badgeText = "🔄 Refinance";
         break;
-      case "scheduled":
-        badgeClass = "priority-scheduled";
-        badgeText = "📅 Scheduled";
+      case "cash-out":
+        badgeClass = "loan-refinance";
+        badgeText = "💵 Cash-Out Refi";
+        break;
+      case "heloc":
+        badgeClass = "loan-heloc";
+        badgeText = "🏦 HELOC";
         break;
     }
 
-    container.innerHTML = `<span class="priority-badge ${badgeClass}">${badgeText}</span>`;
+    container.innerHTML = `<span class="loan-badge ${badgeClass}">${badgeText}</span>`;
   }
-  window.updatePriorityBadge = updatePriorityBadge;
+  window.updateLoanBadge = updateLoanBadge;
 
   /* ----- Supervisor Action Card Toggle ----- */
   function toggleSupervisorCard() {
