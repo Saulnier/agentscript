@@ -3,32 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>New American Funding - Loan Officer Script</title>
+<title>Housecall Pro - Customer Support Script</title>
 
 <style>
   :root {
-    --primary: #00589C;
-    --primary-dark: #003d6b;
-    --primary-light: #E8F2FA;
-    --accent: #F47920;
-    --bg: #F5F7FA;
+    --primary: #0066FF;
+    --primary-dark: #0052CC;
+    --primary-light: #E6F2FF;
+    --accent: #00C853;
+    --bg: #F7F9FC;
     --card-bg: #ffffff;
-    --text-main: #1f2d3d;
-    --text-muted: #5f6c7b;
+    --text-main: #1A202C;
+    --text-muted: #718096;
     --radius: 12px;
-    --shadow: 0 4px 14px rgba(0,0,0,0.08);
-    --danger: #D32F2F;
-    --danger-light: #FFEBEE;
-    --success: #2E7D32;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --success: #00C853;
     --success-light: #E8F5E9;
-    --warning: #F57C00;
+    --warning: #FF9800;
     --warning-light: #FFF3E0;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--text-main);
     padding: 20px 16px;
   }
@@ -41,9 +39,9 @@
   .header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
-    padding: 20px 24px;
+    padding: 24px;
     border-radius: var(--radius);
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     box-shadow: var(--shadow);
     display: flex;
     align-items: center;
@@ -51,23 +49,16 @@
     flex-wrap: wrap;
   }
 
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .header-title {
-    font-size: 1.5rem;
+  .header-content h1 {
+    margin: 0 0 6px 0;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin: 0;
   }
 
-  .header-subtitle {
-    font-size: 0.85rem;
-    font-weight: 400;
+  .header-content p {
+    margin: 0;
+    font-size: 0.95rem;
     opacity: 0.9;
-    margin-top: 4px;
   }
 
   /* -------------------- TABS --------------------- */
@@ -75,18 +66,18 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    border-bottom: 2px solid #d7e0ea;
+    border-bottom: 2px solid #E2E8F0;
     margin-bottom: 20px;
   }
 
   .tab {
-    padding: 10px 14px;
+    padding: 12px 16px;
     cursor: pointer;
     font-size: 0.92rem;
     font-weight: 600;
     color: var(--text-muted);
     border-bottom: 3px solid transparent;
-    transition: color 0.25s ease, border-bottom 0.25s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
   }
 
@@ -98,7 +89,7 @@
   /* ------------------- CARDS -------------------- */
   .card {
     background: var(--card-bg);
-    padding: 22px;
+    padding: 24px;
     margin-bottom: 20px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -107,32 +98,40 @@
   h3 {
     margin-top: 0;
     color: var(--primary);
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   label {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     margin-bottom: 6px;
     font-weight: 600;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   input, select, textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #cbd7e3;
+    border: 2px solid #E2E8F0;
     border-radius: var(--radius);
     margin-bottom: 16px;
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
   }
 
   textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 90px;
   }
 
   .grid-2 {
@@ -158,28 +157,67 @@
   /* ---------------- CHECKBOXES ------------------ */
   .check-item {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 12px;
     margin-bottom: 14px;
     font-size: 0.95rem;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .check-item:hover {
+    background: var(--primary-light);
   }
 
   .check-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin: 0;
+    width: 20px;
+    height: 20px;
+    margin: 2px 0 0 0;
+    cursor: pointer;
+    accent-color: var(--primary);
+  }
+
+  /* ---------------- BADGES ------------------ */
+  .badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .badge-trial {
+    background: var(--warning-light);
+    color: #E65100;
+  }
+
+  .badge-active {
+    background: var(--success-light);
+    color: #1B5E20;
+  }
+
+  .badge-support {
+    background: var(--primary-light);
+    color: var(--primary-dark);
   }
 
   /* ---------------- ACTION BUTTONS -------------- */
   .actions {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 14px;
     margin-top: 20px;
   }
 
+  @media (max-width: 700px) {
+    .actions { grid-template-columns: 1fr; }
+  }
+
   .btn {
-    padding: 14px;
+    padding: 14px 20px;
     border-radius: var(--radius);
     border: none;
     font-size: 0.95rem;
@@ -188,77 +226,52 @@
     transition: all 0.2s ease;
   }
 
-  .btn-danger { background: var(--danger); color: #fff; }
-  .btn-danger:hover { background: #B71C1C; }
-
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-primary:hover { background: var(--primary-dark); }
 
-  .btn-accent { background: var(--accent); color: #fff; }
-  .btn-accent:hover { background: #d66618; }
-
   .btn-success { background: var(--success); color: #fff; }
-  .btn-success:hover { background: #1B5E20; }
+  .btn-success:hover { background: #00A344; }
 
-  /* ---------------- LOAN TYPE BADGES -------------- */
-  .loan-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-  }
+  .btn-secondary { background: #718096; color: #fff; }
+  .btn-secondary:hover { background: #4A5568; }
 
-  .loan-purchase {
-    background: #E8F5E9;
-    color: #2E7D32;
-  }
-
-  .loan-refinance {
-    background: #E3F2FD;
-    color: #1565C0;
-  }
-
-  .loan-heloc {
-    background: #FFF3E0;
-    color: #F57F17;
-  }
-
-  /* ---------------- SUPERVISOR ACTION CARD -------------- */
-  .supervisor-card {
-    background: var(--danger-light);
-    border-left: 4px solid var(--danger);
-    padding: 14px 16px;
-    margin-top: 8px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: none;
-  }
-
-  .supervisor-option {
-    padding: 6px 0;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-
-  .supervisor-option:hover {
-    text-decoration: underline;
-  }
-
-  /* ---------------- COMPLIANCE ALERT -------------- */
-  .compliance-alert {
-    background: var(--warning-light);
-    border-left: 4px solid var(--warning);
-    padding: 14px 16px;
+  /* ---------------- INFO ALERT -------------- */
+  .info-alert {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 16px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: var(--radius);
     font-size: 0.9rem;
   }
 
-  .compliance-alert strong {
-    color: var(--warning);
+  .info-alert strong {
+    color: var(--primary);
+  }
+
+  /* ---------------- QUICK LINKS -------------- */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .quick-link {
+    background: var(--primary-light);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .quick-link:hover {
+    background: var(--primary);
+    color: white;
   }
 
   /* ---------------- TIMELINE -------------------- */
@@ -266,19 +279,29 @@
     border-left: 3px solid var(--primary);
     padding-left: 16px;
   }
-  .event { margin-bottom: 16px; }
-  .event .date { font-size: 0.8rem; font-weight: 600; color: var(--primary); }
+  .event { margin-bottom: 18px; }
+  .event .date { 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+    color: var(--primary); 
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
   .event .type {
     font-size: 0.75rem;
     background: var(--primary-light);
-    padding: 4px 8px;
+    padding: 4px 10px;
     border-radius: 999px;
     display: inline-block;
-    margin: 4px 0;
+    margin: 6px 0;
     font-weight: 600;
     color: var(--primary);
   }
-  .event .summary { font-size: 0.9rem; color: var(--text-muted); }
+  .event .summary { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    line-height: 1.5;
+  }
 
   /* ---------------- TOASTS -------------------- */
   .toast-container {
@@ -290,14 +313,14 @@
   .toast {
     background: var(--success);
     color: #fff;
-    padding: 12px 18px;
-    border-radius: 10px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
     margin-bottom: 10px;
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
   }
   .toast.show {
@@ -308,25 +331,6 @@
   /* -------------- TAB CONTENT ------------------- */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
-  /* -------------- INFO TABLE ------------------- */
-  .info-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
-
-  .info-table td {
-    padding: 8px;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 0.9rem;
-  }
-
-  .info-table td:first-child {
-    font-weight: 600;
-    color: var(--text-muted);
-    width: 40%;
-  }
 
 </style>
 </head>
@@ -339,270 +343,221 @@
 <div class="container">
 
   <div class="header">
-    <div class="header-left">
+    <div class="header-content">
+      <h1>Housecall Pro Support</h1>
+      <p>Customer Success & Sales Script</p>
+    </div>
+  </div>
+
+  <div class="info-alert">
+    <strong>💡 Pro Tip:</strong> Always verify account details before making changes. Use screen sharing for technical support when possible.
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="account">Account Info</div>
+    <div class="tab" data-tab="business">Business Details</div>
+    <div class="tab" data-tab="issue">Support Issue</div>
+    <div class="tab" data-tab="solution">Solution & Actions</div>
+    <div class="tab" data-tab="workflow">Call Workflow</div>
+    <div class="tab" data-tab="history">Call History</div>
+  </div>
+
+  <!-- ---------------- TAB: ACCOUNT INFO ---------------- -->
+  <div id="account" class="tab-content active">
+    <div class="card">
+      <h3>Account Information</h3>
+
+      <div class="grid-2">
+        <div><label>First Name</label><input id="firstName"></div>
+        <div><label>Last Name</label><input id="lastName"></div>
+
+        <div><label>Business Name</label><input id="businessName"></div>
+        <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
+
+        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
+        <div><label>Date of Birth</label><input id="dateOfBirth" type="date"></div>
+      </div>
+
       <div>
-        <div class="header-title">New American Funding</div>
-        <div class="header-subtitle">Loan Officer Call Script</div>
+        <label>Business Address</label>
+        <input id="businessAddress" placeholder="Street, City, State, ZIP">
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label>Account Status</label>
+          <select id="accountStatus" onchange="updateAccountBadge()">
+            <option value="">Select status...</option>
+            <option value="trial">Free Trial</option>
+            <option value="active">Active Subscriber</option>
+            <option value="past-due">Past Due</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Subscription Plan</label>
+          <select id="subscriptionPlan">
+            <option value="">Select plan...</option>
+            <option value="basic">Basic</option>
+            <option value="essentials">Essentials</option>
+            <option value="max">Max</option>
+            <option value="enterprise">Enterprise</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="accountBadgeContainer"></div>
+
+      <div class="grid-2">
+        <div><label>Account ID</label><input id="accountId" placeholder="HCP-######"></div>
+        <div><label>Sign-Up Date</label><input id="signupDate" type="date"></div>
       </div>
     </div>
   </div>
 
-  <!-- COMPLIANCE ALERT -->
-  <div class="compliance-alert">
-    <strong>⚠️ Compliance Reminder:</strong> Ensure all federal lending disclosures are provided. Follow TRID timelines, verify income documentation, and document all customer interactions per CFPB guidelines.
-  </div>
-
-  <div class="tabs">
-    <div class="tab active" data-tab="borrower">Borrower Information</div>
-    <div class="tab" data-tab="loan">Loan Details</div>
-    <div class="tab" data-tab="property">Property Information</div>
-    <div class="tab" data-tab="financial">Financial Profile</div>
-    <div class="tab" data-tab="workflow">Call Workflow</div>
-    <div class="tab" data-tab="history">Contact History</div>
-  </div>
-
-  <!-- ---------------- TAB: BORROWER INFORMATION ---------------- -->
-  <div id="borrower" class="tab-content active">
+  <!-- ---------------- TAB: BUSINESS DETAILS ---------------- -->
+  <div id="business" class="tab-content">
     <div class="card">
-      <h3>Borrower Information</h3>
-
-      <div class="grid-2">
-        <div><label>First Name *</label><input id="firstName"></div>
-        <div><label>Last Name *</label><input id="lastName"></div>
-
-        <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
-        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
-
-        <div><label>Date of Birth</label><input id="dateOfBirth" type="date"></div>
-        <div><label>Social Security Number (Last 4)</label><input id="ssnLast4" maxlength="4" placeholder="xxxx"></div>
-      </div>
-
-      <div>
-        <label>Current Address</label>
-        <input id="currentAddress" placeholder="Street address, city, state, zip">
-      </div>
+      <h3>Business Details</h3>
 
       <div class="grid-2">
         <div>
-          <label>Marital Status</label>
-          <select id="maritalStatus">
-            <option value="">Select status...</option>
-            <option value="single">Single</option>
-            <option value="married">Married</option>
-            <option value="divorced">Divorced</option>
-            <option value="widowed">Widowed</option>
-            <option value="separated">Separated</option>
+          <label>Industry Type</label>
+          <select id="industryType">
+            <option value="">Select industry...</option>
+            <option value="hvac">HVAC</option>
+            <option value="plumbing">Plumbing</option>
+            <option value="electrical">Electrical</option>
+            <option value="handyman">Handyman</option>
+            <option value="cleaning">Home Cleaning</option>
+            <option value="landscaping">Landscaping & Lawn Care</option>
+            <option value="pest-control">Pest Control</option>
+            <option value="appliance">Appliance Repair</option>
+            <option value="carpet-cleaning">Carpet Cleaning</option>
+            <option value="garage-door">Garage Door</option>
+            <option value="pool">Pool Service</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
-        <div>
-          <label>Co-Borrower?</label>
-          <select id="coBorrower">
-            <option value="no">No</option>
-            <option value="yes">Yes - Spouse</option>
-            <option value="yes-other">Yes - Other</option>
-          </select>
-        </div>
+        <div><label>Number of Employees</label><input id="numEmployees" type="number" placeholder="1-100+"></div>
+      </div>
+
+      <div class="grid-3">
+        <div><label>Number of Technicians</label><input id="numTechs" type="number"></div>
+        <div><label>Avg Jobs Per Month</label><input id="avgJobs" type="number"></div>
+        <div><label>Avg Job Value</label><input id="avgJobValue" placeholder="$000"></div>
       </div>
 
       <div>
-        <label>How Did You Hear About Us?</label>
-        <select id="referralSource">
-          <option value="">Select source...</option>
-          <option value="realtor">Real Estate Agent Referral</option>
-          <option value="online">Online Search</option>
-          <option value="social-media">Social Media</option>
-          <option value="friend-family">Friend or Family</option>
-          <option value="existing-customer">Existing NAF Customer</option>
-          <option value="advertisement">Advertisement</option>
+        <label>Primary Pain Points (Before HCP)</label>
+        <textarea id="painPoints" placeholder="e.g., missed calls, scheduling issues, slow payments..."></textarea>
+      </div>
+
+      <div>
+        <label>Current Goals</label>
+        <textarea id="businessGoals" placeholder="e.g., grow revenue, hire more techs, improve customer reviews..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: SUPPORT ISSUE ---------------- -->
+  <div id="issue" class="tab-content">
+    <div class="card">
+      <h3>Support Issue / Call Reason</h3>
+
+      <div>
+        <label>Call Type</label>
+        <select id="callType">
+          <option value="">Select type...</option>
+          <option value="technical">Technical Support</option>
+          <option value="billing">Billing Question</option>
+          <option value="training">Training / How-To</option>
+          <option value="feature">Feature Request</option>
+          <option value="sales">Sales Inquiry</option>
+          <option value="upgrade">Upgrade Request</option>
+          <option value="cancel">Cancellation</option>
           <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Issue Category</label>
+        <select id="issueCategory">
+          <option value="">Select category...</option>
+          <option value="app">Mobile App Issue</option>
+          <option value="scheduling">Scheduling / Dispatching</option>
+          <option value="payments">Payments / Processing</option>
+          <option value="invoicing">Invoicing / Estimates</option>
+          <option value="customer-communication">Customer Communication</option>
+          <option value="integrations">Integrations (QuickBooks, etc.)</option>
+          <option value="reports">Reports / Analytics</option>
+          <option value="team-management">Team Management</option>
+          <option value="account-access">Account Access / Login</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Issue Description</label>
+        <textarea id="issueDescription" placeholder="Customer's description of the issue in their own words..."></textarea>
+      </div>
+
+      <div>
+        <label>Priority Level</label>
+        <select id="priorityLevel">
+          <option value="low">Low - General Question</option>
+          <option value="medium">Medium - Affecting Work</option>
+          <option value="high">High - Blocking Critical Tasks</option>
+          <option value="urgent">Urgent - Business Down</option>
         </select>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: LOAN DETAILS ---------------- -->
-  <div id="loan" class="tab-content">
+  <!-- ---------------- TAB: SOLUTION & ACTIONS ---------------- -->
+  <div id="solution" class="tab-content">
     <div class="card">
-      <h3>Loan Request Details</h3>
-
-      <div class="grid-2">
-        <div>
-          <label>Loan Purpose *</label>
-          <select id="loanPurpose" onchange="updateLoanBadge()">
-            <option value="">Select purpose...</option>
-            <option value="purchase" selected>Purchase</option>
-            <option value="refinance">Refinance (Rate & Term)</option>
-            <option value="cash-out">Cash-Out Refinance</option>
-            <option value="heloc">HELOC</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Loan Type</label>
-          <select id="loanType">
-            <option value="">Select type...</option>
-            <option value="conventional">Conventional</option>
-            <option value="fha">FHA</option>
-            <option value="va">VA</option>
-            <option value="usda">USDA</option>
-            <option value="jumbo">Jumbo</option>
-            <option value="non-qm">Non-QM</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="loanBadgeContainer" style="margin-bottom: 16px;"></div>
-
-      <div class="grid-3">
-        <div><label>Estimated Purchase Price / Home Value</label><input id="purchasePrice" type="number" placeholder="$"></div>
-        <div><label>Desired Loan Amount</label><input id="loanAmount" type="number" placeholder="$"></div>
-        <div><label>Down Payment Amount</label><input id="downPayment" type="number" placeholder="$"></div>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Property Type</label>
-          <select id="propertyType">
-            <option value="">Select type...</option>
-            <option value="single-family">Single Family Home</option>
-            <option value="condo">Condominium</option>
-            <option value="townhome">Townhome</option>
-            <option value="multi-unit">Multi-Unit (2-4 units)</option>
-            <option value="manufactured">Manufactured Home</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Occupancy</label>
-          <select id="occupancy">
-            <option value="primary">Primary Residence</option>
-            <option value="second-home">Second Home</option>
-            <option value="investment">Investment Property</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Credit Score (Estimated)</label>
-          <select id="creditScore">
-            <option value="">Select range...</option>
-            <option value="740+">Excellent (740+)</option>
-            <option value="700-739">Good (700-739)</option>
-            <option value="660-699">Fair (660-699)</option>
-            <option value="620-659">Below Average (620-659)</option>
-            <option value="<620">Poor (<620)</option>
-            <option value="unknown">Not Sure</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Desired Closing Timeline</label>
-          <select id="closingTimeline">
-            <option value="">Select timeline...</option>
-            <option value="asap">ASAP (Under 30 days)</option>
-            <option value="30-45">30-45 days</option>
-            <option value="45-60">45-60 days</option>
-            <option value="60+">60+ days</option>
-            <option value="flexible">Flexible</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ---------------- TAB: PROPERTY INFORMATION ---------------- -->
-  <div id="property" class="tab-content">
-    <div class="card">
-      <h3>Property Information</h3>
+      <h3>Solution & Actions Taken</h3>
 
       <div>
-        <label>Property Address (If Known)</label>
-        <textarea id="propertyAddress" placeholder="Street address, city, state, zip (leave blank if still searching)"></textarea>
+        <label>Solution Provided</label>
+        <textarea id="solutionProvided" placeholder="Describe the steps taken to resolve the issue..."></textarea>
       </div>
 
       <div class="grid-2">
-        <div><label>City/Area Interested In</label><input id="targetCity" placeholder="e.g., Irvine, CA"></div>
-        <div><label>MLS Number (If Available)</label><input id="mlsNumber" placeholder="Optional"></div>
-      </div>
-
-      <div class="grid-3">
-        <div><label>Bedrooms</label><input id="bedrooms" type="number" placeholder="#"></div>
-        <div><label>Bathrooms</label><input id="bathrooms" type="number" step="0.5" placeholder="#"></div>
-        <div><label>Square Footage</label><input id="sqft" type="number" placeholder="sq ft"></div>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Year Built</label><input id="yearBuilt" type="number" placeholder="YYYY"></div>
         <div>
-          <label>Working with Realtor?</label>
-          <select id="hasRealtor">
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
-            <option value="need-referral">Need Realtor Referral</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label>Realtor Name & Contact (If Applicable)</label>
-        <input id="realtorInfo" placeholder="Name, phone, email">
-      </div>
-    </div>
-  </div>
-
-  <!-- ---------------- TAB: FINANCIAL PROFILE ---------------- -->
-  <div id="financial" class="tab-content">
-    <div class="card">
-      <h3>Financial Profile</h3>
-
-      <div class="grid-2">
-        <div><label>Employment Status</label>
-          <select id="employmentStatus">
+          <label>Resolution Status</label>
+          <select id="resolutionStatus">
             <option value="">Select status...</option>
-            <option value="w2">W-2 Employee</option>
-            <option value="self-employed">Self-Employed</option>
-            <option value="1099">1099 Contractor</option>
-            <option value="retired">Retired</option>
-            <option value="other">Other Income Source</option>
-          </select>
-        </div>
-
-        <div><label>Employer Name</label><input id="employerName" placeholder="Company name"></div>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Years at Current Job</label><input id="yearsEmployed" type="number" step="0.5" placeholder="Years"></div>
-        <div><label>Annual Gross Income</label><input id="annualIncome" type="number" placeholder="$"></div>
-      </div>
-
-      <div>
-        <label>Additional Income Sources</label>
-        <textarea id="additionalIncome" placeholder="e.g., rental income, bonuses, alimony, investment income"></textarea>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Total Monthly Debt Payments</label><input id="monthlyDebt" type="number" placeholder="$ (car, student loans, credit cards)"></div>
-        <div><label>Cash Reserves Available</label><input id="cashReserves" type="number" placeholder="$"></div>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Bankruptcy in Last 7 Years?</label>
-          <select id="bankruptcy">
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
+            <option value="resolved">Resolved</option>
+            <option value="partially-resolved">Partially Resolved</option>
+            <option value="escalated">Escalated to Tech Team</option>
+            <option value="follow-up">Requires Follow-Up</option>
+            <option value="unresolved">Unresolved</option>
           </select>
         </div>
 
         <div>
-          <label>Foreclosure in Last 7 Years?</label>
-          <select id="foreclosure">
-            <option value="no">No</option>
-            <option value="yes">Yes</option>
+          <label>Follow-Up Required?</label>
+          <select id="followUpRequired">
+            <option value="no">No Follow-Up Needed</option>
+            <option value="yes-24hr">Yes - Within 24 Hours</option>
+            <option value="yes-48hr">Yes - Within 48 Hours</option>
+            <option value="yes-scheduled">Yes - Scheduled Callback</option>
           </select>
         </div>
+      </div>
+
+      <h3 style="margin-top: 30px;">Quick Actions</h3>
+      <div class="quick-links">
+        <div class="quick-link" onclick="showToast('Screen sharing link sent')">Send Screen Share Link</div>
+        <div class="quick-link" onclick="showToast('Help article sent via email')">Send Help Article</div>
+        <div class="quick-link" onclick="showToast('Training video sent')">Send Training Video</div>
+        <div class="quick-link" onclick="showToast('Account refreshed')">Refresh Account</div>
+        <div class="quick-link" onclick="showToast('Password reset email sent')">Reset Password</div>
+        <div class="quick-link" onclick="showToast('Billing details updated')">Update Billing</div>
       </div>
     </div>
   </div>
@@ -610,68 +565,92 @@
   <!-- ---------------- TAB: WORKFLOW ---------------- -->
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Loan Officer Workflow</h3>
+      <h3>Support Call Workflow</h3>
 
-      <div class="check-item"><input type="checkbox">Introduce yourself and NAF</div>
-      <div class="check-item"><input type="checkbox">Verify borrower contact information</div>
-      <div class="check-item"><input type="checkbox">Identify loan purpose and property type</div>
-      <div class="check-item"><input type="checkbox">Discuss estimated purchase price and down payment</div>
-      <div class="check-item"><input type="checkbox">Review employment and income</div>
-      <div class="check-item"><input type="checkbox">Check credit score estimate</div>
-      <div class="check-item"><input type="checkbox">Explain pre-qualification vs pre-approval</div>
-      <div class="check-item"><input type="checkbox">Discuss NAF advantages (servicing, NAF Cash, concierge)</div>
-      <div class="check-item"><input type="checkbox">Review current mortgage rates</div>
-      <div class="check-item"><input type="checkbox">Set expectations for timeline and process</div>
-      <div class="check-item"><input type="checkbox">Send pre-qual letter (if applicable)</div>
-      <div class="check-item"><input type="checkbox">Schedule follow-up or application appointment</div>
-      <div class="check-item"><input type="checkbox">Log interaction in CRM</div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Greet customer and verify account (name + email or account ID)</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Ask "What brings you in today?" and listen actively</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Confirm understanding of the issue by repeating it back</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Check account status and subscription plan</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Use screen sharing if technical issue (with permission)</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Provide clear, step-by-step solution</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Confirm the issue is resolved before ending call</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Document solution in CRM system</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Send follow-up email with resources (if applicable)</span>
+      </div>
+      <div class="check-item">
+        <input type="checkbox">
+        <span>Thank customer and invite them to call anytime</span>
+      </div>
 
       <div class="actions">
-        <button class="btn btn-success" onclick="showToast('Pre-qualification letter generated')">Generate Pre-Qual Letter</button>
-        <button class="btn btn-accent" onclick="showToast('Application link sent to borrower')">Send Application Link</button>
-        <button class="btn btn-primary" onclick="showToast('Follow-up scheduled')">Schedule Follow-Up</button>
-        <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Manager</button>
-
-        <div id="supervisorCard" class="supervisor-card">
-          <div class="supervisor-option">Transfer to Branch Manager</div>
-          <div class="supervisor-option">Request Underwriting Consultation</div>
-          <div class="supervisor-option">Escalate Complex Scenario</div>
-          <div class="supervisor-option">Compliance Review Needed</div>
-        </div>
+        <button class="btn btn-success" onclick="showToast('Call notes saved successfully')">Save Call Notes</button>
+        <button class="btn btn-primary" onclick="showToast('Follow-up task created')">Create Follow-Up Task</button>
+        <button class="btn btn-secondary" onclick="showToast('Ticket escalated to Level 2 support')">Escalate to Tech Team</button>
       </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: CONTACT HISTORY ---------------- -->
+  <!-- ---------------- TAB: CALL HISTORY ---------------- -->
   <div id="history" class="tab-content">
     <div class="card">
-      <h3>Borrower Contact History</h3>
+      <h3>Recent Call History</h3>
 
       <div class="timeline">
         <div class="event">
-          <div class="date">Feb 8, 2026 - 10:15 AM</div>
-          <div class="type">Inbound Call</div>
-          <div class="summary">Initial inquiry about purchase loan. Pre-qualified for $450K. Sent pre-qual letter.</div>
+          <div class="date">Feb 15, 2026 - 10:45 AM</div>
+          <div class="type">Billing Inquiry</div>
+          <div class="summary">Customer asked about upgrading from Basic to Essentials plan. Provided pricing details and benefits. Customer will decide by end of week.</div>
         </div>
         <div class="event">
-          <div class="date">Feb 6, 2026</div>
-          <div class="type">Email</div>
-          <div class="summary">Sent rate sheet and NAF Cash information packet.</div>
+          <div class="date">Feb 10, 2026 - 2:30 PM</div>
+          <div class="type">Technical Support</div>
+          <div class="summary">Issue with mobile app not syncing. Resolved by clearing cache and reinstalling app. Customer confirmed working.</div>
         </div>
         <div class="event">
-          <div class="date">Feb 5, 2026 - 2:30 PM</div>
-          <div class="type">Web Lead</div>
-          <div class="summary">Submitted online rate quote request. Interested in FHA loan for first-time purchase.</div>
+          <div class="date">Feb 5, 2026 - 9:15 AM</div>
+          <div class="type">Training</div>
+          <div class="summary">Requested help setting up online booking. Walked through setup process. Sent follow-up video tutorial.</div>
         </div>
         <div class="event">
-          <div class="date">Feb 3, 2026</div>
-          <div class="type">SMS</div>
-          <div class="summary">Follow-up text sent with calculator link and application portal access.</div>
+          <div class="date">Jan 28, 2026 - 4:20 PM</div>
+          <div class="type">Feature Request</div>
+          <div class="summary">Requested ability to send batch text messages. Submitted feature request to product team. Provided workaround using customer tags.</div>
+        </div>
+        <div class="event">
+          <div class="date">Jan 22, 2026 - 11:00 AM</div>
+          <div class="type">Onboarding Call</div>
+          <div class="summary">Initial onboarding call. Set up account, added first technician, created sample job. Customer excited to start using the platform.</div>
         </div>
       </div>
 
-      <div class="actions">
-        <button class="btn btn-accent" onclick="showToast('Full history exported')">Export Contact History</button>
+      <div class="actions" style="margin-top: 24px;">
+        <button class="btn btn-primary" onclick="showToast('Full call history exported')">Export Call History</button>
       </div>
     </div>
   </div>
@@ -711,11 +690,15 @@
 
   /* ----- Defaults ----- */
   const defaults = {
-    firstName: "Alex",
-    lastName: "Johnson",
-    phoneNumber: "(714) 555-9284",
-    emailAddress: "alex.Johnson@email.com",
-    currentAddress: "123 Main St, Denver, CO 80134"
+    firstName: "Mike",
+    lastName: "Thompson",
+    businessName: "Thompson HVAC Services",
+    phoneNumber: "(858) 842-5746",
+    emailAddress: "mike@thompsonhvac.com",
+    dateOfBirth: "1995-01-01",
+    businessAddress: "1234 Main St, San Diego, CA 92101",
+    accountId: "HCP-482910",
+    signupDate: "2024-06-15"
   };
 
   function setField(id, val) {
@@ -724,21 +707,22 @@
   }
 
   /* ----- Field Mapping ----- */
-  setField("firstName", getQP("FNAME","firstName","fname") || defaults.firstName);
-  setField("lastName", getQP("LNAME","lastName","lname") || defaults.lastName);
-  setField("phoneNumber", cleanPhone(getQP("PHONE","phone","phoneNumber")) || defaults.phoneNumber);
-  setField("emailAddress", getQP("EMAIL","email") || defaults.emailAddress);
-  setField("currentAddress", getQP("ADDRESS","address") || defaults.currentAddress);
+  setField("firstName", getQP("firstName","FNAME","fname") || defaults.firstName);
+  setField("lastName", getQP("lastName","LNAME","lname") || defaults.lastName);
+  setField("businessName", getQP("businessName","business") || defaults.businessName);
+  setField("phoneNumber", cleanPhone(getQP("phoneNumber","PHONE","phone")) || defaults.phoneNumber);
+  setField("emailAddress", getQP("emailAddress","EMAIL","email") || defaults.emailAddress);
+  setField("dateOfBirth", getQP("dateOfBirth","DOB","dob") || defaults.dateOfBirth);
+  setField("businessAddress", getQP("businessAddress","address") || defaults.businessAddress);
+  setField("accountId", getQP("accountId","account") || defaults.accountId);
+  setField("signupDate", getQP("signupDate") || defaults.signupDate);
 
-  /* ----- Trigger loan badge on load ----- */
-  updateLoanBadge();
-
-  /* ----- Loan Purpose Badge ----- */
-  function updateLoanBadge() {
-    const purpose = document.getElementById("loanPurpose").value;
-    const container = document.getElementById("loanBadgeContainer");
+  /* ----- Account Status Badge ----- */
+  function updateAccountBadge() {
+    const status = document.getElementById("accountStatus").value;
+    const container = document.getElementById("accountBadgeContainer");
     
-    if (!purpose) {
+    if (!status) {
       container.innerHTML = "";
       return;
     }
@@ -746,35 +730,28 @@
     let badgeClass = "";
     let badgeText = "";
 
-    switch(purpose) {
-      case "purchase":
-        badgeClass = "loan-purchase";
-        badgeText = "🏠 Purchase";
+    switch(status) {
+      case "trial":
+        badgeClass = "badge-trial";
+        badgeText = "🆓 Free Trial";
         break;
-      case "refinance":
-        badgeClass = "loan-refinance";
-        badgeText = "🔄 Refinance";
+      case "active":
+        badgeClass = "badge-active";
+        badgeText = "✅ Active Subscriber";
         break;
-      case "cash-out":
-        badgeClass = "loan-refinance";
-        badgeText = "💵 Cash-Out Refi";
+      case "past-due":
+        badgeClass = "badge-trial";
+        badgeText = "⚠️ Past Due";
         break;
-      case "heloc":
-        badgeClass = "loan-heloc";
-        badgeText = "🏦 HELOC";
+      case "canceled":
+        badgeClass = "badge-support";
+        badgeText = "❌ Canceled";
         break;
     }
 
-    container.innerHTML = `<span class="loan-badge ${badgeClass}">${badgeText}</span>`;
+    container.innerHTML = `<span class="badge ${badgeClass}">${badgeText}</span>`;
   }
-  window.updateLoanBadge = updateLoanBadge;
-
-  /* ----- Supervisor Action Card Toggle ----- */
-  function toggleSupervisorCard() {
-    const card = document.getElementById("supervisorCard");
-    card.style.display = (card.style.display === "block") ? "none" : "block";
-  }
-  window.toggleSupervisorCard = toggleSupervisorCard;
+  window.updateAccountBadge = updateAccountBadge;
 
   /* ----- Toast System ----- */
   function showToast(text) {
@@ -793,28 +770,6 @@
     }, 3000);
   }
   window.showToast = showToast;
-
-  /* ----- Supervisor Option Clicks ----- */
-  document.querySelectorAll(".supervisor-option").forEach(option => {
-    option.addEventListener("click", () => {
-      const msg = option.innerText.trim();
-      document.getElementById("supervisorCard").style.display = "none";
-      showToast(msg);
-    });
-  });
-
-  /* ----- Theme Overrides ----- */
-  const buttonColor = getQP("buttonColor","ButtonColor");
-  const bgColor = getQP("bgColor","PageBackgroundColor");
-  const headerColor = getQP("headerColor","HeaderColor");
-
-  if (bgColor) document.body.style.backgroundColor = bgColor;
-  if (headerColor) document.querySelector(".header").style.background = headerColor;
-  if (buttonColor) {
-    document.querySelectorAll(".btn-primary").forEach(btn => {
-      btn.style.backgroundColor = buttonColor;
-    });
-  }
 </script>
 
 </body>
