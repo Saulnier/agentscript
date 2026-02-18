@@ -7,9 +7,9 @@
 
 <style>
   :root {
-    --primary: #0066FF;
-    --primary-dark: #0052CC;
-    --primary-light: #E6F2FF;
+    --primary: #F05A28;
+    --primary-dark: #D44A1A;
+    --primary-light: #FEF0EB;
     --accent: #00C853;
     --bg: #F7F9FC;
     --card-bg: #ffffff;
@@ -61,7 +61,6 @@
     opacity: 0.9;
   }
 
-  /* -------------------- TABS --------------------- */
   .tabs {
     display: flex;
     flex-wrap: wrap;
@@ -86,7 +85,6 @@
     border-bottom: 3px solid var(--primary);
   }
 
-  /* ------------------- CARDS -------------------- */
   .card {
     background: var(--card-bg);
     padding: 24px;
@@ -154,7 +152,6 @@
     .grid-2, .grid-3 { grid-template-columns: 1fr; }
   }
 
-  /* ---------------- CHECKBOXES ------------------ */
   .check-item {
     display: flex;
     align-items: flex-start;
@@ -178,7 +175,6 @@
     accent-color: var(--primary);
   }
 
-  /* ---------------- BADGES ------------------ */
   .badge {
     display: inline-block;
     padding: 6px 14px;
@@ -204,7 +200,6 @@
     color: var(--primary-dark);
   }
 
-  /* ---------------- ACTION BUTTONS -------------- */
   .actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -235,7 +230,6 @@
   .btn-secondary { background: #718096; color: #fff; }
   .btn-secondary:hover { background: #4A5568; }
 
-  /* ---------------- INFO ALERT -------------- */
   .info-alert {
     background: var(--primary-light);
     border-left: 4px solid var(--primary);
@@ -249,7 +243,6 @@
     color: var(--primary);
   }
 
-  /* ---------------- QUICK LINKS -------------- */
   .quick-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -274,7 +267,6 @@
     color: white;
   }
 
-  /* ---------------- TIMELINE -------------------- */
   .timeline {
     border-left: 3px solid var(--primary);
     padding-left: 16px;
@@ -303,7 +295,6 @@
     line-height: 1.5;
   }
 
-  /* ---------------- TOASTS -------------------- */
   .toast-container {
     position: fixed;
     top: 20px;
@@ -328,29 +319,72 @@
     transform: translateY(0);
   }
 
-  /* -------------- TAB CONTENT ------------------- */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
+  .header-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.6);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .header-btn:hover {
+    background: rgba(255,255,255,0.35);
+  }
+
+  .ticket-banner {
+    background: linear-gradient(135deg, #7B4FBF 0%, #A87FE0 100%);
+    color: white;
+    padding: 20px 28px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .ticket-banner .ticket-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .ticket-banner .ticket-number {
+    font-size: 2rem;
+    font-weight: 800;
+  }
 
 </style>
 </head>
 
 <body>
 
-<!-- TOASTS -->
 <div class="toast-container" id="toastContainer"></div>
 
 <div class="container">
 
   <div class="header">
     <div class="header-content">
-      <h1>Housecall Pro Support</h1>
+      <h1>🔧 Housecall Pro Support</h1>
       <p>Customer Success & Sales Script</p>
     </div>
+    <button class="header-btn">Support Agent Dashboard</button>
   </div>
 
   <div class="info-alert">
-    <strong>💡 Pro Tip:</strong> Always verify account details before making changes. Use screen sharing for technical support when possible.
+    <strong>ℹ️ Support Tips:</strong> Always verify account ownership before discussing sensitive information. Check the Help Center for up-to-date troubleshooting guides.
+  </div>
+
+  <div class="ticket-banner">
+    <div class="ticket-label">Support Ticket</div>
+    <div class="ticket-number">#HCP-387</div>
   </div>
 
   <div class="tabs">
@@ -362,7 +396,7 @@
     <div class="tab" data-tab="history">Call History</div>
   </div>
 
-  <!-- ---------------- TAB: ACCOUNT INFO ---------------- -->
+  <!-- TAB: ACCOUNT INFO -->
   <div id="account" class="tab-content active">
     <div class="card">
       <h3>Account Information</h3>
@@ -370,10 +404,8 @@
       <div class="grid-2">
         <div><label>First Name</label><input id="firstName"></div>
         <div><label>Last Name</label><input id="lastName"></div>
-
         <div><label>Business Name</label><input id="businessName"></div>
         <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
-
         <div><label>Email Address</label><input id="emailAddress" type="email"></div>
         <div><label>Date of Birth</label><input id="dateOfBirth" type="date"></div>
       </div>
@@ -386,10 +418,11 @@
       <div class="grid-2">
         <div>
           <label>Account Status</label>
+          <!-- CHANGE 2: Default to "Active Subscriber" -->
           <select id="accountStatus" onchange="updateAccountBadge()">
             <option value="">Select status...</option>
             <option value="trial">Free Trial</option>
-            <option value="active">Active Subscriber</option>
+            <option value="active" selected>Active Subscriber</option>
             <option value="past-due">Past Due</option>
             <option value="canceled">Canceled</option>
           </select>
@@ -397,10 +430,11 @@
 
         <div>
           <label>Subscription Plan</label>
+          <!-- CHANGE 3: Default to "Essentials" -->
           <select id="subscriptionPlan">
             <option value="">Select plan...</option>
             <option value="basic">Basic</option>
-            <option value="essentials">Essentials</option>
+            <option value="essentials" selected>Essentials</option>
             <option value="max">Max</option>
             <option value="enterprise">Enterprise</option>
           </select>
@@ -416,7 +450,7 @@
     </div>
   </div>
 
-  <!-- ---------------- TAB: BUSINESS DETAILS ---------------- -->
+  <!-- TAB: BUSINESS DETAILS -->
   <div id="business" class="tab-content">
     <div class="card">
       <h3>Business Details</h3>
@@ -424,9 +458,10 @@
       <div class="grid-2">
         <div>
           <label>Industry Type</label>
+          <!-- CHANGE 4a: Default to "HVAC" -->
           <select id="industryType">
             <option value="">Select industry...</option>
-            <option value="hvac">HVAC</option>
+            <option value="hvac" selected>HVAC</option>
             <option value="plumbing">Plumbing</option>
             <option value="electrical">Electrical</option>
             <option value="handyman">Handyman</option>
@@ -441,7 +476,8 @@
           </select>
         </div>
 
-        <div><label>Number of Employees</label><input id="numEmployees" type="number" placeholder="1-100+"></div>
+        <!-- CHANGE 4b: Default employees to 75 -->
+        <div><label>Number of Employees</label><input id="numEmployees" type="number" placeholder="1-100+" value="75"></div>
       </div>
 
       <div class="grid-3">
@@ -462,7 +498,7 @@
     </div>
   </div>
 
-  <!-- ---------------- TAB: SUPPORT ISSUE ---------------- -->
+  <!-- TAB: SUPPORT ISSUE -->
   <div id="issue" class="tab-content">
     <div class="card">
       <h3>Support Issue / Call Reason</h3>
@@ -516,7 +552,7 @@
     </div>
   </div>
 
-  <!-- ---------------- TAB: SOLUTION & ACTIONS ---------------- -->
+  <!-- TAB: SOLUTION & ACTIONS -->
   <div id="solution" class="tab-content">
     <div class="card">
       <h3>Solution & Actions Taken</h3>
@@ -562,51 +598,21 @@
     </div>
   </div>
 
-  <!-- ---------------- TAB: WORKFLOW ---------------- -->
+  <!-- TAB: WORKFLOW -->
   <div id="workflow" class="tab-content">
     <div class="card">
       <h3>Support Call Workflow</h3>
 
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Greet customer and verify account (name + email or account ID)</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Ask "What brings you in today?" and listen actively</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Confirm understanding of the issue by repeating it back</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Check account status and subscription plan</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Use screen sharing if technical issue (with permission)</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Provide clear, step-by-step solution</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Confirm the issue is resolved before ending call</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Document solution in CRM system</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Send follow-up email with resources (if applicable)</span>
-      </div>
-      <div class="check-item">
-        <input type="checkbox">
-        <span>Thank customer and invite them to call anytime</span>
-      </div>
+      <div class="check-item"><input type="checkbox"><span>Greet customer and verify account (name + email or account ID)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Ask "What brings you in today?" and listen actively</span></div>
+      <div class="check-item"><input type="checkbox"><span>Confirm understanding of the issue by repeating it back</span></div>
+      <div class="check-item"><input type="checkbox"><span>Check account status and subscription plan</span></div>
+      <div class="check-item"><input type="checkbox"><span>Use screen sharing if technical issue (with permission)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Provide clear, step-by-step solution</span></div>
+      <div class="check-item"><input type="checkbox"><span>Confirm the issue is resolved before ending call</span></div>
+      <div class="check-item"><input type="checkbox"><span>Document solution in CRM system</span></div>
+      <div class="check-item"><input type="checkbox"><span>Send follow-up email with resources (if applicable)</span></div>
+      <div class="check-item"><input type="checkbox"><span>Thank customer and invite them to call anytime</span></div>
 
       <div class="actions">
         <button class="btn btn-success" onclick="showToast('Call notes saved successfully')">Save Call Notes</button>
@@ -616,7 +622,7 @@
     </div>
   </div>
 
-  <!-- ---------------- TAB: CALL HISTORY ---------------- -->
+  <!-- TAB: CALL HISTORY -->
   <div id="history" class="tab-content">
     <div class="card">
       <h3>Recent Call History</h3>
@@ -657,18 +663,13 @@
 
 </div>
 
-<!-- ------------------------ SCRIPT ------------------------- -->
 <script>
   /* ----- Tabs ----- */
-  const tabs = document.querySelectorAll(".tab");
-  const contents = document.querySelectorAll(".tab-content");
-
-  tabs.forEach(tab => {
+  document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-
-      contents.forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
       document.getElementById(tab.dataset.tab).classList.add("active");
     });
   });
@@ -688,14 +689,14 @@
     return input.replace(/[\[\]\(\)]/g,"").trim();
   }
 
-  /* ----- Defaults ----- */
+  /* ----- Defaults (CHANGE 1: businessName no longer includes "Thompson") ----- */
   const defaults = {
     firstName: "Mike",
     lastName: "Thompson",
-    businessName: "Thompson HVAC Services",
+    businessName: "HVAC Services",
     phoneNumber: "(858) 842-5746",
-    emailAddress: "mike@thompsonhvac.com",
-    dateOfBirth: "1995-01-01",
+    emailAddress: "alex.johnson@email.com",
+    dateOfBirth: "1986-05-10",
     businessAddress: "1234 Main St, San Diego, CA 92101",
     accountId: "HCP-482910",
     signupDate: "2024-06-15"
@@ -706,68 +707,47 @@
     if (el) el.value = val;
   }
 
-  /* ----- Field Mapping ----- */
-  setField("firstName", getQP("firstName","FNAME","fname") || defaults.firstName);
-  setField("lastName", getQP("lastName","LNAME","lname") || defaults.lastName);
-  setField("businessName", getQP("businessName","business") || defaults.businessName);
-  setField("phoneNumber", cleanPhone(getQP("phoneNumber","PHONE","phone")) || defaults.phoneNumber);
-  setField("emailAddress", getQP("emailAddress","EMAIL","email") || defaults.emailAddress);
-  setField("dateOfBirth", getQP("dateOfBirth","DOB","dob") || defaults.dateOfBirth);
-  setField("businessAddress", getQP("businessAddress","address") || defaults.businessAddress);
-  setField("accountId", getQP("accountId","account") || defaults.accountId);
-  setField("signupDate", getQP("signupDate") || defaults.signupDate);
+  setField("firstName",       getQP("firstName","FNAME","fname")           || defaults.firstName);
+  setField("lastName",        getQP("lastName","LNAME","lname")            || defaults.lastName);
+  setField("businessName",    getQP("businessName","business")             || defaults.businessName);
+  setField("phoneNumber",     cleanPhone(getQP("phoneNumber","PHONE","phone")) || defaults.phoneNumber);
+  setField("emailAddress",    getQP("emailAddress","EMAIL","email")        || defaults.emailAddress);
+  setField("dateOfBirth",     getQP("dateOfBirth","DOB","dob")             || defaults.dateOfBirth);
+  setField("businessAddress", getQP("businessAddress","address")           || defaults.businessAddress);
+  setField("accountId",       getQP("accountId","account")                 || defaults.accountId);
+  setField("signupDate",      getQP("signupDate")                          || defaults.signupDate);
 
   /* ----- Account Status Badge ----- */
   function updateAccountBadge() {
     const status = document.getElementById("accountStatus").value;
     const container = document.getElementById("accountBadgeContainer");
-    
-    if (!status) {
-      container.innerHTML = "";
-      return;
-    }
 
-    let badgeClass = "";
-    let badgeText = "";
+    if (!status) { container.innerHTML = ""; return; }
 
-    switch(status) {
-      case "trial":
-        badgeClass = "badge-trial";
-        badgeText = "🆓 Free Trial";
-        break;
-      case "active":
-        badgeClass = "badge-active";
-        badgeText = "✅ Active Subscriber";
-        break;
-      case "past-due":
-        badgeClass = "badge-trial";
-        badgeText = "⚠️ Past Due";
-        break;
-      case "canceled":
-        badgeClass = "badge-support";
-        badgeText = "❌ Canceled";
-        break;
-    }
+    const map = {
+      trial:    { cls: "badge-trial",   text: "🆓 Free Trial" },
+      active:   { cls: "badge-active",  text: "✅ Active Subscriber" },
+      "past-due": { cls: "badge-trial", text: "⚠️ Past Due" },
+      canceled: { cls: "badge-support", text: "❌ Canceled" }
+    };
 
-    container.innerHTML = `<span class="badge ${badgeClass}">${badgeText}</span>`;
+    const b = map[status] || {};
+    container.innerHTML = `<span class="badge ${b.cls}">${b.text}</span>`;
   }
   window.updateAccountBadge = updateAccountBadge;
+
+  // Auto-trigger badge since Active Subscriber is pre-selected
+  updateAccountBadge();
 
   /* ----- Toast System ----- */
   function showToast(text) {
     const container = document.getElementById("toastContainer");
-
     const toast = document.createElement("div");
     toast.className = "toast";
     toast.innerText = text + " ✓";
-
     container.appendChild(toast);
-
     setTimeout(() => toast.classList.add("show"), 10);
-    setTimeout(() => {
-      toast.classList.remove("show");
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.classList.remove("show"); setTimeout(() => toast.remove(), 300); }, 3000);
   }
   window.showToast = showToast;
 </script>
