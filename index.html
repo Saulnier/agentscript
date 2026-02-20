@@ -3,80 +3,63 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Housecall Pro - Customer Support Script</title>
+<title>Surgery Partners – Patient Services Script</title>
 
 <style>
   :root {
-    --primary: #F05A28;
-    --primary-dark: #D44A1A;
-    --primary-light: #FEF0EB;
-    --accent: #00C853;
-    --bg: #F7F9FC;
+    --primary: #0056a6;
+    --primary-light: #e8f1fb;
+    --bg: #f4f6f8;
     --card-bg: #ffffff;
-    --text-main: #1A202C;
-    --text-muted: #718096;
-    --radius: 12px;
-    --shadow: 0 4px 12px rgba(0,0,0,0.08);
-    --success: #00C853;
-    --success-light: #E8F5E9;
-    --warning: #FF9800;
-    --warning-light: #FFF3E0;
+    --text-main: #1f2d3d;
+    --text-muted: #5f6c7b;
+    --radius: 14px;
+    --shadow: 0 4px 14px rgba(0,0,0,0.08);
+    --danger: #e26c6c;
+    --danger-light: #f9e5e5;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Segoe UI", sans-serif;
     color: var(--text-main);
     padding: 20px 16px;
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: auto;
   }
 
   .header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: var(--primary);
     color: #fff;
-    padding: 24px;
+    padding: 16px 24px;
     border-radius: var(--radius);
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 22px;
+    text-align: center;
   }
 
-  .header-content h1 {
-    margin: 0 0 6px 0;
-    font-size: 1.8rem;
-    font-weight: 700;
-  }
-
-  .header-content p {
-    margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.9;
-  }
-
+  /* -------------------- TABS --------------------- */
   .tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    border-bottom: 2px solid #E2E8F0;
+    border-bottom: 2px solid #d7e0ea;
     margin-bottom: 20px;
   }
 
   .tab {
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
     font-size: 0.92rem;
     font-weight: 600;
     color: var(--text-muted);
     border-bottom: 3px solid transparent;
-    transition: all 0.2s ease;
+    transition: color 0.25s ease, border-bottom 0.25s ease;
     white-space: nowrap;
   }
 
@@ -85,9 +68,10 @@
     border-bottom: 3px solid var(--primary);
   }
 
+  /* ------------------- CARDS -------------------- */
   .card {
     background: var(--card-bg);
-    padding: 24px;
+    padding: 22px;
     margin-bottom: 20px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -96,40 +80,27 @@
   h3 {
     margin-top: 0;
     color: var(--primary);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   label {
     display: block;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     margin-bottom: 6px;
     font-weight: 600;
     color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 
-  input, select, textarea {
+  input {
     width: 100%;
     padding: 12px;
-    border: 2px solid #E2E8F0;
+    border: 1px solid #cbd7e3;
     border-radius: var(--radius);
     margin-bottom: 16px;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     box-sizing: border-box;
-    transition: border-color 0.2s ease;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 90px;
   }
 
   .grid-2 {
@@ -138,163 +109,114 @@
     gap: 24px;
   }
 
-  .grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-  }
-
-  @media (max-width: 900px) {
-    .grid-3 { grid-template-columns: 1fr 1fr; }
-  }
-
   @media (max-width: 700px) {
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
   }
 
+  /* ---------------- CHECKBOXES ------------------ */
   .check-item {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 14px;
     font-size: 0.95rem;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
   }
 
-  .check-item:hover {
-    background: var(--primary-light);
+  .check-item input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
   }
 
-  .check-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 2px 0 0 0;
-    cursor: pointer;
-    accent-color: var(--primary);
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .badge-trial {
-    background: var(--warning-light);
-    color: #E65100;
-  }
-
-  .badge-active {
-    background: var(--success-light);
-    color: #1B5E20;
-  }
-
-  .badge-support {
-    background: var(--primary-light);
-    color: var(--primary-dark);
-  }
-
+  /* ---------------- ACTION BUTTONS -------------- */
   .actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 14px;
     margin-top: 20px;
   }
 
-  @media (max-width: 700px) {
-    .actions { grid-template-columns: 1fr; }
-  }
-
   .btn {
-    padding: 14px 20px;
+    padding: 14px;
     border-radius: var(--radius);
     border: none;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
   }
 
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: #d45252; }
+
+  /* Primary button (used for Update Contact Preferences) */
   .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-primary:hover { background: #00417c; }
 
-  .btn-success { background: var(--success); color: #fff; }
-  .btn-success:hover { background: #00A344; }
-
-  .btn-secondary { background: #718096; color: #fff; }
-  .btn-secondary:hover { background: #4A5568; }
-
-  .info-alert {
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    padding: 16px;
-    margin-bottom: 20px;
-    border-radius: var(--radius);
-    font-size: 0.9rem;
+  /* ---------------- SUPERVISOR ACTION CARD -------------- */
+  .supervisor-card {
+    background: var(--danger-light);
+    border-left: 4px solid var(--danger);
+    padding: 14px 16px;
+    margin-top: 8px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: none;
   }
 
-  .info-alert strong {
-    color: var(--primary);
-  }
-
-  .quick-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  .quick-link {
-    background: var(--primary-light);
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    text-align: center;
-    font-weight: 600;
-    color: var(--primary);
+  .supervisor-option {
+    padding: 6px 0;
     cursor: pointer;
-    transition: all 0.2s ease;
     font-size: 0.9rem;
   }
 
-  .quick-link:hover {
-    background: var(--primary);
-    color: white;
+  .supervisor-option:hover {
+    text-decoration: underline;
   }
 
+  /* ---------------- TIMELINE -------------------- */
   .timeline {
     border-left: 3px solid var(--primary);
     padding-left: 16px;
   }
-  .event { margin-bottom: 18px; }
-  .event .date { 
-    font-size: 0.8rem; 
-    font-weight: 600; 
-    color: var(--primary); 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
+  .event { margin-bottom: 16px; }
+  .event .date { font-size: 0.8rem; font-weight: 600; color: var(--primary); }
   .event .type {
     font-size: 0.75rem;
     background: var(--primary-light);
-    padding: 4px 10px;
+    padding: 4px 8px;
     border-radius: 999px;
     display: inline-block;
-    margin: 6px 0;
+    margin: 4px 0;
     font-weight: 600;
     color: var(--primary);
   }
-  .event .summary { 
-    font-size: 0.9rem; 
-    color: var(--text-muted); 
-    line-height: 1.5;
+  .event .summary { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ---------------- COST BREAKDOWN -------------------- */
+  .breakdown-card {
+    background: #ffffff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin-top: 10px;
+    display: none;
+  }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.9rem;
+  }
+  .breakdown-divider { border-top: 1px solid #d9dee4; margin: 10px 0; }
+  .toggle-breakdown {
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: -10px;
   }
 
+  /* ---------------- TOASTS -------------------- */
   .toast-container {
     position: fixed;
     top: 20px;
@@ -302,16 +224,16 @@
     z-index: 3000;
   }
   .toast {
-    background: var(--success);
+    background: var(--danger);
     color: #fff;
-    padding: 14px 20px;
-    border-radius: var(--radius);
+    padding: 12px 18px;
+    border-radius: 10px;
     box-shadow: var(--shadow);
     margin-bottom: 10px;
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
   }
   .toast.show {
@@ -319,362 +241,181 @@
     transform: translateY(0);
   }
 
+  /* -------------- TAB CONTENT ------------------- */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
-  .header-btn {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: 2px solid rgba(255,255,255,0.6);
-    padding: 10px 22px;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .header-btn:hover {
-    background: rgba(255,255,255,0.35);
-  }
-
-  .ticket-banner {
-    background: linear-gradient(135deg, #7B4FBF 0%, #A87FE0 100%);
-    color: white;
-    padding: 20px 28px;
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-  }
-
-  .ticket-banner .ticket-label {
-    font-size: 0.85rem;
-    font-weight: 700;
-    opacity: 0.85;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
-
-  .ticket-banner .ticket-number {
-    font-size: 2rem;
-    font-weight: 800;
-  }
 
 </style>
 </head>
 
 <body>
 
+<!-- TOASTS -->
 <div class="toast-container" id="toastContainer"></div>
 
 <div class="container">
 
-  <div class="header">
-    <div class="header-content">
-      <h1>🔧 Housecall Pro Support</h1>
-      <p>Customer Success & Sales Script</p>
-    </div>
-    <button class="header-btn">Support Agent Dashboard</button>
-  </div>
-
-  <div class="info-alert">
-    <strong>ℹ️ Support Tips:</strong> Always verify account ownership before discussing sensitive information. Check the Help Center for up-to-date troubleshooting guides.
-  </div>
-
-  <div class="ticket-banner">
-    <div class="ticket-label">Support Ticket</div>
-    <div class="ticket-number">#HCP-387</div>
-  </div>
+  <div class="header">Surgery Partners – Patient Services Script</div>
 
   <div class="tabs">
-    <div class="tab active" data-tab="account">Account Info</div>
-    <div class="tab" data-tab="business">Business Details</div>
-    <div class="tab" data-tab="issue">Support Issue</div>
-    <div class="tab" data-tab="solution">Solution & Actions</div>
-    <div class="tab" data-tab="workflow">Call Workflow</div>
-    <div class="tab" data-tab="history">Call History</div>
+    <div class="tab active" data-tab="context">Patient Context</div>
+    <div class="tab" data-tab="workflow">Workflow</div>
+    <div class="tab" data-tab="preferences">Contact Preferences</div>
+    <div class="tab" data-tab="journey">Patient Journey</div>
+    <div class="tab" data-tab="ehr">EHR Viewer</div>
+    <div class="tab" data-tab="pa">Prior Auth Assistant</div>
   </div>
 
-  <!-- TAB: ACCOUNT INFO -->
-  <div id="account" class="tab-content active">
+  <!-- ---------------- TAB: PATIENT CONTEXT ---------------- -->
+  <div id="context" class="tab-content active">
     <div class="card">
-      <h3>Account Information</h3>
+      <h3>Patient Context</h3>
 
       <div class="grid-2">
-        <div><label>First Name</label><input id="firstName"></div>
-        <div><label>Last Name</label><input id="lastName"></div>
-        <div><label>Business Name</label><input id="businessName"></div>
-        <div><label>Phone Number</label><input id="phoneNumber" type="tel"></div>
-        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
-        <div><label>Date of Birth</label><input id="dateOfBirth" type="date"></div>
-      </div>
+        <div><label>Patient Name</label><input id="ptName" readonly></div>
+        <div><label>Date of Birth</label><input id="ptDOB" readonly></div>
 
-      <div>
-        <label>Business Address</label>
-        <input id="businessAddress" placeholder="Street, City, State, ZIP">
-      </div>
+        <div><label>Phone Number</label><input id="ptPhone" readonly></div>
+        <div><label>Case / Procedure ID</label><input id="ptCase" readonly></div>
 
-      <div class="grid-2">
-        <div>
-          <label>Account Status</label>
-          <!-- CHANGE 2: Default to "Active Subscriber" -->
-          <select id="accountStatus" onchange="updateAccountBadge()">
-            <option value="">Select status...</option>
-            <option value="trial">Free Trial</option>
-            <option value="active" selected>Active Subscriber</option>
-            <option value="past-due">Past Due</option>
-            <option value="canceled">Canceled</option>
-          </select>
-        </div>
+        <div><label>Scheduled Surgery Date</label><input id="ptSurgeryDate" readonly></div>
+        <div><label>Center / Facility</label><input id="ptCenter" readonly></div>
+
+        <div><label>Insurance Plan</label><input id="ptInsurance" readonly></div>
 
         <div>
-          <label>Subscription Plan</label>
-          <!-- CHANGE 3: Default to "Essentials" -->
-          <select id="subscriptionPlan">
-            <option value="">Select plan...</option>
-            <option value="basic">Basic</option>
-            <option value="essentials" selected>Essentials</option>
-            <option value="max">Max</option>
-            <option value="enterprise">Enterprise</option>
-          </select>
+          <label>Patient Responsibility Estimate</label>
+          <input id="ptBalance" readonly />
+
+          <div class="toggle-breakdown" onclick="toggleBreakdown()">
+            ▼ View Cost Breakdown
+          </div>
+
+          <div id="breakdownCard" class="breakdown-card">
+            <div class="breakdown-row"><span>Deductible:</span><span id="deductibleVal">$0</span></div>
+            <div class="breakdown-row"><span>Coinsurance:</span><span id="coinsuranceVal">$0</span></div>
+            <div class="breakdown-row"><span>Copay:</span><span id="copayVal">$0</span></div>
+            <div class="breakdown-divider"></div>
+            <div class="breakdown-row">
+              <strong>Total Estimate:</strong><strong id="totalEstimateVal">$0</strong>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div id="accountBadgeContainer"></div>
-
-      <div class="grid-2">
-        <div><label>Account ID</label><input id="accountId" placeholder="HCP-######"></div>
-        <div><label>Sign-Up Date</label><input id="signupDate" type="date"></div>
       </div>
     </div>
   </div>
 
-  <!-- TAB: BUSINESS DETAILS -->
-  <div id="business" class="tab-content">
-    <div class="card">
-      <h3>Business Details</h3>
-
-      <div class="grid-2">
-        <div>
-          <label>Industry Type</label>
-          <!-- CHANGE 4a: Default to "HVAC" -->
-          <select id="industryType">
-            <option value="">Select industry...</option>
-            <option value="hvac" selected>HVAC</option>
-            <option value="plumbing">Plumbing</option>
-            <option value="electrical">Electrical</option>
-            <option value="handyman">Handyman</option>
-            <option value="cleaning">Home Cleaning</option>
-            <option value="landscaping">Landscaping & Lawn Care</option>
-            <option value="pest-control">Pest Control</option>
-            <option value="appliance">Appliance Repair</option>
-            <option value="carpet-cleaning">Carpet Cleaning</option>
-            <option value="garage-door">Garage Door</option>
-            <option value="pool">Pool Service</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <!-- CHANGE 4b: Default employees to 75 -->
-        <div><label>Number of Employees</label><input id="numEmployees" type="number" placeholder="1-100+" value="75"></div>
-      </div>
-
-      <div class="grid-3">
-        <div><label>Number of Technicians</label><input id="numTechs" type="number"></div>
-        <div><label>Avg Jobs Per Month</label><input id="avgJobs" type="number"></div>
-        <div><label>Avg Job Value</label><input id="avgJobValue" placeholder="$000"></div>
-      </div>
-
-      <div>
-        <label>Primary Pain Points (Before HCP)</label>
-        <textarea id="painPoints" placeholder="e.g., missed calls, scheduling issues, slow payments..."></textarea>
-      </div>
-
-      <div>
-        <label>Current Goals</label>
-        <textarea id="businessGoals" placeholder="e.g., grow revenue, hire more techs, improve customer reviews..."></textarea>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB: SUPPORT ISSUE -->
-  <div id="issue" class="tab-content">
-    <div class="card">
-      <h3>Support Issue / Call Reason</h3>
-
-      <div>
-        <label>Call Type</label>
-        <select id="callType">
-          <option value="">Select type...</option>
-          <option value="technical">Technical Support</option>
-          <option value="billing">Billing Question</option>
-          <option value="training">Training / How-To</option>
-          <option value="feature">Feature Request</option>
-          <option value="sales">Sales Inquiry</option>
-          <option value="upgrade">Upgrade Request</option>
-          <option value="cancel">Cancellation</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Issue Category</label>
-        <select id="issueCategory">
-          <option value="">Select category...</option>
-          <option value="app">Mobile App Issue</option>
-          <option value="scheduling">Scheduling / Dispatching</option>
-          <option value="payments">Payments / Processing</option>
-          <option value="invoicing">Invoicing / Estimates</option>
-          <option value="customer-communication">Customer Communication</option>
-          <option value="integrations">Integrations (QuickBooks, etc.)</option>
-          <option value="reports">Reports / Analytics</option>
-          <option value="team-management">Team Management</option>
-          <option value="account-access">Account Access / Login</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Issue Description</label>
-        <textarea id="issueDescription" placeholder="Customer's description of the issue in their own words..."></textarea>
-      </div>
-
-      <div>
-        <label>Priority Level</label>
-        <select id="priorityLevel">
-          <option value="low">Low - General Question</option>
-          <option value="medium">Medium - Affecting Work</option>
-          <option value="high">High - Blocking Critical Tasks</option>
-          <option value="urgent">Urgent - Business Down</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB: SOLUTION & ACTIONS -->
-  <div id="solution" class="tab-content">
-    <div class="card">
-      <h3>Solution & Actions Taken</h3>
-
-      <div>
-        <label>Solution Provided</label>
-        <textarea id="solutionProvided" placeholder="Describe the steps taken to resolve the issue..."></textarea>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Resolution Status</label>
-          <select id="resolutionStatus">
-            <option value="">Select status...</option>
-            <option value="resolved">Resolved</option>
-            <option value="partially-resolved">Partially Resolved</option>
-            <option value="escalated">Escalated to Tech Team</option>
-            <option value="follow-up">Requires Follow-Up</option>
-            <option value="unresolved">Unresolved</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Follow-Up Required?</label>
-          <select id="followUpRequired">
-            <option value="no">No Follow-Up Needed</option>
-            <option value="yes-24hr">Yes - Within 24 Hours</option>
-            <option value="yes-48hr">Yes - Within 48 Hours</option>
-            <option value="yes-scheduled">Yes - Scheduled Callback</option>
-          </select>
-        </div>
-      </div>
-
-      <h3 style="margin-top: 30px;">Quick Actions</h3>
-      <div class="quick-links">
-        <div class="quick-link" onclick="showToast('Screen sharing link sent')">Send Screen Share Link</div>
-        <div class="quick-link" onclick="showToast('Help article sent via email')">Send Help Article</div>
-        <div class="quick-link" onclick="showToast('Training video sent')">Send Training Video</div>
-        <div class="quick-link" onclick="showToast('Account refreshed')">Refresh Account</div>
-        <div class="quick-link" onclick="showToast('Password reset email sent')">Reset Password</div>
-        <div class="quick-link" onclick="showToast('Billing details updated')">Update Billing</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB: WORKFLOW -->
+  <!-- ---------------- TAB: WORKFLOW ---------------- -->
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Support Call Workflow</h3>
+      <h3>Pre-Service Collection Workflow</h3>
 
-      <div class="check-item"><input type="checkbox"><span>Greet customer and verify account (name + email or account ID)</span></div>
-      <div class="check-item"><input type="checkbox"><span>Ask "What brings you in today?" and listen actively</span></div>
-      <div class="check-item"><input type="checkbox"><span>Confirm understanding of the issue by repeating it back</span></div>
-      <div class="check-item"><input type="checkbox"><span>Check account status and subscription plan</span></div>
-      <div class="check-item"><input type="checkbox"><span>Use screen sharing if technical issue (with permission)</span></div>
-      <div class="check-item"><input type="checkbox"><span>Provide clear, step-by-step solution</span></div>
-      <div class="check-item"><input type="checkbox"><span>Confirm the issue is resolved before ending call</span></div>
-      <div class="check-item"><input type="checkbox"><span>Document solution in CRM system</span></div>
-      <div class="check-item"><input type="checkbox"><span>Send follow-up email with resources (if applicable)</span></div>
-      <div class="check-item"><input type="checkbox"><span>Thank customer and invite them to call anytime</span></div>
+      <div class="check-item"><input type="checkbox">Verify patient identity (DOB + Phone)</div>
+      <div class="check-item"><input type="checkbox">Confirm upcoming procedure & facility</div>
+      <div class="check-item"><input type="checkbox">Review insurance verification status</div>
+      <div class="check-item"><input type="checkbox">Present patient responsibility estimate</div>
+      <div class="check-item"><input type="checkbox">Offer payment options (full, partial, plan)</div>
+      <div class="check-item"><input type="checkbox">Document patient commitment & note in HST</div>
 
       <div class="actions">
-        <button class="btn btn-success" onclick="showToast('Call notes saved successfully')">Save Call Notes</button>
-        <button class="btn btn-primary" onclick="showToast('Follow-up task created')">Create Follow-Up Task</button>
-        <button class="btn btn-secondary" onclick="showToast('Ticket escalated to Level 2 support')">Escalate to Tech Team</button>
+        <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Supervisor</button>
+
+        <div id="supervisorCard" class="supervisor-card">
+          <div class="supervisor-option">Notify Supervisor Immediately</div>
+          <div class="supervisor-option">Request Live Monitoring</div>
+          <div class="supervisor-option">Flag Interaction for Coaching Review</div>
+          <div class="supervisor-option">Transfer Call to Supervisor Queue</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- TAB: CALL HISTORY -->
-  <div id="history" class="tab-content">
+  <!-- ---------------- TAB: CONTACT PREFERENCES ---------------- -->
+  <div id="preferences" class="tab-content">
     <div class="card">
-      <h3>Recent Call History</h3>
+      <h3>Patient Contact Preferences</h3>
+
+      <div class="check-item"><input type="checkbox" id="prefSMS">SMS</div>
+      <div class="check-item"><input type="checkbox" id="prefEmail">Email</div>
+      <!-- Voice defaults to checked -->
+      <div class="check-item"><input type="checkbox" id="prefVoice" checked>Voice</div>
+      <div class="check-item"><input type="checkbox" id="prefPlan">Enrolled in Pre-Op Payment Plan</div>
+
+      <div class="actions">
+        <button class="btn btn-primary" id="updatePrefsBtn">Update Contact Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: PATIENT JOURNEY ---------------- -->
+  <div id="journey" class="tab-content">
+    <div class="card">
+      <h3>Patient Journey / Contact History</h3>
 
       <div class="timeline">
-        <div class="event">
-          <div class="date">Feb 15, 2026 - 10:45 AM</div>
-          <div class="type">Billing Inquiry</div>
-          <div class="summary">Customer asked about upgrading from Basic to Essentials plan. Provided pricing details and benefits. Customer will decide by end of week.</div>
-        </div>
-        <div class="event">
-          <div class="date">Feb 10, 2026 - 2:30 PM</div>
-          <div class="type">Technical Support</div>
-          <div class="summary">Issue with mobile app not syncing. Resolved by clearing cache and reinstalling app. Customer confirmed working.</div>
-        </div>
-        <div class="event">
-          <div class="date">Feb 5, 2026 - 9:15 AM</div>
-          <div class="type">Training</div>
-          <div class="summary">Requested help setting up online booking. Walked through setup process. Sent follow-up video tutorial.</div>
-        </div>
-        <div class="event">
-          <div class="date">Jan 28, 2026 - 4:20 PM</div>
-          <div class="type">Feature Request</div>
-          <div class="summary">Requested ability to send batch text messages. Submitted feature request to product team. Provided workaround using customer tags.</div>
-        </div>
-        <div class="event">
-          <div class="date">Jan 22, 2026 - 11:00 AM</div>
-          <div class="type">Onboarding Call</div>
-          <div class="summary">Initial onboarding call. Set up account, added first technician, created sample job. Customer excited to start using the platform.</div>
-        </div>
+        <div class="event"><div class="date">Dec 9, 2025</div><div class="type">Email</div><div class="summary">Sent pre-op fasting instructions.</div></div>
+        <div class="event"><div class="date">Dec 8, 2025</div><div class="type">SMS</div><div class="summary">Reminder sent.</div></div>
+        <div class="event"><div class="date">Dec 7, 2025</div><div class="type">Inbound Call</div><div class="summary">Collected $150 & reviewed prep checklist.</div></div>
+        <div class="event"><div class="date">Dec 5, 2025</div><div class="type">Outbound Call</div><div class="summary">Insurance verified & surgery confirmed.</div></div>
+        <div class="event"><div class="date">Dec 3, 2025</div><div class="type">Outbound Call</div><div class="summary">No answer. Voicemail left.</div></div>
       </div>
+    </div>
+  </div>
 
-      <div class="actions" style="margin-top: 24px;">
-        <button class="btn btn-primary" onclick="showToast('Full call history exported')">Export Call History</button>
-      </div>
+  <!-- ---------------- TAB: EHR VIEWER ---------------- -->
+  <div id="ehr" class="tab-content">
+    <div class="card">
+      <h3>Mini EHR Viewer (Read-Only)</h3>
+
+      <table class="ehr-table">
+        <tr><td><strong>Primary Diagnosis:</strong></td><td>Cholelithiasis (K80.20)</td></tr>
+        <tr><td><strong>Procedure:</strong></td><td>Laparoscopic Cholecystectomy</td></tr>
+        <tr><td><strong>Allergies:</strong></td><td>Penicillin, Latex</td></tr>
+        <tr><td><strong>Medications:</strong></td><td>Metformin 500mg, Atorvastatin 20mg</td></tr>
+        <tr><td><strong>Past Procedures:</strong></td><td>Colonoscopy – 2022</td></tr>
+        <tr><td><strong>Pre-Op Clearance:</strong></td><td>Completed – PCP (11/28/25)</td></tr>
+        <tr><td><strong>Primary Care Provider:</strong></td><td>Dr. Susan Miller</td></tr>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- ---------------- TAB: PRIOR AUTH ---------------- -->
+  <div id="pa" class="tab-content">
+    <div class="card">
+      <h3>Prior Authorization Assistant</h3>
+
+      <table class="ehr-table">
+        <tr><td><strong>PA Status:</strong></td><td>Approved</td></tr>
+        <tr><td><strong>Payer:</strong></td><td>BlueCross PPO</td></tr>
+        <tr><td><strong>Approval #:</strong></td><td>PA-9822341</td></tr>
+        <tr><td><strong>Valid Through:</strong></td><td>02/15/2026</td></tr>
+        <tr><td><strong>Required Docs:</strong></td><td>DX code, imaging results, surgeon notes</td></tr>
+      </table>
+
     </div>
   </div>
 
 </div>
 
+<!-- ------------------------ SCRIPT ------------------------- -->
 <script>
   /* ----- Tabs ----- */
-  document.querySelectorAll(".tab").forEach(tab => {
+  const tabs = document.querySelectorAll(".tab");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach(tab => {
     tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+      contents.forEach(c => c.classList.remove("active"));
       document.getElementById(tab.dataset.tab).classList.add("active");
     });
   });
 
-  /* ----- Query Params ----- */
+  /* ----- Dual-Case Query Params ----- */
   const qp = new URLSearchParams(window.location.search);
 
   function getQP(...keys) {
@@ -689,17 +430,13 @@
     return input.replace(/[\[\]\(\)]/g,"").trim();
   }
 
-  /* ----- Defaults (CHANGE 1: businessName no longer includes "Thompson") ----- */
+  /* ----- Defaults ----- */
   const defaults = {
-    firstName: "Mike",
-    lastName: "Thompson",
-    businessName: "ABC HVAC Services",
-    phoneNumber: "(858) 842-5746",
-    emailAddress: "alex.johnson@email.com",
-    dateOfBirth: "1986-05-10",
-    businessAddress: "1234 Main St, San Diego, CA 92101",
-    accountId: "HCP-482910",
-    signupDate: "2024-06-15"
+    ptDOB: "1984-07-22",
+    ptCase: "PROC-447821",
+    ptSurgeryDate: "2025-12-19",
+    ptCenter: "NovaMed Surgery Center of Madison",
+    ptInsurance: "BlueCross PPO"
   };
 
   function setField(id, val) {
@@ -707,49 +444,98 @@
     if (el) el.value = val;
   }
 
-  setField("firstName",       getQP("firstName","FNAME","fname")           || defaults.firstName);
-  setField("lastName",        getQP("lastName","LNAME","lname")            || defaults.lastName);
-  setField("businessName",    getQP("businessName","business")             || defaults.businessName);
-  setField("phoneNumber",     cleanPhone(getQP("phoneNumber","PHONE","phone")) || defaults.phoneNumber);
-  setField("emailAddress",    getQP("emailAddress","EMAIL","email")        || defaults.emailAddress);
-  setField("dateOfBirth",     getQP("dateOfBirth","DOB","dob")             || defaults.dateOfBirth);
-  setField("businessAddress", getQP("businessAddress","address")           || defaults.businessAddress);
-  setField("accountId",       getQP("accountId","account")                 || defaults.accountId);
-  setField("signupDate",      getQP("signupDate")                          || defaults.signupDate);
+  /* ----- Field Mapping ----- */
+  setField("ptName",
+    getQP("name","Name","FNAME","fname") + " " +
+    getQP("LNAME","lname","last","LastName")
+  );
+  setField("ptDOB", getQP("dob","DOB","BirthDate") || defaults.ptDOB);
+  setField("ptPhone", cleanPhone(getQP("phone","PHONE","Mobile","ContactNumber")));
+  setField("ptCase", getQP("service","CASEID","AccountPatientOrMemberID") || defaults.ptCase);
+  setField("ptSurgeryDate", getQP("surgerydate","SURGERYDATE") || defaults.ptSurgeryDate);
+  setField("ptCenter", getQP("center","CENTER","facility") || defaults.ptCenter);
+  setField("ptInsurance", getQP("insurance","INSURANCE","plan") || defaults.ptInsurance);
 
-  /* ----- Account Status Badge ----- */
-  function updateAccountBadge() {
-    const status = document.getElementById("accountStatus").value;
-    const container = document.getElementById("accountBadgeContainer");
+  /* ----- Fixed Cost Calculator (always $750) ----- */
+  const deductible = 300;
+  const coinsurance = 350;
+  const copay = 100;
+  const total = 750;
 
-    if (!status) { container.innerHTML = ""; return; }
+  document.getElementById("ptBalance").value = "$" + total.toFixed(2);
+  document.getElementById("deductibleVal").innerText = "$" + deductible.toFixed(2);
+  document.getElementById("coinsuranceVal").innerText = "$" + coinsurance.toFixed(2);
+  document.getElementById("copayVal").innerText = "$" + copay.toFixed(2);
+  document.getElementById("totalEstimateVal").innerText = "$" + total.toFixed(2);
 
-    const map = {
-      trial:    { cls: "badge-trial",   text: "🆓 Free Trial" },
-      active:   { cls: "badge-active",  text: "✅ Active Subscriber" },
-      "past-due": { cls: "badge-trial", text: "⚠️ Past Due" },
-      canceled: { cls: "badge-support", text: "❌ Canceled" }
-    };
+  /* ----- Cost Breakdown Toggle ----- */
+  function toggleBreakdown() {
+    const card = document.getElementById("breakdownCard");
+    const label = document.querySelector(".toggle-breakdown");
 
-    const b = map[status] || {};
-    container.innerHTML = `<span class="badge ${b.cls}">${b.text}</span>`;
+    if (card.style.display === "none" || card.style.display === "") {
+      card.style.display = "block";
+      label.innerText = "▲ Hide Cost Breakdown";
+    } else {
+      card.style.display = "none";
+      label.innerText = "▼ View Cost Breakdown";
+    }
   }
-  window.updateAccountBadge = updateAccountBadge;
+  window.toggleBreakdown = toggleBreakdown;
 
-  // Auto-trigger badge since Active Subscriber is pre-selected
-  updateAccountBadge();
+  /* ----- Supervisor Action Card Toggle ----- */
+  function toggleSupervisorCard() {
+    const card = document.getElementById("supervisorCard");
+    card.style.display = (card.style.display === "block") ? "none" : "block";
+  }
+  window.toggleSupervisorCard = toggleSupervisorCard;
 
   /* ----- Toast System ----- */
   function showToast(text) {
     const container = document.getElementById("toastContainer");
+
     const toast = document.createElement("div");
     toast.className = "toast";
     toast.innerText = text + " ✓";
+
     container.appendChild(toast);
+
     setTimeout(() => toast.classList.add("show"), 10);
-    setTimeout(() => { toast.classList.remove("show"); setTimeout(() => toast.remove(), 300); }, 3000);
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
   }
-  window.showToast = showToast;
+
+  /* ----- Supervisor Option Clicks ----- */
+  document.querySelectorAll(".supervisor-option").forEach(option => {
+    option.addEventListener("click", () => {
+      const msg = option.innerText.trim();
+      document.getElementById("supervisorCard").style.display = "none";
+      showToast(msg);
+    });
+  });
+
+  /* ----- Update Contact Preferences button ----- */
+  const updatePrefsBtn = document.getElementById("updatePrefsBtn");
+  if (updatePrefsBtn) {
+    updatePrefsBtn.addEventListener("click", () => {
+      showToast("Contact preferences updated");
+    });
+  }
+
+  /* ----- Theme Overrides from Architect ----- */
+  const buttonColor = getQP("buttonColor","ButtonColor");
+  const bgColor = getQP("bgColor","PageBackgroundColor");
+  const headerColor = getQP("headerColor","HeaderColor");
+
+  if (bgColor) document.body.style.backgroundColor = bgColor;
+  if (headerColor) document.querySelector(".header").style.backgroundColor = headerColor;
+  if (buttonColor) {
+    document.querySelectorAll(".btn-primary").forEach(btn => {
+      btn.style.backgroundColor = buttonColor;
+    });
+  }
 </script>
 
 </body>
