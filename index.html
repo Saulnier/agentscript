@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Surgery Partners – Patient Services Script</title>
+<title>Arizona Public Service – Agent Script</title>
 
 <style>
   :root {
-    --primary: #0056a6;
+    --primary: #003a8f;
     --primary-light: #e8f1fb;
     --bg: #f4f6f8;
     --card-bg: #ffffff;
@@ -39,9 +39,26 @@
     border-radius: var(--radius);
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 22px;
+    margin-bottom: 12px;
     text-align: center;
   }
+
+  .outage-bar {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  .btn {
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #002e6f; }
 
   /* -------------------- TABS --------------------- */
   .tabs {
@@ -59,8 +76,6 @@
     font-weight: 600;
     color: var(--text-muted);
     border-bottom: 3px solid transparent;
-    transition: color 0.25s ease, border-bottom 0.25s ease;
-    white-space: nowrap;
   }
 
   .tab.active {
@@ -68,7 +83,6 @@
     border-bottom: 3px solid var(--primary);
   }
 
-  /* ------------------- CARDS -------------------- */
   .card {
     background: var(--card-bg);
     padding: 22px;
@@ -80,9 +94,6 @@
   h3 {
     margin-top: 0;
     color: var(--primary);
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 16px;
   }
 
   label {
@@ -99,8 +110,6 @@
     border: 1px solid #cbd7e3;
     border-radius: var(--radius);
     margin-bottom: 16px;
-    font-size: 0.92rem;
-    box-sizing: border-box;
   }
 
   .grid-2 {
@@ -113,13 +122,11 @@
     .grid-2 { grid-template-columns: 1fr; }
   }
 
-  /* ---------------- CHECKBOXES ------------------ */
   .check-item {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 14px;
-    font-size: 0.95rem;
   }
 
   .check-item input {
@@ -128,280 +135,104 @@
     margin: 0;
   }
 
-  /* ---------------- ACTION BUTTONS -------------- */
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 20px;
-  }
-
-  .btn {
-    padding: 14px;
-    border-radius: var(--radius);
-    border: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .btn-danger { background: var(--danger); color: #fff; }
-  .btn-danger:hover { background: #d45252; }
-
-  /* Primary button (used for Update Contact Preferences) */
-  .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: #00417c; }
-
-  /* ---------------- SUPERVISOR ACTION CARD -------------- */
-  .supervisor-card {
-    background: var(--danger-light);
-    border-left: 4px solid var(--danger);
-    padding: 14px 16px;
-    margin-top: 8px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: none;
-  }
-
-  .supervisor-option {
-    padding: 6px 0;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
-
-  .supervisor-option:hover {
-    text-decoration: underline;
-  }
-
-  /* ---------------- TIMELINE -------------------- */
-  .timeline {
-    border-left: 3px solid var(--primary);
-    padding-left: 16px;
-  }
-  .event { margin-bottom: 16px; }
-  .event .date { font-size: 0.8rem; font-weight: 600; color: var(--primary); }
-  .event .type {
-    font-size: 0.75rem;
-    background: var(--primary-light);
-    padding: 4px 8px;
-    border-radius: 999px;
-    display: inline-block;
-    margin: 4px 0;
-    font-weight: 600;
-    color: var(--primary);
-  }
-  .event .summary { font-size: 0.9rem; color: var(--text-muted); }
-
-  /* ---------------- COST BREAKDOWN -------------------- */
-  .breakdown-card {
-    background: #ffffff;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 16px;
-    margin-top: 10px;
-    display: none;
-  }
-  .breakdown-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    font-size: 0.9rem;
-  }
-  .breakdown-divider { border-top: 1px solid #d9dee4; margin: 10px 0; }
-  .toggle-breakdown {
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-top: -10px;
-  }
-
-  /* ---------------- TOASTS -------------------- */
-  .toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 3000;
-  }
-  .toast {
-    background: var(--danger);
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  .toast.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* -------------- TAB CONTENT ------------------- */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
 </style>
 </head>
 
 <body>
 
-<!-- TOASTS -->
-<div class="toast-container" id="toastContainer"></div>
-
 <div class="container">
 
-  <div class="header">Surgery Partners – Patient Services Script</div>
+  <div class="header">Arizona Public Service</div>
 
-  <div class="tabs">
-    <div class="tab active" data-tab="context">Patient Context</div>
-    <div class="tab" data-tab="workflow">Workflow</div>
-    <div class="tab" data-tab="preferences">Contact Preferences</div>
-    <div class="tab" data-tab="journey">Patient Journey</div>
-    <div class="tab" data-tab="ehr">EHR Viewer</div>
-    <div class="tab" data-tab="pa">Prior Auth Assistant</div>
+  <!-- REPORT OUTAGE BUTTON -->
+  <div class="outage-bar">
+    <button class="btn btn-primary" type="button">
+      Report an Outage
+    </button>
   </div>
 
-  <!-- ---------------- TAB: PATIENT CONTEXT ---------------- -->
+  <!-- ---------------- TABS ---------------- -->
+  <div class="tabs">
+    <div class="tab active" data-tab="context">Customer Context</div>
+    <div class="tab" data-tab="workflow">Workflow</div>
+    <div class="tab" data-tab="preferences">Contact Preferences</div>
+    <div class="tab" data-tab="journey">Customer Journey</div>
+    <div class="tab" data-tab="pa">Account Viewer</div>
+  </div>
+
+  <!-- ---------------- TAB: CONTEXT ---------------- -->
   <div id="context" class="tab-content active">
     <div class="card">
-      <h3>Patient Context</h3>
+      <h3>Customer Context</h3>
 
       <div class="grid-2">
-        <div><label>Patient Name</label><input id="ptName" readonly></div>
-        <div><label>Date of Birth</label><input id="ptDOB" readonly></div>
+        <div><label>First Name</label><input></div>
+        <div><label>Last Name</label><input></div>
 
-        <div><label>Phone Number</label><input id="ptPhone" readonly></div>
-        <div><label>Case / Procedure ID</label><input id="ptCase" readonly></div>
+        <div><label>Phone Number</label><input></div>
+        <div><label>Account Number</label><input></div>
 
-        <div><label>Scheduled Surgery Date</label><input id="ptSurgeryDate" readonly></div>
-        <div><label>Center / Facility</label><input id="ptCenter" readonly></div>
+        <div><label>Service Address</label><input></div>
+        <div><label>Start of Service Date</label><input></div>
 
-        <div><label>Insurance Plan</label><input id="ptInsurance" readonly></div>
-
-        <div>
-          <label>Patient Responsibility Estimate</label>
-          <input id="ptBalance" readonly />
-
-          <div class="toggle-breakdown" onclick="toggleBreakdown()">
-            ▼ View Cost Breakdown
-          </div>
-
-          <div id="breakdownCard" class="breakdown-card">
-            <div class="breakdown-row"><span>Deductible:</span><span id="deductibleVal">$0</span></div>
-            <div class="breakdown-row"><span>Coinsurance:</span><span id="coinsuranceVal">$0</span></div>
-            <div class="breakdown-row"><span>Copay:</span><span id="copayVal">$0</span></div>
-            <div class="breakdown-divider"></div>
-            <div class="breakdown-row">
-              <strong>Total Estimate:</strong><strong id="totalEstimateVal">$0</strong>
-            </div>
-          </div>
-        </div>
-
+        <div><label>Account Balance</label><input></div>
+        <div><label>Plan Rate Details</label><input></div>
       </div>
+
+      <div class="check-item">
+        <input type="checkbox">Identity Verified
+      </div>
+
+      <label>Caller Intent</label>
+      <input>
     </div>
   </div>
 
   <!-- ---------------- TAB: WORKFLOW ---------------- -->
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Pre-Service Collection Workflow</h3>
+      <h3>Outage & Service Workflow</h3>
 
-      <div class="check-item"><input type="checkbox">Verify patient identity (DOB + Phone)</div>
-      <div class="check-item"><input type="checkbox">Confirm upcoming procedure & facility</div>
-      <div class="check-item"><input type="checkbox">Review insurance verification status</div>
-      <div class="check-item"><input type="checkbox">Present patient responsibility estimate</div>
-      <div class="check-item"><input type="checkbox">Offer payment options (full, partial, plan)</div>
-      <div class="check-item"><input type="checkbox">Document patient commitment & note in HST</div>
-
-      <div class="actions">
-        <button class="btn btn-danger" onclick="toggleSupervisorCard()">Escalate to Supervisor</button>
-
-        <div id="supervisorCard" class="supervisor-card">
-          <div class="supervisor-option">Notify Supervisor Immediately</div>
-          <div class="supervisor-option">Request Live Monitoring</div>
-          <div class="supervisor-option">Flag Interaction for Coaching Review</div>
-          <div class="supervisor-option">Transfer Call to Supervisor Queue</div>
-        </div>
-      </div>
+      <div class="check-item"><input type="checkbox">Verify identity</div>
+      <div class="check-item"><input type="checkbox">Confirm service address</div>
+      <div class="check-item"><input type="checkbox">Check known outage map</div>
+      <div class="check-item"><input type="checkbox">Create outage report if needed</div>
+      <div class="check-item"><input type="checkbox">Provide ETA if available</div>
+      <div class="check-item"><input type="checkbox">Document interaction</div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: CONTACT PREFERENCES ---------------- -->
+  <!-- ---------------- TAB: CONTACT PREFS ---------------- -->
   <div id="preferences" class="tab-content">
     <div class="card">
-      <h3>Patient Contact Preferences</h3>
-
-      <div class="check-item"><input type="checkbox" id="prefSMS">SMS</div>
-      <div class="check-item"><input type="checkbox" id="prefEmail">Email</div>
-      <!-- Voice defaults to checked -->
-      <div class="check-item"><input type="checkbox" id="prefVoice" checked>Voice</div>
-      <div class="check-item"><input type="checkbox" id="prefPlan">Enrolled in Pre-Op Payment Plan</div>
-
-      <div class="actions">
-        <button class="btn btn-primary" id="updatePrefsBtn">Update Contact Preferences</button>
-      </div>
+      <h3>Contact Preferences</h3>
+      <div class="check-item"><input type="checkbox">SMS</div>
+      <div class="check-item"><input type="checkbox">Email</div>
+      <div class="check-item"><input type="checkbox" checked>Voice</div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: PATIENT JOURNEY ---------------- -->
+  <!-- ---------------- TAB: JOURNEY ---------------- -->
   <div id="journey" class="tab-content">
     <div class="card">
-      <h3>Patient Journey / Contact History</h3>
-
-      <div class="timeline">
-        <div class="event"><div class="date">Dec 9, 2025</div><div class="type">Email</div><div class="summary">Sent pre-op fasting instructions.</div></div>
-        <div class="event"><div class="date">Dec 8, 2025</div><div class="type">SMS</div><div class="summary">Reminder sent.</div></div>
-        <div class="event"><div class="date">Dec 7, 2025</div><div class="type">Inbound Call</div><div class="summary">Collected $150 & reviewed prep checklist.</div></div>
-        <div class="event"><div class="date">Dec 5, 2025</div><div class="type">Outbound Call</div><div class="summary">Insurance verified & surgery confirmed.</div></div>
-        <div class="event"><div class="date">Dec 3, 2025</div><div class="type">Outbound Call</div><div class="summary">No answer. Voicemail left.</div></div>
-      </div>
+      <h3>Customer Journey</h3>
+      <p>Recent interactions will appear here.</p>
     </div>
   </div>
 
-  <!-- ---------------- TAB: EHR VIEWER ---------------- -->
-  <div id="ehr" class="tab-content">
-    <div class="card">
-      <h3>Mini EHR Viewer (Read-Only)</h3>
-
-      <table class="ehr-table">
-        <tr><td><strong>Primary Diagnosis:</strong></td><td>Cholelithiasis (K80.20)</td></tr>
-        <tr><td><strong>Procedure:</strong></td><td>Laparoscopic Cholecystectomy</td></tr>
-        <tr><td><strong>Allergies:</strong></td><td>Penicillin, Latex</td></tr>
-        <tr><td><strong>Medications:</strong></td><td>Metformin 500mg, Atorvastatin 20mg</td></tr>
-        <tr><td><strong>Past Procedures:</strong></td><td>Colonoscopy – 2022</td></tr>
-        <tr><td><strong>Pre-Op Clearance:</strong></td><td>Completed – PCP (11/28/25)</td></tr>
-        <tr><td><strong>Primary Care Provider:</strong></td><td>Dr. Susan Miller</td></tr>
-      </table>
-
-    </div>
-  </div>
-
-  <!-- ---------------- TAB: PRIOR AUTH ---------------- -->
+  <!-- ---------------- TAB: ACCOUNT ---------------- -->
   <div id="pa" class="tab-content">
     <div class="card">
-      <h3>Prior Authorization Assistant</h3>
-
-      <table class="ehr-table">
-        <tr><td><strong>PA Status:</strong></td><td>Approved</td></tr>
-        <tr><td><strong>Payer:</strong></td><td>BlueCross PPO</td></tr>
-        <tr><td><strong>Approval #:</strong></td><td>PA-9822341</td></tr>
-        <tr><td><strong>Valid Through:</strong></td><td>02/15/2026</td></tr>
-        <tr><td><strong>Required Docs:</strong></td><td>DX code, imaging results, surgeon notes</td></tr>
-      </table>
-
+      <h3>Account Viewer</h3>
+      <p>Read-only account and service data.</p>
     </div>
   </div>
 
 </div>
 
-<!-- ------------------------ SCRIPT ------------------------- -->
 <script>
-  /* ----- Tabs ----- */
   const tabs = document.querySelectorAll(".tab");
   const contents = document.querySelectorAll(".tab-content");
 
@@ -409,133 +240,10 @@
     tab.addEventListener("click", () => {
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-
       contents.forEach(c => c.classList.remove("active"));
       document.getElementById(tab.dataset.tab).classList.add("active");
     });
   });
-
-  /* ----- Dual-Case Query Params ----- */
-  const qp = new URLSearchParams(window.location.search);
-
-  function getQP(...keys) {
-    for (let k of keys) {
-      const v = qp.get(k);
-      if (v && v.trim() !== "") return v;
-    }
-    return "";
-  }
-
-  function cleanPhone(input="") {
-    return input.replace(/[\[\]\(\)]/g,"").trim();
-  }
-
-  /* ----- Defaults ----- */
-  const defaults = {
-    ptDOB: "1984-07-22",
-    ptCase: "PROC-447821",
-    ptSurgeryDate: "2025-12-19",
-    ptCenter: "NovaMed Surgery Center of Madison",
-    ptInsurance: "BlueCross PPO"
-  };
-
-  function setField(id, val) {
-    const el = document.getElementById(id);
-    if (el) el.value = val;
-  }
-
-  /* ----- Field Mapping ----- */
-  setField("ptName",
-    getQP("name","Name","FNAME","fname") + " " +
-    getQP("LNAME","lname","last","LastName")
-  );
-  setField("ptDOB", getQP("dob","DOB","BirthDate") || defaults.ptDOB);
-  setField("ptPhone", cleanPhone(getQP("phone","PHONE","Mobile","ContactNumber")));
-  setField("ptCase", getQP("service","CASEID","AccountPatientOrMemberID") || defaults.ptCase);
-  setField("ptSurgeryDate", getQP("surgerydate","SURGERYDATE") || defaults.ptSurgeryDate);
-  setField("ptCenter", getQP("center","CENTER","facility") || defaults.ptCenter);
-  setField("ptInsurance", getQP("insurance","INSURANCE","plan") || defaults.ptInsurance);
-
-  /* ----- Fixed Cost Calculator (always $750) ----- */
-  const deductible = 300;
-  const coinsurance = 350;
-  const copay = 100;
-  const total = 750;
-
-  document.getElementById("ptBalance").value = "$" + total.toFixed(2);
-  document.getElementById("deductibleVal").innerText = "$" + deductible.toFixed(2);
-  document.getElementById("coinsuranceVal").innerText = "$" + coinsurance.toFixed(2);
-  document.getElementById("copayVal").innerText = "$" + copay.toFixed(2);
-  document.getElementById("totalEstimateVal").innerText = "$" + total.toFixed(2);
-
-  /* ----- Cost Breakdown Toggle ----- */
-  function toggleBreakdown() {
-    const card = document.getElementById("breakdownCard");
-    const label = document.querySelector(".toggle-breakdown");
-
-    if (card.style.display === "none" || card.style.display === "") {
-      card.style.display = "block";
-      label.innerText = "▲ Hide Cost Breakdown";
-    } else {
-      card.style.display = "none";
-      label.innerText = "▼ View Cost Breakdown";
-    }
-  }
-  window.toggleBreakdown = toggleBreakdown;
-
-  /* ----- Supervisor Action Card Toggle ----- */
-  function toggleSupervisorCard() {
-    const card = document.getElementById("supervisorCard");
-    card.style.display = (card.style.display === "block") ? "none" : "block";
-  }
-  window.toggleSupervisorCard = toggleSupervisorCard;
-
-  /* ----- Toast System ----- */
-  function showToast(text) {
-    const container = document.getElementById("toastContainer");
-
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerText = text + " ✓";
-
-    container.appendChild(toast);
-
-    setTimeout(() => toast.classList.add("show"), 10);
-    setTimeout(() => {
-      toast.classList.remove("show");
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
-  }
-
-  /* ----- Supervisor Option Clicks ----- */
-  document.querySelectorAll(".supervisor-option").forEach(option => {
-    option.addEventListener("click", () => {
-      const msg = option.innerText.trim();
-      document.getElementById("supervisorCard").style.display = "none";
-      showToast(msg);
-    });
-  });
-
-  /* ----- Update Contact Preferences button ----- */
-  const updatePrefsBtn = document.getElementById("updatePrefsBtn");
-  if (updatePrefsBtn) {
-    updatePrefsBtn.addEventListener("click", () => {
-      showToast("Contact preferences updated");
-    });
-  }
-
-  /* ----- Theme Overrides from Architect ----- */
-  const buttonColor = getQP("buttonColor","ButtonColor");
-  const bgColor = getQP("bgColor","PageBackgroundColor");
-  const headerColor = getQP("headerColor","HeaderColor");
-
-  if (bgColor) document.body.style.backgroundColor = bgColor;
-  if (headerColor) document.querySelector(".header").style.backgroundColor = headerColor;
-  if (buttonColor) {
-    document.querySelectorAll(".btn-primary").forEach(btn => {
-      btn.style.backgroundColor = buttonColor;
-    });
-  }
 </script>
 
 </body>
