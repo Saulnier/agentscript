@@ -3,26 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Arizona Public Service – Agent Script</title>
+<title>Arizona Public Service</title>
 
 <style>
   :root {
-    --primary: #003a8f;
-    --primary-light: #e8f1fb;
-    --bg: #f4f6f8;
+    --primary: #00a3e0;
+    --primary-dark: #007ba7;
+    --accent: #f47920;
+    --primary-light: #e6f7fd;
+    --bg: #f5f5f5;
     --card-bg: #ffffff;
-    --text-main: #1f2d3d;
-    --text-muted: #5f6c7b;
-    --radius: 14px;
-    --shadow: 0 4px 14px rgba(0,0,0,0.08);
-    --danger: #e26c6c;
-    --danger-light: #f9e5e5;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --success: #52a447;
+    --success-light: #e8f5e6;
+    --warning: #f47920;
+    --warning-light: #fff4e8;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Segoe UI", Tahoma, sans-serif;
     color: var(--text-main);
     padding: 20px 16px;
   }
@@ -33,49 +37,90 @@
   }
 
   .header {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
-    padding: 16px 24px;
+    padding: 18px 24px;
     border-radius: var(--radius);
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     text-align: center;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
   }
 
-  .outage-bar {
-    text-align: center;
-    margin-bottom: 22px;
+  .button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .btn {
-    padding: 14px 20px;
-    border-radius: var(--radius);
+  .outage-btn {
+    background: var(--accent);
+    color: #fff;
     border: none;
-    font-size: 0.95rem;
-    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(244,121,32,0.4);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .btn-primary { background: var(--primary); color: #fff; }
-  .btn-primary:hover { background: #002e6f; }
+  .outage-btn:hover {
+    background: #d66a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(244,121,32,0.5);
+  }
 
-  /* -------------------- TABS --------------------- */
+  .outage-map-btn {
+    background: var(--success);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(82,164,71,0.4);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .outage-map-btn:hover {
+    background: #428a39;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(82,164,71,0.5);
+  }
+
   .tabs {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     border-bottom: 2px solid #d7e0ea;
     margin-bottom: 20px;
   }
 
   .tab {
-    padding: 10px 14px;
+    padding: 10px 16px;
     cursor: pointer;
     font-size: 0.92rem;
     font-weight: 600;
     color: var(--text-muted);
     border-bottom: 3px solid transparent;
+    transition: all 0.25s ease;
+    white-space: nowrap;
   }
 
   .tab.active {
@@ -83,9 +128,13 @@
     border-bottom: 3px solid var(--primary);
   }
 
+  .tab:hover {
+    color: var(--primary-dark);
+  }
+
   .card {
     background: var(--card-bg);
-    padding: 22px;
+    padding: 24px;
     margin-bottom: 20px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -94,22 +143,35 @@
   h3 {
     margin-top: 0;
     color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 18px;
   }
 
   label {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     margin-bottom: 6px;
     font-weight: 600;
     color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
   }
 
-  input {
+  input, select {
     width: 100%;
     padding: 12px;
     border: 1px solid #cbd7e3;
     border-radius: var(--radius);
     margin-bottom: 16px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  input[readonly] {
+    background: #f8f9fa;
+    color: var(--text-muted);
   }
 
   .grid-2 {
@@ -118,117 +180,489 @@
     gap: 24px;
   }
 
-  @media (max-width: 700px) {
-    .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
   }
 
   .check-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 14px;
+    font-size: 0.95rem;
   }
 
-  .check-item input {
-    width: 18px;
-    height: 18px;
+  .check-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
     margin: 0;
+    cursor: pointer;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 14px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary { 
+    background: var(--primary); 
+    color: #fff; 
+  }
+  .btn-primary:hover { 
+    background: var(--primary-dark); 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,163,224,0.3);
+  }
+
+  .btn-accent { 
+    background: var(--accent); 
+    color: #fff; 
+  }
+  .btn-accent:hover { 
+    background: #d66a1a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(244,121,32,0.3);
+  }
+
+  .btn-secondary {
+    background: #6c757d;
+    color: #fff;
+  }
+  .btn-secondary:hover {
+    background: #5a6268;
+  }
+
+  .escalation-card {
+    background: var(--warning-light);
+    border-left: 4px solid var(--accent);
+    padding: 16px 18px;
+    margin-top: 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    display: none;
+  }
+
+  .escalation-option {
+    padding: 8px 0;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: var(--text-main);
+    transition: color 0.2s ease;
+  }
+
+  .escalation-option:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  .timeline {
+    border-left: 3px solid var(--primary);
+    padding-left: 18px;
+  }
+  .event { margin-bottom: 18px; }
+  .event .date { 
+    font-size: 0.82rem; 
+    font-weight: 600; 
+    color: var(--primary); 
+  }
+  .event .type {
+    font-size: 0.75rem;
+    background: var(--primary-light);
+    padding: 4px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    margin: 4px 0;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .event .summary { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    margin-top: 4px;
+  }
+
+  .payment-details {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .payment-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.92rem;
+  }
+  .payment-divider { 
+    border-top: 2px solid #e0e0e0; 
+    margin: 12px 0; 
+  }
+
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+  }
+  .toast {
+    background: var(--success);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 0.92rem;
+  }
+
+  table tr:last-child td {
+    border-bottom: none;
+  }
+
+  table td:first-child {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .api-explorer-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,163,224,0.4);
+    transition: all 0.2s ease;
+    margin-bottom: 24px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    outline: none;
+    float: right;
+    clear: both;
+  }
+
+  .api-explorer-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,163,224,0.5);
+  }
+
+  .api-explorer-btn:focus {
+    outline: none;
+  }
 </style>
 </head>
 
 <body>
 
+<div class="toast-container" id="toastContainer"></div>
+
 <div class="container">
 
-  <div class="header">Arizona Public Service</div>
-
-  <!-- REPORT OUTAGE BUTTON -->
-  <div class="outage-bar">
-    <button class="btn btn-primary" type="button">
-      Report an Outage
-    </button>
+  <div class="header">
+    Arizona Public Service
+    <div class="button-group">
+      <button class="outage-btn" onclick="reportOutage()">⚡ Report Outage</button>
+      <button class="outage-map-btn" onclick="openOutageMap()">🗺️ Outage Map</button>
+    </div>
   </div>
 
-  <!-- ---------------- TABS ---------------- -->
   <div class="tabs">
-    <div class="tab active" data-tab="context">Customer Context</div>
-    <div class="tab" data-tab="workflow">Workflow</div>
-    <div class="tab" data-tab="preferences">Contact Preferences</div>
-    <div class="tab" data-tab="journey">Customer Journey</div>
-    <div class="tab" data-tab="pa">Account Viewer</div>
+    <div class="tab active" data-tab="customer">Customer Info</div>
+    <div class="tab" data-tab="account">Account Details</div>
+    <div class="tab" data-tab="workflow">Call Workflow</div>
+    <div class="tab" data-tab="history">Contact History</div>
+    <div class="tab" data-tab="billing">Billing & Rates</div>
+    <div class="tab" data-tab="payments">Payments</div>
   </div>
 
-  <!-- ---------------- TAB: CONTEXT ---------------- -->
-  <div id="context" class="tab-content active">
+  <div id="customer" class="tab-content active">
     <div class="card">
-      <h3>Customer Context</h3>
+      <h3>Customer Information</h3>
 
       <div class="grid-2">
-        <div><label>First Name</label><input></div>
-        <div><label>Last Name</label><input></div>
+        <div><label>First Name</label><input id="firstName" readonly></div>
+        <div><label>Last Name</label><input id="lastName" readonly></div>
 
-        <div><label>Phone Number</label><input></div>
-        <div><label>Account Number</label><input></div>
+        <div><label>Phone Number</label><input id="phoneNumber" readonly></div>
+        <div><label>Account Number</label><input id="accountNumber" readonly></div>
 
-        <div><label>Service Address</label><input></div>
-        <div><label>Start of Service Date</label><input></div>
+        <div style="grid-column: 1 / -1;">
+          <label>Service Address</label>
+          <input id="address" readonly>
+        </div>
 
-        <div><label>Account Balance</label><input></div>
-        <div><label>Plan Rate Details</label><input></div>
+        <div>
+          <label>Start of Service Date</label>
+          <input id="serviceDate" readonly>
+        </div>
+
+        <div>
+          <label>Identity Verification</label>
+          <div class="check-item">
+            <input type="checkbox" id="identityVerified" checked>
+            <span>Customer Identity Verified</span>
+          </div>
+        </div>
       </div>
-
-      <div class="check-item">
-        <input type="checkbox">Identity Verified
-      </div>
-
-      <label>Caller Intent</label>
-      <input>
     </div>
   </div>
 
-  <!-- ---------------- TAB: WORKFLOW ---------------- -->
+  <div id="account" class="tab-content">
+    <div class="card">
+      <h3>Account Overview</h3>
+
+      <div class="grid-3">
+        <div>
+          <label>Account Status</label>
+          <input id="accountStatus" value="Active" readonly>
+        </div>
+        <div>
+          <label>Current Balance</label>
+          <input id="accountBalance" readonly>
+        </div>
+        <div>
+          <label>Due Date</label>
+          <input id="dueDate" value="Jan 28, 2026" readonly>
+        </div>
+      </div>
+
+      <div class="payment-details">
+        <div class="payment-row">
+          <span>Previous Balance:</span>
+          <span id="prevBalance">$0.00</span>
+        </div>
+        <div class="payment-row">
+          <span>Current Charges:</span>
+          <span id="currentCharges">$0.00</span>
+        </div>
+        <div class="payment-row">
+          <span>Payments Received:</span>
+          <span id="paymentsReceived">$0.00</span>
+        </div>
+        <div class="payment-divider"></div>
+        <div class="payment-row">
+          <strong>Total Amount Due:</strong>
+          <strong id="totalDue">$0.00</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Service Details</h3>
+      <table>
+        <tr><td><strong>Service Type:</strong></td><td>Residential Electric</td></tr>
+        <tr><td><strong>Meter Number:</strong></td><td id="meterNumber">MTR-8847221</td></tr>
+        <tr><td><strong>Average Monthly Usage:</strong></td><td>850 kWh</td></tr>
+        <tr><td><strong>Last Meter Read:</strong></td><td>Jan 10, 2026</td></tr>
+        <tr><td><strong>Next Read Date:</strong></td><td>Feb 10, 2026</td></tr>
+      </table>
+    </div>
+  </div>
+
   <div id="workflow" class="tab-content">
     <div class="card">
-      <h3>Outage & Service Workflow</h3>
+      <h3>Customer Service Workflow</h3>
 
-      <div class="check-item"><input type="checkbox">Verify identity</div>
-      <div class="check-item"><input type="checkbox">Confirm service address</div>
-      <div class="check-item"><input type="checkbox">Check known outage map</div>
-      <div class="check-item"><input type="checkbox">Create outage report if needed</div>
-      <div class="check-item"><input type="checkbox">Provide ETA if available</div>
-      <div class="check-item"><input type="checkbox">Document interaction</div>
+      <div class="check-item"><input type="checkbox">Greet customer and confirm identity</div>
+      <div class="check-item"><input type="checkbox">Verify account number and service address</div>
+      <div class="check-item"><input type="checkbox">Document caller intent in system</div>
+      <div class="check-item"><input type="checkbox">Review account status and current balance</div>
+      <div class="check-item"><input type="checkbox">Address customer inquiry or concern</div>
+      <div class="check-item"><input type="checkbox">Offer additional assistance or services</div>
+      <div class="check-item"><input type="checkbox">Confirm resolution and next steps</div>
+      <div class="check-item"><input type="checkbox">Document interaction in CRM notes</div>
+
+      <div class="actions">
+        <button class="btn btn-accent" onclick="toggleEscalationCard()">Escalate to Supervisor</button>
+
+        <div id="escalationCard" class="escalation-card">
+          <div class="escalation-option">Notify Supervisor Immediately</div>
+          <div class="escalation-option">Request Quality Monitoring</div>
+          <div class="escalation-option">Flag for Follow-Up Review</div>
+          <div class="escalation-option">Transfer to Supervisor Queue</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: CONTACT PREFS ---------------- -->
-  <div id="preferences" class="tab-content">
+  <div id="history" class="tab-content">
     <div class="card">
-      <h3>Contact Preferences</h3>
-      <div class="check-item"><input type="checkbox">SMS</div>
-      <div class="check-item"><input type="checkbox">Email</div>
-      <div class="check-item"><input type="checkbox" checked>Voice</div>
+      <h3>Contact History</h3>
+
+      <div class="timeline">
+        <div class="event">
+          <div class="date">Jan 11, 2026</div>
+          <div class="type">Email</div>
+          <div class="summary">Sent monthly billing statement.</div>
+        </div>
+        <div class="event">
+          <div class="date">Jan 8, 2026</div>
+          <div class="type">SMS</div>
+          <div class="summary">Payment reminder sent for upcoming due date.</div>
+        </div>
+        <div class="event">
+          <div class="date">Jan 3, 2026</div>
+          <div class="type">Inbound Call</div>
+          <div class="summary">Customer inquired about energy efficiency programs.</div>
+        </div>
+        <div class="event">
+          <div class="date">Dec 28, 2025</div>
+          <div class="type">Inbound Call</div>
+          <div class="summary">Payment processed - $145.67.</div>
+        </div>
+        <div class="event">
+          <div class="date">Dec 15, 2025</div>
+          <div class="type">Outbound Call</div>
+          <div class="summary">Attempted outage notification - voicemail left.</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: JOURNEY ---------------- -->
-  <div id="journey" class="tab-content">
+  <div id="billing" class="tab-content">
     <div class="card">
-      <h3>Customer Journey</h3>
-      <p>Recent interactions will appear here.</p>
+      <h3>Current Rate Plan</h3>
+      
+      <table>
+        <tr><td><strong>Plan Name:</strong></td><td id="planName">Standard Residential</td></tr>
+        <tr><td><strong>Rate Structure:</strong></td><td>Tiered Rate</td></tr>
+        <tr><td><strong>Base Rate (0-400 kWh):</strong></td><td>$0.1089/kWh</td></tr>
+        <tr><td><strong>Tier 2 (401-800 kWh):</strong></td><td>$0.1248/kWh</td></tr>
+        <tr><td><strong>Tier 3 (801+ kWh):</strong></td><td>$0.1387/kWh</td></tr>
+        <tr><td><strong>Basic Service Charge:</strong></td><td>$12.50/month</td></tr>
+        <tr><td><strong>Enrolled Since:</strong></td><td id="enrolledSince">March 2019</td></tr>
+      </table>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showToast('Rate plan comparison sent to customer email')">Send Rate Plan Comparison</button>
+        <button class="btn btn-primary" onclick="showToast('Time-of-Use plan information sent')">View Time-of-Use Options</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Available Programs</h3>
+      
+      <div class="check-item"><input type="checkbox">Budget Billing Enrolled</div>
+      <div class="check-item"><input type="checkbox">Paperless Billing Enrolled</div>
+      <div class="check-item"><input type="checkbox">Auto-Pay Enrolled</div>
+      <div class="check-item"><input type="checkbox">Energy Efficiency Program Member</div>
+      
+      <div class="actions">
+        <button class="btn btn-primary" onclick="showToast('Program enrollment updated')">Update Program Enrollment</button>
+      </div>
     </div>
   </div>
 
-  <!-- ---------------- TAB: ACCOUNT ---------------- -->
-  <div id="pa" class="tab-content">
+  <div id="payments" class="tab-content">
     <div class="card">
-      <h3>Account Viewer</h3>
-      <p>Read-only account and service data.</p>
+      <h3>Payment Processing</h3>
+
+      <div class="grid-2">
+        <div>
+          <label>Total Amount Due</label>
+          <input id="paymentAmountDue" readonly>
+        </div>
+        <div>
+          <label>Due Date</label>
+          <input id="paymentDueDate" value="Jan 28, 2026" readonly>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <label>Payment Amount</label>
+        <input type="number" id="paymentAmount" placeholder="Enter payment amount" step="0.01" min="0">
+        
+        <div style="display: flex; gap: 10px; margin-top: 10px; margin-bottom: 16px;">
+          <button class="btn btn-secondary" onclick="setFullPayment()">Pay Full Amount</button>
+          <button class="btn btn-secondary" onclick="clearPaymentAmount()">Clear</button>
+        </div>
+      </div>
+
+      <div>
+        <label>Payment Date</label>
+        <input type="date" id="paymentDate">
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="processPayment()">Process Payment</button>
+        <button class="btn btn-accent" onclick="setupPaymentPlan()">Set Up Payment Plan</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Payment History</h3>
+      
+      <div class="timeline">
+        <div class="event">
+          <div class="date">Dec 28, 2025</div>
+          <div class="type">Payment</div>
+          <div class="summary">Payment received: $145.67 - Check #1234</div>
+        </div>
+        <div class="event">
+          <div class="date">Nov 29, 2025</div>
+          <div class="type">Payment</div>
+          <div class="summary">Payment received: $138.92 - Auto-Pay</div>
+        </div>
+        <div class="event">
+          <div class="date">Oct 30, 2025</div>
+          <div class="type">Payment</div>
+          <div class="summary">Payment received: $152.45 - Online</div>
+        </div>
+        <div class="event">
+          <div class="date">Sep 28, 2025</div>
+          <div class="type">Payment</div>
+          <div class="summary">Payment received: $147.33 - Phone</div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <button class="api-explorer-btn" onclick="openApiExplorer()">🔧 API Explorer</button>
 
 </div>
 
@@ -240,10 +674,158 @@
     tab.addEventListener("click", () => {
       tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
+
       contents.forEach(c => c.classList.remove("active"));
       document.getElementById(tab.dataset.tab).classList.add("active");
     });
   });
+
+  const qp = new URLSearchParams(window.location.search);
+
+  function getQP(...keys) {
+    for (let k of keys) {
+      const v = qp.get(k);
+      if (v && v.trim() !== "") return v;
+    }
+    return "";
+  }
+
+  function cleanPhone(input="") {
+    return input.replace(/[\[\]\(\)\-]/g,"").trim();
+  }
+
+  const firstName = getQP("firstName","FirstName","fname","FNAME") || "Alex";
+  const lastName = getQP("lastName","LastName","lname","LNAME") || "Johnson";
+  
+  document.getElementById("firstName").value = firstName;
+  document.getElementById("lastName").value = lastName;
+  document.getElementById("phoneNumber").value = cleanPhone(getQP("phone","phoneNumber","PHONE")) || "+1 (303) 803-6511";
+  document.getElementById("accountNumber").value = getQP("accountNumber","account","ACCOUNT") || "A456789";
+  document.getElementById("address").value = getQP("address","serviceAddress","ADDRESS") || "200 E ECHO LN PHOENIX AZ 85020-3572";
+  document.getElementById("serviceDate").value = getQP("serviceDate","startDate","START_DATE") || "2019-10-08";
+  
+  const balance = parseFloat(getQP("accountBalance","balance","BALANCE")) || 187.45;
+  const prevBalance = balance * 0.45;
+  const currentCharges = balance * 0.65;
+  const paymentsReceived = balance * 0.10;
+
+  document.getElementById("accountBalance").value = "$" + balance.toFixed(2);
+  document.getElementById("prevBalance").innerText = "$" + prevBalance.toFixed(2);
+  document.getElementById("currentCharges").innerText = "$" + currentCharges.toFixed(2);
+  document.getElementById("paymentsReceived").innerText = "$" + paymentsReceived.toFixed(2);
+  document.getElementById("totalDue").innerText = "$" + balance.toFixed(2);
+
+  document.getElementById("paymentAmountDue").value = "$" + balance.toFixed(2);
+  
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+  document.getElementById("paymentDate").value = formattedDate;
+
+  const identityCheckbox = document.getElementById("identityVerified");
+  identityCheckbox.addEventListener("change", () => {
+    if (identityCheckbox.checked) {
+      showToast("Customer identity verified");
+    }
+  });
+
+  function reportOutage() {
+    showToast("Outage report initiated for service address");
+  }
+
+  function toggleEscalationCard() {
+    const card = document.getElementById("escalationCard");
+    card.style.display = (card.style.display === "block") ? "none" : "block";
+  }
+
+  function showToast(text) {
+    const container = document.getElementById("toastContainer");
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerText = text + " ✓";
+    container.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 10);
+    setTimeout(() => {
+      toast.classList.remove("show");
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  document.querySelectorAll(".escalation-option").forEach(option => {
+    option.addEventListener("click", () => {
+      const msg = option.innerText.trim();
+      document.getElementById("escalationCard").style.display = "none";
+      showToast(msg);
+    });
+  });
+
+  function openApiExplorer() {
+    const width = 1200;
+    const height = 800;
+    const left = (screen.width - width) / 2;
+    const top = (screen.height - height) / 2;
+    window.open(
+      'https://developer.genesys.cloud/devapps/api-explorer#',
+      'API Explorer',
+      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+    );
+  }
+
+  function openOutageMap() {
+    const width = 1200;
+    const height = 800;
+    const left = (screen.width - width) / 2;
+    const top = (screen.height - height) / 2;
+    window.open(
+      'https://outagemap.aps.com/outageviewer/',
+      'Outage Map',
+      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
+    );
+  }
+
+  function setFullPayment() {
+    const amountDue = parseFloat(document.getElementById("paymentAmountDue").value.replace('$', ''));
+    document.getElementById("paymentAmount").value = amountDue.toFixed(2);
+  }
+
+  function clearPaymentAmount() {
+    document.getElementById("paymentAmount").value = '';
+  }
+
+  function processPayment() {
+    const amount = document.getElementById("paymentAmount").value;
+    const date = document.getElementById("paymentDate").value;
+    
+    if (!amount || parseFloat(amount) <= 0) {
+      showToast("Please enter a valid payment amount");
+      return;
+    }
+    
+    if (!date) {
+      showToast("Please select a payment date");
+      return;
+    }
+    
+    showToast(`Payment of $${parseFloat(amount).toFixed(2)} processed successfully`);
+  }
+
+  function setupPaymentPlan() {
+    showToast("Payment plan setup initiated");
+  }
+
+  const primaryColor = getQP("primaryColor","PrimaryColor");
+  const accentColor = getQP("accentColor","AccentColor");
+  const bgColor = getQP("bgColor","BackgroundColor");
+
+  if (bgColor) document.body.style.backgroundColor = bgColor;
+  if (primaryColor) {
+    document.documentElement.style.setProperty('--primary', primaryColor);
+  }
+  if (accentColor) {
+    document.documentElement.style.setProperty('--accent', accentColor);
+  }
 </script>
 
 </body>
