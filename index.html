@@ -3,397 +3,352 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Arizona Public Service</title>
+<title>Southwest Gas - Customer Solutions Script</title>
 
 <style>
   :root {
-    --primary: #00a3e0;
-    --primary-dark: #007ba7;
-    --accent: #f47920;
-    --primary-light: #e6f7fd;
-    --bg: #f5f5f5;
+    --primary: #6B1A2A;
+    --primary-dark: #4E1020;
+    --primary-light: #F8EDEF;
+    --accent: #A0622A;
+    --accent-light: #FBF3EB;
+    --accent2: #D4882A;
+    --bg: #F5F4F2;
     --card-bg: #ffffff;
-    --text-main: #333333;
-    --text-muted: #666666;
+    --text-main: #1A1A1A;
+    --text-muted: #6B7280;
     --radius: 12px;
-    --shadow: 0 4px 12px rgba(0,0,0,0.1);
-    --success: #52a447;
-    --success-light: #e8f5e6;
-    --warning: #f47920;
-    --warning-light: #fff4e8;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --success: #1E6E3A;
+    --success-light: #E6F4EC;
+    --warning: #B45309;
+    --warning-light: #FEF3C7;
+    --danger: #DC2626;
+    --danger-light: #FEE2E2;
   }
 
   body {
     margin: 0;
     background: var(--bg);
-    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     color: var(--text-main);
     padding: 20px 16px;
   }
 
-  .container {
-    max-width: 1100px;
-    margin: auto;
-  }
+  .container { max-width: 1200px; margin: auto; }
 
+  /* ── EMERGENCY BANNER ── */
+  .emergency-bar {
+    background: var(--danger);
+    color: white;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .emergency-bar span { opacity: 0.95; }
+  .emergency-bar strong { font-size: 1rem; }
+
+  /* ── HEADER ── */
   .header {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: #fff;
-    padding: 18px 24px;
+    padding: 22px 28px;
     border-radius: var(--radius);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-    text-align: center;
+    margin-bottom: 16px;
     box-shadow: var(--shadow);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 14px;
   }
 
-  .button-group {
+  .header-left { display: flex; align-items: center; gap: 16px; }
+
+  .header-logo {
+    width: 50px; height: 50px;
+    background: white;
+    border-radius: 10px;
     display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    font-size: 1.7rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
 
-  .outage-btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: var(--radius);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(244,121,32,0.4);
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .header-content h1 { margin: 0 0 3px 0; font-size: 1.55rem; font-weight: 700; }
+  .header-content p  { margin: 0; font-size: 0.88rem; opacity: 0.85; }
 
-  .outage-btn:hover {
-    background: #d66a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(244,121,32,0.5);
-  }
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
-  .outage-map-btn {
-    background: var(--success);
-    color: #fff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: var(--radius);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(82,164,71,0.4);
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .outage-map-btn:hover {
-    background: #428a39;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(82,164,71,0.5);
-  }
-
-  .tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-bottom: 2px solid #d7e0ea;
-    margin-bottom: 20px;
-  }
-
-  .tab {
-    padding: 10px 16px;
-    cursor: pointer;
-    font-size: 0.92rem;
+  .header-btn {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.45);
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--text-muted);
-    border-bottom: 3px solid transparent;
-    transition: all 0.25s ease;
+    cursor: pointer;
+    transition: background 0.2s;
     white-space: nowrap;
   }
+  .header-btn:hover { background: rgba(255,255,255,0.28); }
 
-  .tab.active {
-    color: var(--primary);
-    border-bottom: 3px solid var(--primary);
+  .header-hours {
+    font-size: 0.78rem;
+    opacity: 0.75;
+    text-align: right;
   }
 
-  .tab:hover {
-    color: var(--primary-dark);
+  /* ── TICKET BANNER ── */
+  .ticket-banner {
+    background: linear-gradient(135deg, #7B4A1A 0%, #C4862A 100%);
+    color: white;
+    padding: 18px 28px;
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
+  .ticket-left .ticket-label {
+    font-size: 0.78rem; font-weight: 700;
+    opacity: 0.8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px;
+  }
+  .ticket-left .ticket-number { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
+
+  .ticket-right { display: flex; gap: 14px; flex-wrap: wrap; }
+  .ticket-stat {
+    text-align: center;
+    background: rgba(255,255,255,0.18);
+    padding: 7px 14px;
+    border-radius: 8px;
+    min-width: 80px;
+  }
+  .ticket-stat .stat-val { font-size: 0.92rem; font-weight: 700; }
+  .ticket-stat .stat-lbl { font-size: 0.68rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  /* ── INFO ALERT ── */
+  .info-alert {
+    background: #EEF0FB;
+    border-left: 4px solid #5B5EA6;
+    padding: 13px 18px;
+    margin-bottom: 16px;
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+    color: #3B3D72;
+  }
+  .info-alert strong { color: #3B3D72; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    border-bottom: 2px solid #E5E7EB;
+    margin-bottom: 20px;
+  }
+  .tab {
+    padding: 10px 15px; cursor: pointer;
+    font-size: 0.88rem; font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .tab.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+  .tab:hover:not(.active) { color: var(--primary); }
+
+  /* ── CARDS ── */
   .card {
     background: var(--card-bg);
-    padding: 24px;
-    margin-bottom: 20px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
 
   h3 {
-    margin-top: 0;
-    color: var(--primary);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 18px;
+    margin-top: 0; color: var(--primary);
+    font-size: 1.05rem; font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--primary-light);
+    display: flex; align-items: center; gap: 8px;
   }
 
   label {
-    display: block;
-    font-size: 0.85rem;
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
+    display: block; font-size: 0.78rem; margin-bottom: 5px;
+    font-weight: 700; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.6px;
   }
 
-  input, select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #cbd7e3;
-    border-radius: var(--radius);
-    margin-bottom: 16px;
-    font-size: 0.95rem;
-    box-sizing: border-box;
-    font-family: inherit;
+  input, select, textarea {
+    width: 100%; padding: 10px 13px;
+    border: 2px solid #E5E7EB; border-radius: 8px;
+    margin-bottom: 14px; font-size: 0.93rem;
+    box-sizing: border-box; transition: border-color 0.2s;
+    background: #FAFAFA; color: var(--text-main);
   }
-
-  input[readonly] {
-    background: #f8f9fa;
-    color: var(--text-muted);
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--primary); background: white;
   }
+  textarea { resize: vertical; min-height: 85px; }
 
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 18px; }
+
+  @media (max-width: 900px) { .grid-3,.grid-4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 650px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--accent); margin: 18px 0 12px;
+    display: flex; align-items: center; gap: 10px;
   }
+  .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--accent-light); border: 1px solid #F0D9C4; }
 
-  .grid-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block; padding: 5px 13px;
+    border-radius: 999px; font-size: 0.76rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 12px;
   }
+  .badge-active  { background: var(--success-light); color: var(--success); }
+  .badge-trial   { background: var(--warning-light); color: var(--warning); }
+  .badge-danger  { background: var(--danger-light);  color: var(--danger);  }
+  .badge-support { background: var(--primary-light); color: var(--primary); }
+  .badge-accent  { background: var(--accent-light);  color: var(--accent);  }
 
-  @media (max-width: 768px) {
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
-  }
-
+  /* ── CHECKBOXES ── */
   .check-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    font-size: 0.95rem;
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 8px; font-size: 0.9rem;
+    padding: 9px 12px; border-radius: 8px;
+    transition: background 0.15s; border: 1px solid transparent;
   }
-
+  .check-item:hover { background: var(--primary-light); border-color: #F0CECE; }
   .check-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    cursor: pointer;
+    width: 17px; height: 17px; margin: 2px 0 0 0;
+    cursor: pointer; accent-color: var(--primary); flex-shrink: 0;
   }
 
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    margin-top: 20px;
+  /* ── SAFETY CHECKLIST (special) ── */
+  .safety-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 8px; font-size: 0.9rem;
+    padding: 10px 14px; border-radius: 8px;
+    background: var(--danger-light);
+    border: 1px solid #FECACA;
+  }
+  .safety-item input[type="checkbox"] {
+    width: 17px; height: 17px; margin: 2px 0 0 0;
+    cursor: pointer; accent-color: var(--danger); flex-shrink: 0;
   }
 
-  .btn {
-    padding: 14px;
-    border-radius: var(--radius);
-    border: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
+  /* ── BUTTONS ── */
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+  @media (max-width: 650px) { .actions { grid-template-columns: 1fr; } }
 
-  .btn-primary { 
-    background: var(--primary); 
-    color: #fff; 
-  }
-  .btn-primary:hover { 
-    background: var(--primary-dark); 
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,163,224,0.3);
-  }
+  .btn { padding: 12px 18px; border-radius: 8px; border: none; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-primary  { background: var(--primary); color: #fff; }
+  .btn-primary:hover  { background: var(--primary-dark); }
+  .btn-accent   { background: var(--accent2); color: #fff; }
+  .btn-accent:hover   { background: var(--accent); }
+  .btn-danger   { background: var(--danger); color: #fff; }
+  .btn-danger:hover   { background: #B91C1C; }
+  .btn-secondary { background: #6B7280; color: #fff; }
+  .btn-secondary:hover { background: #4B5563; }
+  .btn-success  { background: var(--success); color: #fff; }
+  .btn-success:hover  { background: #155E32; }
 
-  .btn-accent { 
-    background: var(--accent); 
-    color: #fff; 
-  }
-  .btn-accent:hover { 
-    background: #d66a1a;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(244,121,32,0.3);
-  }
-
-  .btn-secondary {
-    background: #6c757d;
-    color: #fff;
-  }
-  .btn-secondary:hover {
-    background: #5a6268;
-  }
-
-  .escalation-card {
-    background: var(--warning-light);
-    border-left: 4px solid var(--accent);
-    padding: 16px 18px;
-    margin-top: 12px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: none;
-  }
-
-  .escalation-option {
-    padding: 8px 0;
-    cursor: pointer;
-    font-size: 0.92rem;
-    color: var(--text-main);
-    transition: color 0.2s ease;
-  }
-
-  .escalation-option:hover {
-    color: var(--accent);
-    text-decoration: underline;
-  }
-
-  .timeline {
-    border-left: 3px solid var(--primary);
-    padding-left: 18px;
-  }
-  .event { margin-bottom: 18px; }
-  .event .date { 
-    font-size: 0.82rem; 
-    font-weight: 600; 
-    color: var(--primary); 
-  }
-  .event .type {
-    font-size: 0.75rem;
+  /* ── QUICK LINKS ── */
+  .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-top: 14px; }
+  .quick-link {
     background: var(--primary-light);
-    padding: 4px 10px;
-    border-radius: 999px;
-    display: inline-block;
-    margin: 4px 0;
-    font-weight: 600;
-    color: var(--primary);
+    padding: 10px 14px; border-radius: 8px;
+    text-align: center; font-weight: 600;
+    color: var(--primary); cursor: pointer;
+    transition: all 0.2s; font-size: 0.85rem;
+    border: 1px solid #F0CECE;
   }
-  .event .summary { 
-    font-size: 0.9rem; 
-    color: var(--text-muted); 
-    margin-top: 4px;
-  }
+  .quick-link:hover { background: var(--primary); color: white; }
 
-  .payment-details {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: var(--radius);
-    padding: 16px;
-    margin-top: 12px;
+  /* ── TIMELINE ── */
+  .timeline { border-left: 3px solid var(--primary); padding-left: 18px; }
+  .event { margin-bottom: 18px; position: relative; }
+  .event::before {
+    content: ''; width: 10px; height: 10px;
+    background: var(--primary); border-radius: 50%;
+    position: absolute; left: -24px; top: 4px;
   }
-  .payment-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 0.92rem;
+  .event .date { font-size: 0.76rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .event .type {
+    font-size: 0.7rem; background: var(--primary-light);
+    padding: 3px 10px; border-radius: 999px;
+    display: inline-block; margin: 5px 0;
+    font-weight: 700; color: var(--primary);
+    text-transform: uppercase; letter-spacing: 0.4px;
   }
-  .payment-divider { 
-    border-top: 2px solid #e0e0e0; 
-    margin: 12px 0; 
-  }
+  .event .summary { font-size: 0.88rem; color: var(--text-muted); line-height: 1.55; }
 
-  .toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 3000;
-  }
+  /* ── TOASTS ── */
+  .toast-container { position: fixed; top: 20px; right: 20px; z-index: 3000; }
   .toast {
-    background: var(--success);
-    color: #fff;
-    padding: 14px 20px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 600;
+    background: var(--success); color: #fff;
+    padding: 12px 20px; border-radius: var(--radius);
+    box-shadow: var(--shadow); margin-bottom: 10px;
+    opacity: 0; transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+    font-size: 0.9rem; font-weight: 600;
   }
-  .toast.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.danger { background: var(--danger); }
 
+  /* ── TAB CONTENT ── */
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  table td {
-    padding: 10px 8px;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 0.92rem;
-  }
-
-  table tr:last-child td {
-    border-bottom: none;
-  }
-
-  table td:first-child {
-    color: var(--text-muted);
-    font-weight: 600;
+  /* ── METER READING DISPLAY ── */
+  .meter-box {
+    background: linear-gradient(135deg, #1A1A2E, #2D2D5E);
+    color: #00FF88;
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    letter-spacing: 8px;
+    margin-bottom: 14px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
   }
 
-  .api-explorer-btn {
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    padding: 14px 20px;
-    border-radius: var(--radius);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,163,224,0.4);
-    transition: all 0.2s ease;
-    margin-bottom: 24px;
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: 0;
-    outline: none;
-    float: right;
-    clear: both;
+  /* ── PAYMENT OPTIONS GRID ── */
+  .pay-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+  .pay-option {
+    background: var(--accent-light); border: 2px solid #EDD9C0;
+    border-radius: 10px; padding: 12px; text-align: center;
+    cursor: pointer; transition: all 0.2s; font-size: 0.82rem; font-weight: 600; color: var(--accent);
   }
+  .pay-option:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .pay-option .pay-icon { font-size: 1.5rem; margin-bottom: 5px; }
 
-  .api-explorer-btn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,163,224,0.5);
-  }
-
-  .api-explorer-btn:focus {
-    outline: none;
-  }
 </style>
 </head>
 
@@ -403,429 +358,610 @@
 
 <div class="container">
 
-  <div class="header">
-    Arizona Public Service
-    <div class="button-group">
-      <button class="outage-btn" onclick="reportOutage()">⚡ Report Outage</button>
-      <button class="outage-map-btn" onclick="openOutageMap()">🗺️ Outage Map</button>
+  <!-- EMERGENCY BAR -->
+  <div class="emergency-bar">
+    <span>🔥</span>
+    <div>
+      <strong>GAS LEAK / EMERGENCY:</strong>
+      <span>Immediately direct customer to evacuate, call 911, then call Southwest Gas 24/7 Emergency Line: <strong>877-860-6020</strong></span>
     </div>
   </div>
 
-  <div class="tabs">
-    <div class="tab active" data-tab="customer">Customer Info</div>
-    <div class="tab" data-tab="account">Account Details</div>
-    <div class="tab" data-tab="workflow">Call Workflow</div>
-    <div class="tab" data-tab="history">Contact History</div>
-    <div class="tab" data-tab="billing">Billing & Rates</div>
-    <div class="tab" data-tab="payments">Payments</div>
-  </div>
-
-  <div id="customer" class="tab-content active">
-    <div class="card">
-      <h3>Customer Information</h3>
-
-      <div class="grid-2">
-        <div><label>First Name</label><input id="firstName" readonly></div>
-        <div><label>Last Name</label><input id="lastName" readonly></div>
-
-        <div><label>Phone Number</label><input id="phoneNumber" readonly></div>
-        <div><label>Account Number</label><input id="accountNumber" readonly></div>
-
-        <div style="grid-column: 1 / -1;">
-          <label>Service Address</label>
-          <input id="address" readonly>
-        </div>
-
-        <div>
-          <label>Start of Service Date</label>
-          <input id="serviceDate" readonly>
-        </div>
-
-        <div>
-          <label>Identity Verification</label>
-          <div class="check-item">
-            <input type="checkbox" id="identityVerified" checked>
-            <span>Customer Identity Verified</span>
-          </div>
-        </div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="header-logo">🔥</div>
+      <div class="header-content">
+        <h1>Southwest Gas</h1>
+        <p>Customer Solutions Representative Script</p>
       </div>
     </div>
+    <div class="header-right">
+      <button class="header-btn">Agent Dashboard</button>
+      <div class="header-hours">Mon–Fri 7am–6pm PST · Emergency 24/7: 877-860-6020</div>
+    </div>
   </div>
 
-  <div id="account" class="tab-content">
+  <!-- INFO ALERT -->
+  <div class="info-alert">
+    <strong>ℹ️ Verification Required:</strong> Before accessing any account information, verify customer identity: full name + service address or account number. Never share account details without successful ID verification.
+  </div>
+
+  <!-- TICKET BANNER -->
+  <div class="ticket-banner">
+    <div class="ticket-left">
+      <div class="ticket-label">Case Ticket</div>
+      <div class="ticket-number">#SWG-5842</div>
+    </div>
+    <div class="ticket-right">
+      <div class="ticket-stat"><div class="stat-val">Open</div><div class="stat-lbl">Status</div></div>
+      <div class="ticket-stat"><div class="stat-val">Billing</div><div class="stat-lbl">Category</div></div>
+      <div class="ticket-stat"><div class="stat-val">Arizona</div><div class="stat-lbl">Service Area</div></div>
+      <div class="ticket-stat"><div class="stat-val">Mar 8, 2026</div><div class="stat-lbl">Date</div></div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" data-tab="account">Customer Info</div>
+    <div class="tab" data-tab="service">Service & Meter</div>
+    <div class="tab" data-tab="billing">Billing & Payment</div>
+    <div class="tab" data-tab="issue">Call Reason</div>
+    <div class="tab" data-tab="safety">Safety Protocol</div>
+    <div class="tab" data-tab="workflow">Call Workflow</div>
+    <div class="tab" data-tab="history">Call History</div>
+  </div>
+
+  <!-- ── TAB: CUSTOMER INFO ── -->
+  <div id="account" class="tab-content active">
     <div class="card">
-      <h3>Account Overview</h3>
+      <h3>👤 Customer Account Information</h3>
+
+      <div class="grid-2">
+        <div><label>First Name</label><input id="firstName"></div>
+        <div><label>Last Name</label><input id="lastName"></div>
+        <div><label>Primary Phone</label><input id="phoneNumber" type="tel"></div>
+        <div><label>Alternate Phone</label><input id="altPhone" type="tel"></div>
+        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
+        <div><label>Date of Birth (verification)</label><input id="dateOfBirth" type="date"></div>
+      </div>
+
+      <div class="section-divider">Service Address</div>
+
+      <div><label>Service Address</label><input id="businessAddress" placeholder="Street, City, State, ZIP"></div>
 
       <div class="grid-3">
         <div>
-          <label>Account Status</label>
-          <input id="accountStatus" value="Active" readonly>
+          <label>Service State</label>
+          <select id="serviceState">
+            <option value="">Select state...</option>
+            <option value="az" selected>Arizona</option>
+            <option value="nv">Nevada</option>
+            <option value="ca">California</option>
+          </select>
         </div>
+        <div><label>Account Number</label><input id="accountId" placeholder="SWG-##########"></div>
         <div>
-          <label>Current Balance</label>
-          <input id="accountBalance" readonly>
-        </div>
-        <div>
-          <label>Due Date</label>
-          <input id="dueDate" value="Jan 28, 2026" readonly>
-        </div>
-      </div>
-
-      <div class="payment-details">
-        <div class="payment-row">
-          <span>Previous Balance:</span>
-          <span id="prevBalance">$0.00</span>
-        </div>
-        <div class="payment-row">
-          <span>Current Charges:</span>
-          <span id="currentCharges">$0.00</span>
-        </div>
-        <div class="payment-row">
-          <span>Payments Received:</span>
-          <span id="paymentsReceived">$0.00</span>
-        </div>
-        <div class="payment-divider"></div>
-        <div class="payment-row">
-          <strong>Total Amount Due:</strong>
-          <strong id="totalDue">$0.00</strong>
+          <label>Customer Type</label>
+          <select id="customerType">
+            <option value="residential" selected>Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="industrial">Industrial</option>
+          </select>
         </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3>Service Details</h3>
-      <table>
-        <tr><td><strong>Service Type:</strong></td><td>Residential Electric</td></tr>
-        <tr><td><strong>Meter Number:</strong></td><td id="meterNumber">MTR-8847221</td></tr>
-        <tr><td><strong>Average Monthly Usage:</strong></td><td>850 kWh</td></tr>
-        <tr><td><strong>Last Meter Read:</strong></td><td>Jan 10, 2026</td></tr>
-        <tr><td><strong>Next Read Date:</strong></td><td>Feb 10, 2026</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div id="workflow" class="tab-content">
-    <div class="card">
-      <h3>Customer Service Workflow</h3>
-
-      <div class="check-item"><input type="checkbox">Greet customer and confirm identity</div>
-      <div class="check-item"><input type="checkbox">Verify account number and service address</div>
-      <div class="check-item"><input type="checkbox">Document caller intent in system</div>
-      <div class="check-item"><input type="checkbox">Review account status and current balance</div>
-      <div class="check-item"><input type="checkbox">Address customer inquiry or concern</div>
-      <div class="check-item"><input type="checkbox">Offer additional assistance or services</div>
-      <div class="check-item"><input type="checkbox">Confirm resolution and next steps</div>
-      <div class="check-item"><input type="checkbox">Document interaction in CRM notes</div>
-
-      <div class="actions">
-        <button class="btn btn-accent" onclick="toggleEscalationCard()">Escalate to Supervisor</button>
-
-        <div id="escalationCard" class="escalation-card">
-          <div class="escalation-option">Notify Supervisor Immediately</div>
-          <div class="escalation-option">Request Quality Monitoring</div>
-          <div class="escalation-option">Flag for Follow-Up Review</div>
-          <div class="escalation-option">Transfer to Supervisor Queue</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="history" class="tab-content">
-    <div class="card">
-      <h3>Contact History</h3>
-
-      <div class="timeline">
-        <div class="event">
-          <div class="date">Jan 11, 2026</div>
-          <div class="type">Email</div>
-          <div class="summary">Sent monthly billing statement.</div>
-        </div>
-        <div class="event">
-          <div class="date">Jan 8, 2026</div>
-          <div class="type">SMS</div>
-          <div class="summary">Payment reminder sent for upcoming due date.</div>
-        </div>
-        <div class="event">
-          <div class="date">Jan 3, 2026</div>
-          <div class="type">Inbound Call</div>
-          <div class="summary">Customer inquired about energy efficiency programs.</div>
-        </div>
-        <div class="event">
-          <div class="date">Dec 28, 2025</div>
-          <div class="type">Inbound Call</div>
-          <div class="summary">Payment processed - $145.67.</div>
-        </div>
-        <div class="event">
-          <div class="date">Dec 15, 2025</div>
-          <div class="type">Outbound Call</div>
-          <div class="summary">Attempted outage notification - voicemail left.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="billing" class="tab-content">
-    <div class="card">
-      <h3>Current Rate Plan</h3>
-      
-      <table>
-        <tr><td><strong>Plan Name:</strong></td><td id="planName">Standard Residential</td></tr>
-        <tr><td><strong>Rate Structure:</strong></td><td>Tiered Rate</td></tr>
-        <tr><td><strong>Base Rate (0-400 kWh):</strong></td><td>$0.1089/kWh</td></tr>
-        <tr><td><strong>Tier 2 (401-800 kWh):</strong></td><td>$0.1248/kWh</td></tr>
-        <tr><td><strong>Tier 3 (801+ kWh):</strong></td><td>$0.1387/kWh</td></tr>
-        <tr><td><strong>Basic Service Charge:</strong></td><td>$12.50/month</td></tr>
-        <tr><td><strong>Enrolled Since:</strong></td><td id="enrolledSince">March 2019</td></tr>
-      </table>
-
-      <div class="actions">
-        <button class="btn btn-primary" onclick="showToast('Rate plan comparison sent to customer email')">Send Rate Plan Comparison</button>
-        <button class="btn btn-primary" onclick="showToast('Time-of-Use plan information sent')">View Time-of-Use Options</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Available Programs</h3>
-      
-      <div class="check-item"><input type="checkbox">Budget Billing Enrolled</div>
-      <div class="check-item"><input type="checkbox">Paperless Billing Enrolled</div>
-      <div class="check-item"><input type="checkbox">Auto-Pay Enrolled</div>
-      <div class="check-item"><input type="checkbox">Energy Efficiency Program Member</div>
-      
-      <div class="actions">
-        <button class="btn btn-primary" onclick="showToast('Program enrollment updated')">Update Program Enrollment</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="payments" class="tab-content">
-    <div class="card">
-      <h3>Payment Processing</h3>
+      <div class="section-divider">Account Status</div>
 
       <div class="grid-2">
         <div>
-          <label>Total Amount Due</label>
-          <input id="paymentAmountDue" readonly>
+          <label>Account Status</label>
+          <select id="accountStatus" onchange="updateAccountBadge()">
+            <option value="">Select status...</option>
+            <option value="active" selected>Active — Service On</option>
+            <option value="pending">Pending — New Service</option>
+            <option value="hold">Payment Hold</option>
+            <option value="shutoff">Service Interrupted</option>
+            <option value="transfer">Transfer In Progress</option>
+            <option value="closed">Closed / Final Bill</option>
+          </select>
         </div>
         <div>
-          <label>Due Date</label>
-          <input id="paymentDueDate" value="Jan 28, 2026" readonly>
+          <label>Service Start Date</label>
+          <input id="signupDate" type="date">
         </div>
       </div>
 
-      <div style="margin-top: 20px;">
-        <label>Payment Amount</label>
-        <input type="number" id="paymentAmount" placeholder="Enter payment amount" step="0.01" min="0">
-        
-        <div style="display: flex; gap: 10px; margin-top: 10px; margin-bottom: 16px;">
-          <button class="btn btn-secondary" onclick="setFullPayment()">Pay Full Amount</button>
-          <button class="btn btn-secondary" onclick="clearPaymentAmount()">Clear</button>
+      <div id="accountBadgeContainer"></div>
+
+      <div class="grid-2">
+        <div>
+          <label>Paperless Billing</label>
+          <select id="paperless">
+            <option value="yes" selected>Enrolled — Paperless</option>
+            <option value="no">Paper Bill</option>
+          </select>
+        </div>
+        <div>
+          <label>Auto Pay Status</label>
+          <select id="autopay">
+            <option value="yes" selected>Enrolled — Auto Pay</option>
+            <option value="no">Not Enrolled</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: SERVICE & METER ── -->
+  <div id="service" class="tab-content">
+    <div class="card">
+      <h3>⚙️ Service & Meter Details</h3>
+
+      <div class="grid-2">
+        <div>
+          <label>Service Type</label>
+          <select id="serviceType">
+            <option value="">Select type...</option>
+            <option value="residential-heat" selected>Residential — Heating</option>
+            <option value="residential-all">Residential — All Appliances</option>
+            <option value="commercial">Commercial</option>
+            <option value="new-construction">New Construction</option>
+          </select>
+        </div>
+        <div>
+          <label>Service Order Type</label>
+          <select id="serviceOrder">
+            <option value="">Select...</option>
+            <option value="start">Start Service</option>
+            <option value="stop">Stop Service</option>
+            <option value="transfer">Transfer / Move</option>
+            <option value="existing">Existing — No Change</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-divider">Meter Information</div>
+
+      <div class="meter-box" id="meterDisplay">0 4 8 2 7 6</div>
+
+      <div class="grid-3">
+        <div><label>Meter Number</label><input id="meterNum" placeholder="MET-######"></div>
+        <div><label>Last Read Date</label><input id="lastRead" type="date"></div>
+        <div>
+          <label>Read Type</label>
+          <select id="readType">
+            <option value="actual" selected>Actual Read</option>
+            <option value="estimated">Estimated</option>
+            <option value="customer">Customer Self-Read</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div><label>Current Read (CCF)</label><input id="currentRead" type="number" placeholder="0.00" oninput="updateMeter(this.value)"></div>
+        <div><label>Previous Read (CCF)</label><input id="prevRead" type="number" placeholder="0.00"></div>
+      </div>
+
+      <div class="section-divider">Appliances on Account</div>
+
+      <div class="grid-4">
+        <div class="check-item"><input type="checkbox" checked><span>Furnace / Heating</span></div>
+        <div class="check-item"><input type="checkbox" checked><span>Water Heater</span></div>
+        <div class="check-item"><input type="checkbox"><span>Gas Range / Oven</span></div>
+        <div class="check-item"><input type="checkbox"><span>Clothes Dryer</span></div>
+        <div class="check-item"><input type="checkbox"><span>Fireplace / Log Set</span></div>
+        <div class="check-item"><input type="checkbox"><span>Pool/Spa Heater</span></div>
+        <div class="check-item"><input type="checkbox"><span>Outdoor BBQ</span></div>
+        <div class="check-item"><input type="checkbox"><span>Generator</span></div>
+      </div>
+
+      <div class="section-divider">Appointment Scheduling</div>
+
+      <div class="grid-3">
+        <div>
+          <label>Appointment Type</label>
+          <select id="apptType">
+            <option value="">Select...</option>
+            <option value="turn-on">Service Turn-On</option>
+            <option value="turn-off">Service Turn-Off</option>
+            <option value="meter-read">Meter Read / Inspect</option>
+            <option value="leak-check">Leak Investigation</option>
+            <option value="appliance">Appliance Check</option>
+          </select>
+        </div>
+        <div>
+          <label>Appointment Window</label>
+          <select id="apptWindow">
+            <option value="">Select window...</option>
+            <option value="am">Morning (8am–12pm)</option>
+            <option value="pm">Afternoon (12pm–4pm)</option>
+            <option value="allday">All Day</option>
+          </select>
+        </div>
+        <div><label>Requested Date</label><input id="apptDate" type="date"></div>
+      </div>
+      <div class="info-alert" style="margin-top:0; margin-bottom:0;">
+        📅 <strong>Note:</strong> Recommend scheduling 2 weeks in advance for 2–4 hr windows, or 5 business days minimum for all-day appointments.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: BILLING & PAYMENT ── -->
+  <div id="billing" class="tab-content">
+    <div class="card">
+      <h3>💳 Billing & Payment</h3>
+
+      <div class="grid-4">
+        <div><label>Current Balance</label><input id="currentBalance" placeholder="$0.00"></div>
+        <div><label>Due Date</label><input id="dueDate" type="date"></div>
+        <div><label>Last Payment</label><input id="lastPayment" placeholder="$0.00"></div>
+        <div><label>Last Payment Date</label><input id="lastPayDate" type="date"></div>
+      </div>
+
+      <div class="grid-3">
+        <div><label>Average Monthly Bill</label><input id="avgBill" placeholder="$0.00"></div>
+        <div><label>Budget Billing Amount</label><input id="budgetBill" placeholder="$0.00"></div>
+        <div>
+          <label>Budget Billing Enrolled?</label>
+          <select id="budgetEnrolled">
+            <option value="no">Not Enrolled</option>
+            <option value="yes">Enrolled</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-divider">Payment Methods Available</div>
+
+      <div class="pay-options">
+        <div class="pay-option" onclick="showToast('MyAccount online payment — No convenience fee')">
+          <div class="pay-icon">💻</div>MyAccount Online
+        </div>
+        <div class="pay-option" onclick="showToast('Phone payment — 877-860-6020 press 2 — 24/7')">
+          <div class="pay-icon">📞</div>Pay by Phone 24/7
+        </div>
+        <div class="pay-option" onclick="showToast('Auto Pay — No fee, same-day if before 6pm PST')">
+          <div class="pay-icon">🔁</div>Auto Pay
+        </div>
+        <div class="pay-option" onclick="showToast('Payment kiosk info sent — cash accepted, no fee')">
+          <div class="pay-icon">🏧</div>In-Person Kiosk
+        </div>
+        <div class="pay-option" onclick="showToast('Authorized payment location map sent to customer')">
+          <div class="pay-icon">📍</div>Pay Location Map
+        </div>
+        <div class="pay-option" onclick="showToast('Mail-in payment info provided — PO Box 24531, Oakland CA')">
+          <div class="pay-icon">✉️</div>Mail-In Check
+        </div>
+      </div>
+
+      <div class="section-divider">Assistance Programs</div>
+
+      <div class="grid-2">
+        <div>
+          <label>Assistance Program Eligibility</label>
+          <select id="assistanceProgram">
+            <option value="">Check eligibility...</option>
+            <option value="energy-share">Energy Share Program</option>
+            <option value="lifeline">Lifeline Rate</option>
+            <option value="care">CARE (CA only)</option>
+            <option value="fera">FERA (CA only)</option>
+            <option value="211">2-1-1 Community Funds</option>
+            <option value="flex-pay">Flexible Payment Plan</option>
+            <option value="none">Not Eligible / Not Needed</option>
+          </select>
+        </div>
+        <div>
+          <label>Deposit Status</label>
+          <select id="depositStatus">
+            <option value="none" selected>No Deposit Required</option>
+            <option value="required">Deposit Required</option>
+            <option value="waived">Waived — Letter of Credit</option>
+            <option value="on-file">Deposit on File</option>
+          </select>
         </div>
       </div>
 
       <div>
-        <label>Payment Date</label>
-        <input type="date" id="paymentDate">
-      </div>
-
-      <div class="actions">
-        <button class="btn btn-primary" onclick="processPayment()">Process Payment</button>
-        <button class="btn btn-accent" onclick="setupPaymentPlan()">Set Up Payment Plan</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>Payment History</h3>
-      
-      <div class="timeline">
-        <div class="event">
-          <div class="date">Dec 28, 2025</div>
-          <div class="type">Payment</div>
-          <div class="summary">Payment received: $145.67 - Check #1234</div>
-        </div>
-        <div class="event">
-          <div class="date">Nov 29, 2025</div>
-          <div class="type">Payment</div>
-          <div class="summary">Payment received: $138.92 - Auto-Pay</div>
-        </div>
-        <div class="event">
-          <div class="date">Oct 30, 2025</div>
-          <div class="type">Payment</div>
-          <div class="summary">Payment received: $152.45 - Online</div>
-        </div>
-        <div class="event">
-          <div class="date">Sep 28, 2025</div>
-          <div class="type">Payment</div>
-          <div class="summary">Payment received: $147.33 - Phone</div>
-        </div>
+        <label>Billing Notes</label>
+        <textarea id="billingNotes" placeholder="e.g., customer disputes high bill, needs payment extension, enrolled in assistance program..."></textarea>
       </div>
     </div>
   </div>
 
-  <button class="api-explorer-btn" onclick="openApiExplorer()">🔧 API Explorer</button>
+  <!-- ── TAB: CALL REASON ── -->
+  <div id="issue" class="tab-content">
+    <div class="card">
+      <h3>📋 Call Reason & Issue</h3>
 
-</div>
+      <div class="grid-2">
+        <div>
+          <label>Primary Call Reason</label>
+          <select id="callType">
+            <option value="">Select reason...</option>
+            <option value="bill-question">Bill Question / High Bill</option>
+            <option value="payment">Make a Payment / Payment Arrangement</option>
+            <option value="start-service">Start New Service</option>
+            <option value="stop-service">Stop / Cancel Service</option>
+            <option value="transfer">Transfer Service (Moving)</option>
+            <option value="outage">No Gas / Service Outage</option>
+            <option value="smell">Gas Smell / Suspected Leak</option>
+            <option value="meter">Meter Read / Dispute</option>
+            <option value="autopay">Auto Pay / Paperless Setup</option>
+            <option value="assistance">Assistance Program</option>
+            <option value="rebate">Rebate / Promotion Inquiry</option>
+            <option value="appliance">Appliance / Contractor Referral</option>
+            <option value="scam">Scam / Fraud Report</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label>Priority Level</label>
+          <select id="priorityLevel">
+            <option value="low">Low — General Inquiry</option>
+            <option value="medium">Medium — Billing / Service Setup</option>
+            <option value="high">High — Service Interruption</option>
+            <option value="urgent">🚨 URGENT — Safety / Leak</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label>Issue Description (Customer's Words)</label>
+        <textarea id="issueDescription" placeholder="Summarize what the customer described in their own words..."></textarea>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label>Resolution Status</label>
+          <select id="resolutionStatus">
+            <option value="">Select...</option>
+            <option value="resolved">Resolved on Call</option>
+            <option value="partial">Partially Resolved</option>
+            <option value="escalated">Escalated to Field Tech</option>
+            <option value="follow-up">Follow-Up Required</option>
+            <option value="unresolved">Unresolved</option>
+          </select>
+        </div>
+        <div>
+          <label>Follow-Up?</label>
+          <select id="followUp">
+            <option value="no">No Follow-Up Needed</option>
+            <option value="24hr">Yes — Within 24 Hours</option>
+            <option value="48hr">Yes — Within 48 Hours</option>
+            <option value="callback">Scheduled Callback</option>
+          </select>
+        </div>
+      </div>
+
+      <h3 style="margin-top:22px;">⚡ Quick Actions</h3>
+      <div class="quick-links">
+        <div class="quick-link" onclick="showToast('MyAccount setup guide sent via email')">MyAccount Setup</div>
+        <div class="quick-link" onclick="showToast('Bill explanation sent to customer email')">Explain Bill</div>
+        <div class="quick-link" onclick="showToast('Start service order initiated')">Start Service</div>
+        <div class="quick-link" onclick="showToast('Stop service order initiated')">Stop Service</div>
+        <div class="quick-link" onclick="showToast('Transfer / move service order created')">Transfer Service</div>
+        <div class="quick-link" onclick="showToast('Payment confirmation sent')">Confirm Payment</div>
+        <div class="quick-link" onclick="showToast('Budget billing enrollment processed')">Budget Billing</div>
+        <div class="quick-link" onclick="showToast('Rebate information emailed to customer')">Rebate Info</div>
+        <div class="quick-link" onclick="showToast('Contractor referral list sent — 800-654-2765')">Contractor Referral</div>
+        <div class="quick-link" onclick="showToast('Energy saving tips emailed')">Energy Tips</div>
+        <div class="quick-link" onclick="showToast('Assistance program application sent')">Assist Programs</div>
+        <div class="quick-link" onclick="showToast('Field tech dispatch initiated')">Dispatch Tech</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: SAFETY PROTOCOL ── -->
+  <div id="safety" class="tab-content">
+
+    <div class="card" style="border: 3px solid var(--danger);">
+      <h3 style="color: var(--danger); border-color: var(--danger-light);">🚨 Gas Leak / Emergency Protocol</h3>
+
+      <div class="info-alert" style="background: var(--danger-light); border-color: var(--danger); color: #7F1D1D; margin-bottom: 16px;">
+        <strong>⚠️ If customer reports smelling gas, a hissing sound, or dead vegetation in yard:</strong> Follow ALL steps below immediately. Do not troubleshoot — escalate to emergency.
+      </div>
+
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 1:</strong> Tell customer to stop what they're doing and leave the building/area immediately — do not use any switches, phones, or appliances inside.</span></div>
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 2:</strong> Tell customer to go to a neighbor's house or a safe distance away before calling anyone.</span></div>
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 3:</strong> Direct customer to call <strong>911</strong> first.</span></div>
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 4:</strong> Then call Southwest Gas 24/7 Emergency: <strong>877-860-6020</strong> — dispatching a tech immediately.</span></div>
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 5:</strong> Do NOT re-enter the building until cleared by emergency responders and Southwest Gas technician.</span></div>
+      <div class="safety-item"><input type="checkbox"><span><strong>Step 6:</strong> Log emergency dispatch in CRM with timestamp and customer address.</span></div>
+
+      <div class="actions" style="margin-top: 16px;">
+        <button class="btn btn-danger" onclick="showToastDanger('🚨 Emergency tech dispatched — ticket flagged URGENT')">Dispatch Emergency Tech</button>
+        <button class="btn btn-secondary" onclick="showToast('Safety resource page sent to customer email')">Send Safety Resources</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔍 Gas Smell — Recognition Guide (For Agent Reference)</h3>
+
+      <div class="grid-2">
+        <div>
+          <p style="font-size:0.9rem; color: var(--text-muted); line-height: 1.7;">
+            <strong style="color:var(--primary);">Natural Gas Smell:</strong> Rotten egg / sulfur odor (odorant added for detection)<br>
+            <strong style="color:var(--primary);">Hissing Sound:</strong> Near appliance, meter, or pipe = possible leak<br>
+            <strong style="color:var(--primary);">Dead Vegetation:</strong> Unexplained dying plants in a line = underground leak<br>
+            <strong style="color:var(--primary);">Bubbling Water:</strong> In puddles or wet areas = underground leak
+          </p>
+        </div>
+        <div>
+          <p style="font-size:0.9rem; color: var(--text-muted); line-height: 1.7;">
+            <strong style="color:var(--primary);">Do NOT:</strong><br>
+            — Turn lights or appliances on/off<br>
+            — Use a landline phone inside<br>
+            — Start a vehicle in the garage<br>
+            — Smoke or use open flames<br>
+            — Try to locate the leak yourself
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🪪 Scam / Impersonator Protocol</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px;">
+        Southwest Gas employees will <strong>always carry ID</strong>, wear uniforms, and drive marked vehicles. They will <strong>never</strong> ask for payment in the field or request personal info (card numbers, PINs, SSN) over the phone.
+      </p>
+      <div class="check-item"><input type="checkbox"><span>Advise customer to ask for employee ID and call <strong>877-860-6020</strong> to verify before allowing access.</span></div>
+      <div class="check-item"><input type="checkbox"><span>If customer received a suspicious call or visit, document details and escalate to Fraud team.</span></div>
+      <div class="check-item"><input type="checkbox"><span>Send scam awareness resources to customer email.</span></div>
+      <div class="actions" style="margin-top: 14px;">
+        <button class="btn btn-primary" onclick="showToast('Fraud report submitted — ticket flagged')">Report Fraud / Scam</button>
+        <button class="btn btn-secondary" onclick="showToast('Scam awareness info sent to customer')">Send Scam Alert Info</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TAB: CALL WORKFLOW ── -->
+  <div id="workflow" class="tab-content">
+    <div class="card">
+      <h3>📞 Customer Call Workflow</h3>
+
+      <div class="check-item"><input type="checkbox"><span><strong>Open:</strong> "Thank you for calling Southwest Gas, my name is [Name]. How can I help you today?"</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Safety Check:</strong> If customer mentions gas smell or emergency — immediately switch to Safety Protocol tab.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Verify Identity:</strong> Confirm full name + service address OR account number before accessing account.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Listen:</strong> Allow customer to fully describe their issue without interrupting — note key details.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Confirm:</strong> Repeat the issue back: "So what I'm hearing is [summary] — is that correct?"</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Review Account:</strong> Check account status, billing balance, service address, and relevant history.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Resolve or Escalate:</strong> Address the issue using available tools, or create a field tech dispatch / escalation ticket.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Assistance Check:</strong> If customer mentions bill hardship, proactively mention Energy Share, flexible payment plans, and 2-1-1 assistance.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Self-Service Reminder:</strong> Mention MyAccount portal and mobile app for payments, paperless billing, and service requests.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Confirm Resolution:</strong> "Is there anything else I can help you with today?" — confirm issue is addressed.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Log Call:</strong> Document all details, resolution, and any follow-up needed in CRM.</span></div>
+      <div class="check-item"><input type="checkbox"><span><strong>Close:</strong> "Thank you for calling Southwest Gas. We appreciate your business — stay warm and safe!"</span></div>
+
+      <div class="actions">
+        <button class="btn btn-success" onclick="showToast('Call notes saved successfully')">💾 Save Call Notes</button>
+        <button class="btn btn-accent" onclick="showToast('Follow-up task scheduled')">📅 Schedule Follow-Up</button>
+        <button class="btn btn-primary" onclick="showToast('Ticket escalated to field team')">⬆️ Escalate to Field</button>
+        <button class="btn btn-secondary" onclick="showToast('Call marked complete and logged')">✅ Complete & Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: CALL HISTORY ── -->
+  <div id="history" class="tab-content">
+    <div class="card">
+      <h3>📁 Recent Call History</h3>
+
+      <div class="timeline">
+        <div class="event">
+          <div class="date">Mar 1, 2026 — 9:22 AM</div>
+          <div class="type">Billing Dispute</div>
+          <div class="summary">Customer called regarding a higher-than-expected bill for February. Explained increased usage due to cold weather and provided usage comparison year-over-year. Offered Budget Billing enrollment — customer accepted. Confirmed auto pay still active.</div>
+        </div>
+        <div class="event">
+          <div class="date">Feb 18, 2026 — 2:45 PM</div>
+          <div class="type">Payment Arrangement</div>
+          <div class="summary">Customer requested a payment extension due to financial hardship. Set up 30-day extension on balance of $218.40. Informed customer about Energy Share program. Customer will call back after receiving assistance determination.</div>
+        </div>
+        <div class="event">
+          <div class="date">Feb 5, 2026 — 11:10 AM</div>
+          <div class="type">Service Transfer</div>
+          <div class="summary">Customer relocating within Phoenix area. Processed stop-service at current address (effective Feb 28) and start-service at new address (effective Mar 1). Scheduled 2-hour AM appointment for turn-on. Confirmation sent via email.</div>
+        </div>
+        <div class="event">
+          <div class="date">Jan 22, 2026 — 3:55 PM</div>
+          <div class="type">Meter Read Dispute</div>
+          <div class="summary">Customer believed meter reading was incorrect. Verified last 3 reads — all actual reads. Explained estimated vs. actual read cycles. Customer agreed to schedule an in-person meter inspection. Appointment booked for Jan 29.</div>
+        </div>
+        <div class="event">
+          <div class="date">Jan 9, 2026 — 8:30 AM</div>
+          <div class="type">Safety — Smell Report</div>
+          <div class="summary">Customer reported slight gas smell near water heater. Followed full safety protocol — dispatched emergency tech. Tech arrived within 2 hours, identified minor fitting issue at water heater connection. Repaired on site. Customer cleared to return home same day.</div>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top: 22px;">
+        <button class="btn btn-primary" onclick="showToast('Full call history exported to PDF')">Export Call History</button>
+        <button class="btn btn-secondary" onclick="showToast('History filtered to safety events')">Filter: Safety Only</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end container -->
 
 <script>
-  const tabs = document.querySelectorAll(".tab");
-  const contents = document.querySelectorAll(".tab-content");
-
-  tabs.forEach(tab => {
+  /* TABS */
+  document.querySelectorAll(".tab").forEach(tab => {
     tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
       tab.classList.add("active");
-
-      contents.forEach(c => c.classList.remove("active"));
       document.getElementById(tab.dataset.tab).classList.add("active");
     });
   });
 
+  /* QUERY PARAMS */
   const qp = new URLSearchParams(window.location.search);
+  function getQP(...keys) { for (let k of keys) { const v = qp.get(k); if (v && v.trim()) return v; } return ""; }
+  function cleanPhone(s="") { return s.replace(/[\[\]\(\)]/g,"").trim(); }
 
-  function getQP(...keys) {
-    for (let k of keys) {
-      const v = qp.get(k);
-      if (v && v.trim() !== "") return v;
-    }
-    return "";
+  /* DEFAULTS */
+  const defaults = {
+    firstName: "Linda",
+    lastName: "Reyes",
+    phoneNumber: "(602) 555-0138",
+    emailAddress: "linda.reyes@email.com",
+    dateOfBirth: "1978-11-04",
+    businessAddress: "8842 W Desert Rose Ave, Peoria, AZ 85345",
+    accountId: "SWG-4829301027",
+    signupDate: "2019-03-12"
+  };
+
+  function setField(id, val) { const el = document.getElementById(id); if (el && val) el.value = val; }
+
+  setField("firstName",       getQP("firstName","FNAME") || defaults.firstName);
+  setField("lastName",        getQP("lastName","LNAME")  || defaults.lastName);
+  setField("phoneNumber",     cleanPhone(getQP("phoneNumber","PHONE")) || defaults.phoneNumber);
+  setField("emailAddress",    getQP("emailAddress","EMAIL") || defaults.emailAddress);
+  setField("dateOfBirth",     getQP("dateOfBirth","DOB") || defaults.dateOfBirth);
+  setField("businessAddress", getQP("businessAddress","address") || defaults.businessAddress);
+  setField("accountId",       getQP("accountId","account") || defaults.accountId);
+  setField("signupDate",      getQP("signupDate") || defaults.signupDate);
+
+  /* ACCOUNT BADGE */
+  function updateAccountBadge() {
+    const status = document.getElementById("accountStatus").value;
+    const container = document.getElementById("accountBadgeContainer");
+    if (!status) { container.innerHTML = ""; return; }
+    const map = {
+      active:   { cls: "badge-active",  text: "✅ Active — Service On" },
+      pending:  { cls: "badge-accent",  text: "🕐 Pending — New Service" },
+      hold:     { cls: "badge-trial",   text: "⚠️ Payment Hold" },
+      shutoff:  { cls: "badge-danger",  text: "🔴 Service Interrupted" },
+      transfer: { cls: "badge-support", text: "🔄 Transfer In Progress" },
+      closed:   { cls: "badge-support", text: "❌ Closed / Final Bill" },
+    };
+    const b = map[status] || { cls: "badge-support", text: status };
+    container.innerHTML = `<span class="badge ${b.cls}">${b.text}</span>`;
   }
+  window.updateAccountBadge = updateAccountBadge;
+  updateAccountBadge();
 
-  function cleanPhone(input="") {
-    return input.replace(/[\[\]\(\)\-]/g,"").trim();
+  /* METER DISPLAY */
+  function updateMeter(val) {
+    const digits = String(Math.round(val || 0)).padStart(6, '0').split('').join(' ');
+    document.getElementById('meterDisplay').textContent = digits;
   }
+  window.updateMeter = updateMeter;
 
-  const firstName = getQP("firstName","FirstName","fname","FNAME") || "Alex";
-  const lastName = getQP("lastName","LastName","lname","LNAME") || "Johnson";
-  
-  document.getElementById("firstName").value = firstName;
-  document.getElementById("lastName").value = lastName;
-  document.getElementById("phoneNumber").value = cleanPhone(getQP("phone","phoneNumber","PHONE")) || "+1 (303) 803-6511";
-  document.getElementById("accountNumber").value = getQP("accountNumber","account","ACCOUNT") || "A456789";
-  document.getElementById("address").value = getQP("address","serviceAddress","ADDRESS") || "200 E ECHO LN PHOENIX AZ 85020-3572";
-  document.getElementById("serviceDate").value = getQP("serviceDate","startDate","START_DATE") || "2019-10-08";
-  
-  const balance = parseFloat(getQP("accountBalance","balance","BALANCE")) || 187.45;
-  const prevBalance = balance * 0.45;
-  const currentCharges = balance * 0.65;
-  const paymentsReceived = balance * 0.10;
-
-  document.getElementById("accountBalance").value = "$" + balance.toFixed(2);
-  document.getElementById("prevBalance").innerText = "$" + prevBalance.toFixed(2);
-  document.getElementById("currentCharges").innerText = "$" + currentCharges.toFixed(2);
-  document.getElementById("paymentsReceived").innerText = "$" + paymentsReceived.toFixed(2);
-  document.getElementById("totalDue").innerText = "$" + balance.toFixed(2);
-
-  document.getElementById("paymentAmountDue").value = "$" + balance.toFixed(2);
-  
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  const formattedDate = `${year}-${month}-${day}`;
-  document.getElementById("paymentDate").value = formattedDate;
-
-  const identityCheckbox = document.getElementById("identityVerified");
-  identityCheckbox.addEventListener("change", () => {
-    if (identityCheckbox.checked) {
-      showToast("Customer identity verified");
-    }
-  });
-
-  function reportOutage() {
-    showToast("Outage report initiated for service address");
-  }
-
-  function toggleEscalationCard() {
-    const card = document.getElementById("escalationCard");
-    card.style.display = (card.style.display === "block") ? "none" : "block";
-  }
-
-  function showToast(text) {
+  /* TOAST */
+  function showToast(text, danger=false) {
     const container = document.getElementById("toastContainer");
     const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerText = text + " ✓";
+    toast.className = "toast" + (danger ? " danger" : "");
+    toast.innerText = text + (danger ? "" : " ✓");
     container.appendChild(toast);
     setTimeout(() => toast.classList.add("show"), 10);
-    setTimeout(() => {
-      toast.classList.remove("show");
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.classList.remove("show"); setTimeout(() => toast.remove(), 300); }, 3500);
   }
-
-  document.querySelectorAll(".escalation-option").forEach(option => {
-    option.addEventListener("click", () => {
-      const msg = option.innerText.trim();
-      document.getElementById("escalationCard").style.display = "none";
-      showToast(msg);
-    });
-  });
-
-  function openApiExplorer() {
-    const width = 1200;
-    const height = 800;
-    const left = (screen.width - width) / 2;
-    const top = (screen.height - height) / 2;
-    window.open(
-      'https://developer.genesys.cloud/devapps/api-explorer#',
-      'API Explorer',
-      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
-    );
-  }
-
-  function openOutageMap() {
-    const width = 1200;
-    const height = 800;
-    const left = (screen.width - width) / 2;
-    const top = (screen.height - height) / 2;
-    window.open(
-      'https://outagemap.aps.com/outageviewer/',
-      'Outage Map',
-      `width=${width},height=${height},left=${left},top=${top},toolbar=no,menubar=no,scrollbars=yes,resizable=yes`
-    );
-  }
-
-  function setFullPayment() {
-    const amountDue = parseFloat(document.getElementById("paymentAmountDue").value.replace('$', ''));
-    document.getElementById("paymentAmount").value = amountDue.toFixed(2);
-  }
-
-  function clearPaymentAmount() {
-    document.getElementById("paymentAmount").value = '';
-  }
-
-  function processPayment() {
-    const amount = document.getElementById("paymentAmount").value;
-    const date = document.getElementById("paymentDate").value;
-    
-    if (!amount || parseFloat(amount) <= 0) {
-      showToast("Please enter a valid payment amount");
-      return;
-    }
-    
-    if (!date) {
-      showToast("Please select a payment date");
-      return;
-    }
-    
-    showToast(`Payment of $${parseFloat(amount).toFixed(2)} processed successfully`);
-  }
-
-  function setupPaymentPlan() {
-    showToast("Payment plan setup initiated");
-  }
-
-  const primaryColor = getQP("primaryColor","PrimaryColor");
-  const accentColor = getQP("accentColor","AccentColor");
-  const bgColor = getQP("bgColor","BackgroundColor");
-
-  if (bgColor) document.body.style.backgroundColor = bgColor;
-  if (primaryColor) {
-    document.documentElement.style.setProperty('--primary', primaryColor);
-  }
-  if (accentColor) {
-    document.documentElement.style.setProperty('--accent', accentColor);
-  }
+  function showToastDanger(text) { showToast(text, true); }
+  window.showToast = showToast;
+  window.showToastDanger = showToastDanger;
 </script>
 
 </body>
