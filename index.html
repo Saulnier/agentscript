@@ -243,6 +243,7 @@
     </div>
     <div class="header-right">
       HR Resource Center<br>
+      5 Agents · ~725 calls/mo
     </div>
   </div>
 
@@ -336,33 +337,42 @@
 </div>
 
 <script>
-/* DYNAMIC FIELDS — overridable via URL params */
-const qp = new URLSearchParams(window.location.search);
+  /* ----- Query Params ----- */
+  const qp = new URLSearchParams(window.location.search);
 
-function getQP(...keys) {
-  for (let k of keys) {
-    const v = qp.get(k);
-    if (v && v.trim() !== '') return v;
+  function getQP(...keys) {
+    for (let k of keys) {
+      const v = qp.get(k);
+      if (v && v.trim() !== "") return v;
+    }
+    return "";
   }
-  return '';
-}
 
-function setField(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.value = val;
-}
+  function cleanPhone(input="") {
+    return input.replace(/[\[\]\(\)]/g,"").trim();
+  }
 
-const defaults = {
-  empFirst:  '',
-  empLast:   '',
-  workLoc:   'Denver, Colorado',
-  dob:       '1985-04-12'
-};
+  /* ----- Defaults ----- */
+  const defaults = {
+    empFirst: "",
+    empLast:  "",
+    workLoc:  "Denver, Colorado",
+    dob:      "1985-04-12",
+    empId:    "EMP-482910",
+    hrcNum:   "482-910-374-628-501"
+  };
 
-setField('empFirst', getQP('firstName', 'FNAME', 'fname')       || defaults.empFirst);
-setField('empLast',  getQP('lastName',  'LNAME', 'lname')       || defaults.empLast);
-setField('workLoc',  getQP('workLocation', 'location')          || defaults.workLoc);
-setField('dob',      getQP('dateOfBirth', 'DOB', 'dob')         || defaults.dob);
+  function setField(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  }
+
+  setField("empFirst", getQP("firstName", "FNAME", "fname")              || defaults.empFirst);
+  setField("empLast",  getQP("lastName",  "LNAME", "lname")              || defaults.empLast);
+  setField("workLoc",  getQP("workLocation", "ADDRESS", "address")       || defaults.workLoc);
+  setField("dob",      getQP("dateOfBirth", "DOB", "dob", "START_DATE")  || defaults.dob);
+  setField("empId",    getQP("employeeId", "ACCOUNT", "account")         || defaults.empId);
+  setField("hrcNum",   getQP("hrcNumber", "HRC", "hrc")                  || defaults.hrcNum);
 
 /* VERIFY TOGGLE */
 function toggleVerify(id) {
