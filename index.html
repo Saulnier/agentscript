@@ -339,12 +339,31 @@
 <script>
 /* DYNAMIC FIELDS — overridable via URL params */
 const qp = new URLSearchParams(window.location.search);
-function qpOr(key, fallback) { const v = qp.get(key); return (v && v.trim()) ? v : fallback; }
 
-document.getElementById('empFirst').value = qpOr('firstName', '');
-document.getElementById('empLast').value  = qpOr('lastName', '');
-document.getElementById('workLoc').value  = qpOr('workLocation', 'Denver, Colorado');
-document.getElementById('dob').value      = qpOr('dob', '1985-04-12');
+function getQP(...keys) {
+  for (let k of keys) {
+    const v = qp.get(k);
+    if (v && v.trim() !== '') return v;
+  }
+  return '';
+}
+
+function setField(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val;
+}
+
+const defaults = {
+  empFirst:  '',
+  empLast:   '',
+  workLoc:   'Denver, Colorado',
+  dob:       '1985-04-12'
+};
+
+setField('empFirst', getQP('firstName', 'FNAME', 'fname')       || defaults.empFirst);
+setField('empLast',  getQP('lastName',  'LNAME', 'lname')       || defaults.empLast);
+setField('workLoc',  getQP('workLocation', 'location')          || defaults.workLoc);
+setField('dob',      getQP('dateOfBirth', 'DOB', 'dob')         || defaults.dob);
 
 /* VERIFY TOGGLE */
 function toggleVerify(id) {
