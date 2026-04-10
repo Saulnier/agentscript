@@ -1,127 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>First American – Customer Solutions Script</title>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>VF Corporation — HR Support Script</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --primary: #002B5C;
-    --primary-dark: #001A3A;
-    --primary-light: #E8EEF6;
-    --primary-mid: #1A4A7A;
-    --accent: #C8102E;
-    --accent-light: #FDEAED;
-    --accent-dark: #9B0C23;
-    --gold: #B8860B;
-    --gold-light: #FBF6E6;
-    --bg: #F4F5F7;
-    --card-bg: #ffffff;
-    --text-main: #1A1A2E;
-    --text-muted: #6B7280;
-    --radius: 12px;
-    --shadow: 0 4px 14px rgba(0,0,0,0.08);
-    --success: #1A6B3A;
-    --success-light: #E6F4EC;
-    --warning: #B45309;
-    --warning-light: #FEF3C7;
-    --danger: #C8102E;
-    --danger-light: #FDEAED;
+    --black:   #111111;
+    --gray-1:  #333333;
+    --gray-2:  #666666;
+    --gray-3:  #999999;
+    --gray-4:  #CCCCCC;
+    --gray-5:  #F0F0F0;
+    --gray-6:  #F7F7F7;
+    --white:   #FFFFFF;
+    --accent:  #111111;
+    --green:   #1A7A4A;
+    --green-l: #EAF4EE;
+    --amber:   #8A5C00;
+    --amber-l: #FEF8EC;
+    --red:     #C0182A;
+    --red-l:   #FDEAED;
+    --radius:  8px;
+    --shadow:  0 2px 12px rgba(0,0,0,0.07);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: var(--bg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: var(--text-main);
-    padding: 20px 16px;
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-6);
+    color: var(--black);
+    padding: 24px 16px;
+    font-size: 14px;
     line-height: 1.5;
   }
 
-  .container { max-width: 1200px; margin: auto; }
-
-  /* ── FRAUD ALERT BAR ── */
-  .fraud-bar {
-    background: var(--accent);
-    color: white;
-    padding: 10px 20px;
-    border-radius: var(--radius);
-    margin-bottom: 14px;
-    font-size: 0.86rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .fraud-bar strong { font-size: 0.95rem; }
+  .wrap { max-width: 800px; margin: 0 auto; }
 
   /* ── HEADER ── */
   .header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    padding: 22px 28px;
+    background: var(--black);
+    color: var(--white);
     border-radius: var(--radius);
-    margin-bottom: 14px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .header-left { display: flex; align-items: center; gap: 16px; }
-
-  .header-logo {
-    background: white;
-    border-radius: 10px;
-    width: 52px; height: 52px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem;
-    flex-shrink: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  }
-
-  .header-eyebrow {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.7;
-    margin-bottom: 3px;
-  }
-
-  .header-content h1 { font-size: 1.55rem; font-weight: 700; margin-bottom: 3px; }
-  .header-content p  { font-size: 0.85rem; opacity: 0.8; }
-
-  .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-
-  .header-btn {
-    background: rgba(255,255,255,0.14);
-    color: white;
-    border: 2px solid rgba(255,255,255,0.4);
-    padding: 8px 20px;
-    border-radius: 999px;
-    font-size: 0.84rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-  .header-btn:hover { background: rgba(255,255,255,0.26); }
-  .header-hours { font-size: 0.75rem; opacity: 0.7; text-align: right; }
-
-  /* ── TICKET BANNER ── */
-  .ticket-banner {
-    background: linear-gradient(135deg, var(--primary-mid) 0%, var(--accent) 100%);
-    color: white;
-    padding: 18px 28px;
-    border-radius: var(--radius);
-    margin-bottom: 14px;
-    box-shadow: var(--shadow);
+    padding: 20px 24px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -129,906 +53,358 @@
     gap: 12px;
   }
 
-  .ticket-left .ticket-label {
-    font-size: 0.75rem; font-weight: 700;
-    opacity: 0.8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 3px;
-  }
-  .ticket-left .ticket-number { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.5px; }
+  .header-left { display: flex; align-items: center; gap: 14px; }
 
-  .ticket-right { display: flex; gap: 12px; flex-wrap: wrap; }
-  .ticket-stat {
-    background: rgba(255,255,255,0.16);
-    padding: 7px 14px; border-radius: 8px;
-    text-align: center; min-width: 82px;
-  }
-  .ticket-stat .stat-val { font-size: 0.88rem; font-weight: 700; }
-  .ticket-stat .stat-lbl { font-size: 0.66rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.4px; }
-
-  /* ── INFO ALERT ── */
-  .info-alert {
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    padding: 13px 18px;
-    margin-bottom: 14px;
-    border-radius: var(--radius);
-    font-size: 0.87rem;
-    color: var(--primary-dark);
-  }
-  .info-alert strong { color: var(--primary); }
-
-  .warn-alert {
-    background: var(--warning-light);
-    border-left: 4px solid var(--warning);
-    padding: 13px 18px;
-    margin-bottom: 14px;
-    border-radius: var(--radius);
-    font-size: 0.87rem;
-    color: #78350F;
+  .logo {
+    width: 40px; height: 40px;
+    background: var(--white);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1rem;
+    color: var(--black); letter-spacing: -1px;
+    flex-shrink: 0;
   }
 
-  /* ── TABS ── */
-  .tabs {
-    display: flex; flex-wrap: wrap; gap: 4px;
-    border-bottom: 2px solid #DDE3EC;
-    margin-bottom: 20px;
-  }
-  .tab {
-    padding: 10px 15px; cursor: pointer;
-    font-size: 0.87rem; font-weight: 600;
-    color: var(--text-muted);
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .tab.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
-  .tab:hover:not(.active) { color: var(--primary); }
+  .header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.3px; }
+  .header p  { font-size: 0.75rem; opacity: 0.6; margin-top: 2px; }
 
-  /* ── CARDS ── */
+  .header-right { font-size: 0.72rem; opacity: 0.55; text-align: right; line-height: 1.6; }
+
+  /* ── CARD ── */
   .card {
-    background: var(--card-bg);
-    padding: 22px 24px;
-    margin-bottom: 18px;
+    background: var(--white);
+    border: 1px solid #E8E8E8;
     border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-bottom: 14px;
     box-shadow: var(--shadow);
   }
 
-  h3 {
-    margin-top: 0; color: var(--primary);
-    font-size: 1.02rem; font-weight: 700;
+  .card-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-2);
     margin-bottom: 16px;
     padding-bottom: 10px;
-    border-bottom: 2px solid var(--primary-light);
-    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--gray-5);
+    display: flex;
+    align-items: center;
+    gap: 7px;
   }
 
+  /* ── FIELDS ── */
   label {
-    display: block; font-size: 0.76rem; margin-bottom: 5px;
-    font-weight: 700; color: var(--text-muted);
-    text-transform: uppercase; letter-spacing: 0.6px;
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--gray-2);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-bottom: 5px;
   }
 
   input, select, textarea {
-    width: 100%; padding: 10px 13px;
-    border: 2px solid #DDE3EC; border-radius: 8px;
-    margin-bottom: 14px; font-size: 0.92rem;
-    transition: border-color 0.2s;
-    background: #FAFBFC; color: var(--text-main);
+    width: 100%;
+    border: 1.5px solid var(--gray-4);
+    border-radius: 6px;
+    padding: 9px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: var(--black);
+    background: var(--white);
+    margin-bottom: 14px;
+    transition: border-color 0.15s;
+    outline: none;
   }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--primary); background: white;
+  input:focus, select:focus, textarea:focus { border-color: var(--black); }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width:580px){ .g2 { grid-template-columns: 1fr; } }
+
+  /* ── SECTION LABEL ── */
+  .sec {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-3);
+    margin: 18px 0 10px;
+    display: flex; align-items: center; gap: 8px;
   }
-  textarea { resize: vertical; min-height: 82px; }
+  .sec::after { content:''; flex:1; height:1px; background: var(--gray-5); }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
-  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 18px; }
-
-  @media (max-width: 900px) { .grid-3,.grid-4 { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 640px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } }
-
-  /* ── SECTION DIVIDER ── */
-  .section-divider {
-    font-size: 0.7rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-    color: var(--primary-mid); margin: 18px 0 12px;
-    display: flex; align-items: center; gap: 10px;
+  /* ── VERIFICATION STATUS ── */
+  .verify-row {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
   }
-  .section-divider::after { content:''; flex:1; height:1px; background: var(--primary-light); border:1px solid #D0DBF0; }
-
-  /* ── BADGES ── */
-  .badge {
-    display: inline-block; padding: 5px 13px;
-    border-radius: 999px; font-size: 0.74rem;
-    font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-    margin-bottom: 12px;
+  .verify-btn {
+    flex: 1; min-width: 120px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1.5px solid var(--gray-4);
+    background: var(--gray-6);
+    font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+    text-align: center; color: var(--gray-1);
   }
-  .badge-active   { background: var(--success-light); color: var(--success); }
-  .badge-pending  { background: var(--warning-light); color: var(--warning); }
-  .badge-alert    { background: var(--danger-light);  color: var(--accent);  }
-  .badge-closed   { background: #F3F4F6; color: #4B5563; }
-  .badge-gold     { background: var(--gold-light); color: var(--gold); }
-  .badge-navy     { background: var(--primary-light); color: var(--primary); }
+  .verify-btn:hover { border-color: var(--black); background: var(--white); }
+  .verify-btn.pass  { background: var(--green-l); border-color: var(--green); color: var(--green); }
+  .verify-btn.fail  { background: var(--red-l);   border-color: var(--red);   color: var(--red);   }
 
-  /* ── CHECKBOXES ── */
+  /* ── CALL REASON PILLS ── */
+  .reason-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .reason-pill {
+    padding: 10px 12px;
+    border: 1.5px solid var(--gray-4);
+    border-radius: 6px;
+    font-size: 0.8rem; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+    text-align: center; color: var(--gray-1);
+    background: var(--white);
+  }
+  .reason-pill:hover   { border-color: var(--black); }
+  .reason-pill.active  { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  /* ── CHECKLIST ── */
   .check-item {
-    display: flex; align-items: flex-start; gap: 12px;
-    margin-bottom: 8px; font-size: 0.89rem;
-    padding: 9px 12px; border-radius: 8px;
-    transition: background 0.15s; border: 1px solid transparent;
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 10px; border-radius: 6px;
+    margin-bottom: 4px; font-size: 0.86rem;
+    transition: background 0.12s;
   }
-  .check-item:hover { background: var(--primary-light); border-color: #C8D8EE; }
+  .check-item:hover { background: var(--gray-6); }
   .check-item input[type="checkbox"] {
-    width: 17px; height: 17px; margin: 2px 0 0 0;
-    cursor: pointer; accent-color: var(--primary); flex-shrink: 0;
+    width: 15px; height: 15px; margin-top: 2px;
+    accent-color: var(--black); cursor: pointer; flex-shrink: 0;
   }
 
-  /* ── FRAUD CHECKLIST ── */
-  .fraud-item {
-    display: flex; align-items: flex-start; gap: 12px;
-    margin-bottom: 8px; font-size: 0.89rem;
-    padding: 10px 14px; border-radius: 8px;
-    background: var(--danger-light); border: 1px solid #F5BDC5;
-  }
-  .fraud-item input[type="checkbox"] {
-    width: 17px; height: 17px; margin: 2px 0 0 0;
-    cursor: pointer; accent-color: var(--accent); flex-shrink: 0;
-  }
-
-  /* ── BUTTONS ── */
-  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
-  @media (max-width: 640px) { .actions { grid-template-columns: 1fr; } }
-
-  .btn { padding: 12px 18px; border-radius: 8px; border: none; font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-  .btn-primary  { background: var(--primary);  color: #fff; }
-  .btn-primary:hover  { background: var(--primary-dark); }
-  .btn-accent   { background: var(--accent);   color: #fff; }
-  .btn-accent:hover   { background: var(--accent-dark); }
-  .btn-gold     { background: var(--gold);     color: #fff; }
-  .btn-gold:hover     { background: #8B6508; }
-  .btn-secondary { background: #6B7280; color: #fff; }
-  .btn-secondary:hover { background: #4B5563; }
-  .btn-success  { background: var(--success);  color: #fff; }
-  .btn-success:hover  { background: #145A2E; }
-
-  /* ── QUICK LINKS ── */
-  .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 9px; margin-top: 14px; }
-  .quick-link {
-    background: var(--primary-light);
-    padding: 10px 13px; border-radius: 8px;
-    text-align: center; font-weight: 600;
-    color: var(--primary); cursor: pointer;
-    transition: all 0.2s; font-size: 0.83rem;
-    border: 1px solid #C8D8EE;
-  }
-  .quick-link:hover { background: var(--primary); color: white; }
-
-  /* ── PORTAL TILES ── */
-  .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 14px 0; }
-  .portal-tile {
-    background: var(--primary-light);
-    border: 2px solid #C8D8EE;
-    border-radius: 10px; padding: 14px;
-    text-align: center; cursor: pointer;
-    transition: all 0.2s; font-size: 0.83rem;
-    font-weight: 600; color: var(--primary);
-  }
-  .portal-tile:hover { background: var(--primary); color: white; border-color: var(--primary); }
-  .portal-tile .tile-icon { font-size: 1.6rem; margin-bottom: 6px; }
-  .portal-tile .tile-name { font-size: 0.8rem; font-weight: 700; }
-  .portal-tile .tile-desc { font-size: 0.7rem; opacity: 0.75; margin-top: 3px; font-weight: 400; }
-
-  /* ── TIMELINE ── */
-  .timeline { border-left: 3px solid var(--primary); padding-left: 18px; }
-  .event { margin-bottom: 18px; position: relative; }
-  .event::before {
-    content:''; width:10px; height:10px;
-    background: var(--primary); border-radius: 50%;
-    position: absolute; left: -24px; top: 4px;
-  }
-  .event .date { font-size: 0.74rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
-  .event .type {
-    font-size: 0.69rem; background: var(--primary-light);
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
     padding: 3px 10px; border-radius: 999px;
-    display: inline-block; margin: 5px 0;
-    font-weight: 700; color: var(--primary);
-    text-transform: uppercase; letter-spacing: 0.4px;
+    font-size: 0.68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
-  .event .summary { font-size: 0.87rem; color: var(--text-muted); line-height: 1.55; }
+  .badge-verified { background: var(--green-l); color: var(--green); }
+  .badge-pending  { background: var(--amber-l); color: var(--amber); }
+  .badge-failed   { background: var(--red-l);   color: var(--red);   }
 
-  /* ── TOASTS ── */
-  .toast-container { position: fixed; top: 20px; right: 20px; z-index: 3000; }
+  /* ── ACTION BUTTONS ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .btn {
+    padding: 10px 20px; border-radius: 6px; border: none;
+    font-size: 0.82rem; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-black  { background: var(--black); color: var(--white); }
+  .btn-black:hover { background: var(--gray-1); }
+  .btn-ghost  { background: var(--white); border: 1.5px solid var(--gray-4); color: var(--gray-1); }
+  .btn-ghost:hover { border-color: var(--black); color: var(--black); }
+  .btn-green  { background: var(--green-l); color: var(--green); border: 1.5px solid rgba(26,122,74,0.3); }
+  .btn-green:hover { background: var(--green); color: var(--white); }
+
+  /* ── TOAST ── */
+  .toast-container { position: fixed; top: 20px; right: 20px; z-index: 999; }
   .toast {
-    background: var(--success); color: #fff;
-    padding: 12px 20px; border-radius: var(--radius);
-    box-shadow: var(--shadow); margin-bottom: 10px;
-    opacity: 0; transform: translateY(-10px);
-    transition: opacity 0.3s, transform 0.3s;
-    font-size: 0.88rem; font-weight: 600;
+    background: var(--black); color: var(--white);
+    padding: 10px 18px; border-radius: 6px;
+    font-size: 0.82rem; font-weight: 500;
+    margin-bottom: 8px; opacity: 0;
+    transform: translateY(-6px);
+    transition: all 0.2s; max-width: 280px;
+    box-shadow: var(--shadow);
   }
   .toast.show { opacity: 1; transform: translateY(0); }
-  .toast.red   { background: var(--accent); }
-  .toast.gold  { background: var(--gold); }
-
-  /* ── TAB CONTENT ── */
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-
-  /* ── CLOSING STATUS TRACKER ── */
-  .closing-steps {
-    display: flex; gap: 0;
-    margin: 16px 0; overflow-x: auto;
-  }
-  .closing-step {
-    flex: 1; min-width: 90px;
-    text-align: center; padding: 10px 6px;
-    font-size: 0.72rem; font-weight: 600;
-    background: #EEF2F8; color: var(--text-muted);
-    border-right: 2px solid white;
-    position: relative; transition: all 0.2s;
-    cursor: pointer;
-  }
-  .closing-step:first-child { border-radius: 8px 0 0 8px; }
-  .closing-step:last-child  { border-radius: 0 8px 8px 0; border-right: none; }
-  .closing-step.done        { background: var(--success-light); color: var(--success); }
-  .closing-step.active-step { background: var(--primary); color: white; }
-  .closing-step .step-icon  { font-size: 1.1rem; margin-bottom: 4px; }
-  .closing-step .step-label { text-transform: uppercase; letter-spacing: 0.4px; font-size: 0.65rem; }
 </style>
 </head>
-
 <body>
 
-<div class="toast-container" id="toastContainer"></div>
-
-<div class="container">
-
-  <!-- FRAUD ALERT BAR -->
-  <div class="fraud-bar">
-    <span>🚨</span>
-    <div>
-      <strong>WIRE FRAUD ALERT:</strong>
-      <span>Never wire funds based on emailed instructions alone. Always verify wire instructions by phone using a known number BEFORE transferring. Fraud Hotline: <strong>1-800-854-3643</strong></span>
-    </div>
-  </div>
+<div class="toast-container" id="toastCont"></div>
+<div class="wrap">
 
   <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="header-logo">🦅</div>
-      <div class="header-content">
-        <div class="header-eyebrow">First American Financial Corporation</div>
-        <h1>First American</h1>
-        <p>Customer Solutions Representative Script</p>
+      <div class="logo">VF</div>
+      <div>
+        <h1>VF HR Support</h1>
+        <p>Internal Employee Support Script</p>
       </div>
     </div>
     <div class="header-right">
-      <button class="header-btn">Agent Dashboard</button>
-      <div class="header-hours">Mon–Fri 8am–8pm ET · AgentNet® · ClarityFirst® · IgniteRE™</div>
+      HR Resource Center<br>
+      5 Agents · ~725 calls/mo
     </div>
   </div>
 
-  <!-- INFO ALERT -->
-  <div class="info-alert">
-    <strong>ℹ️ Verification Required:</strong> Before accessing any order or account — confirm full legal name + property address OR order number. For title claims, route to the Claims department immediately. Never confirm wire instructions via email.
-  </div>
+  <!-- 1. IDENTITY VERIFICATION -->
+  <div class="card">
+    <div class="card-title">① Identity Verification</div>
 
-  <!-- TICKET BANNER -->
-  <div class="ticket-banner">
-    <div class="ticket-left">
-      <div class="ticket-label">Case / Order Reference</div>
-      <div class="ticket-number">#FAM-20847</div>
+    <div class="g2">
+      <div><label>First Name</label><input id="empFirst" placeholder="First name"></div>
+      <div><label>Last Name</label><input id="empLast" placeholder="Last name"></div>
+      <div><label>Employee ID</label><input id="empId" value="EMP-482910"></div>
+      <div><label>HRC Number (15-digit)</label><input id="hrcNum" value="482-910-374-628-501" maxlength="19"></div>
+      <div><label>Work Location</label><input id="workLoc" placeholder="Office / site / remote"></div>
     </div>
-    <div class="ticket-right">
-      <div class="ticket-stat"><div class="stat-val">Open</div><div class="stat-lbl">Status</div></div>
-      <div class="ticket-stat"><div class="stat-val">Title / Escrow</div><div class="stat-lbl">Service Line</div></div>
-      <div class="ticket-stat"><div class="stat-val">Residential</div><div class="stat-lbl">Transaction</div></div>
-      <div class="ticket-stat"><div class="stat-val">Mar 13, 2026</div><div class="stat-lbl">Date</div></div>
+
+    <div><label>Date of Birth (required for all calls)</label><input id="dob" type="date" style="max-width:220px"></div>
+
+    <div class="sec">Verification Status</div>
+
+    <div class="verify-row">
+      <div class="verify-btn" id="vWork" onclick="toggleVerify('vWork')">📍 Work Location</div>
+      <div class="verify-btn" id="vDob"  onclick="toggleVerify('vDob')">🎂 Date of Birth</div>
+      <div class="verify-btn" id="vConf" onclick="toggleVerify('vConf')">🔒 Confidential ID</div>
     </div>
-  </div>
 
-  <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active" data-tab="customer">Customer Info</div>
-    <div class="tab" data-tab="transaction">Transaction / Order</div>
-    <div class="tab" data-tab="services">Products & Services</div>
-    <div class="tab" data-tab="issue">Call Reason</div>
-    <div class="tab" data-tab="fraud">Fraud Protocol</div>
-    <div class="tab" data-tab="workflow">Call Workflow</div>
-    <div class="tab" data-tab="history">Call History</div>
-  </div>
+    <div id="verifyBadge"></div>
 
-  <!-- ── TAB: CUSTOMER INFO ── -->
-  <div id="customer" class="tab-content active">
-    <div class="card">
-      <h3>👤 Customer / Client Information</h3>
-
-      <div class="grid-2">
-        <div><label>First Name</label><input id="firstName"></div>
-        <div><label>Last Name</label><input id="lastName"></div>
-        <div><label>Primary Phone</label><input id="phoneNumber" type="tel"></div>
-        <div><label>Alternate Phone</label><input id="altPhone" type="tel"></div>
-        <div><label>Email Address</label><input id="emailAddress" type="email"></div>
-        <div><label>Date of Birth (Verification)</label><input id="dateOfBirth" type="date"></div>
-      </div>
-
-      <div><label>Mailing / Billing Address</label><input id="mailingAddress" placeholder="Street, City, State, ZIP"></div>
-
-      <div class="section-divider">Client Role & Account</div>
-
-      <div class="grid-3">
-        <div>
-          <label>Client Role</label>
-          <select id="clientRole">
-            <option value="">Select role...</option>
-            <option value="buyer" selected>Buyer / Purchaser</option>
-            <option value="seller">Seller</option>
-            <option value="agent-re">Real Estate Agent</option>
-            <option value="agent-title">Title Agent</option>
-            <option value="lender">Mortgage Lender / Broker</option>
-            <option value="attorney">Attorney / Legal</option>
-            <option value="homeowner">Existing Homeowner</option>
-            <option value="builder">Builder / Developer</option>
-            <option value="commercial">Commercial Client</option>
-          </select>
-        </div>
-        <div><label>Account / Order Number</label><input id="accountId" placeholder="FAM-########"></div>
-        <div>
-          <label>Account Status</label>
-          <select id="accountStatus" onchange="updateAccountBadge()">
-            <option value="">Select status...</option>
-            <option value="active" selected>Active Order</option>
-            <option value="pending">Pending / In Process</option>
-            <option value="closing">Ready to Close</option>
-            <option value="closed">Closed / Funded</option>
-            <option value="hold">On Hold</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="claim">Claim Filed</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="accountBadgeContainer"></div>
-
-      <div class="grid-2">
-        <div><label>Order Open Date</label><input id="signupDate" type="date"></div>
-        <div><label>Estimated Close Date</label><input id="closeDate" type="date"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TAB: TRANSACTION / ORDER ── -->
-  <div id="transaction" class="tab-content">
-    <div class="card">
-      <h3>🏠 Transaction & Property Details</h3>
-
-      <div><label>Property / Subject Address</label><input id="propertyAddress" placeholder="Full property address including county"></div>
-
-      <div class="grid-3">
-        <div>
-          <label>Transaction Type</label>
-          <select id="txType">
-            <option value="">Select type...</option>
-            <option value="purchase" selected>Purchase — Residential</option>
-            <option value="refi">Refinance</option>
-            <option value="purchase-comm">Purchase — Commercial</option>
-            <option value="comm-refi">Refinance — Commercial</option>
-            <option value="heloc">HELOC / Second Lien</option>
-            <option value="1031">1031 Tax-Deferred Exchange</option>
-            <option value="new-construction">New Construction</option>
-            <option value="vacation">Vacation Ownership / Timeshare</option>
-          </select>
-        </div>
-        <div>
-          <label>Service Line</label>
-          <select id="serviceLine">
-            <option value="">Select service...</option>
-            <option value="title-res" selected>Title Insurance — Residential</option>
-            <option value="title-comm">Title Insurance — Commercial</option>
-            <option value="escrow">Escrow / Settlement</option>
-            <option value="home-warranty">Home Warranty</option>
-            <option value="lender-sol">Lender & Servicer Solutions</option>
-            <option value="data">Real Estate Data Solutions</option>
-            <option value="wealth">Wealth Management / Trust</option>
-            <option value="international">International Services</option>
-          </select>
-        </div>
-        <div>
-          <label>State / Jurisdiction</label>
-          <select id="stateJurisdiction">
-            <option value="">Select state...</option>
-            <option value="CA">California</option>
-            <option value="TX">Texas</option>
-            <option value="FL">Florida</option>
-            <option value="AZ">Arizona</option>
-            <option value="NY">New York</option>
-            <option value="CO">Colorado</option>
-            <option value="WA">Washington</option>
-            <option value="OR">Oregon</option>
-            <option value="NV">Nevada</option>
-            <option value="other">Other State</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="grid-4">
-        <div><label>Purchase / Loan Amount</label><input id="purchaseAmt" placeholder="$0,000,000"></div>
-        <div><label>Title Insurance Premium</label><input id="titlePremium" placeholder="$0,000"></div>
-        <div><label>Escrow / Settlement Fee</label><input id="escrowFee" placeholder="$0,000"></div>
-        <div><label>Lender</label><input id="lenderName" placeholder="Lender / Bank name"></div>
-      </div>
-
-      <div class="section-divider">Closing Progress Tracker</div>
-
-      <div class="closing-steps">
-        <div class="closing-step done" onclick="cycleStep(this)">
-          <div class="step-icon">📂</div>
-          <div class="step-label">Order Opened</div>
-        </div>
-        <div class="closing-step done" onclick="cycleStep(this)">
-          <div class="step-icon">🔍</div>
-          <div class="step-label">Title Search</div>
-        </div>
-        <div class="closing-step active-step" onclick="cycleStep(this)">
-          <div class="step-icon">📄</div>
-          <div class="step-label">Title Exam</div>
-        </div>
-        <div class="closing-step" onclick="cycleStep(this)">
-          <div class="step-icon">✅</div>
-          <div class="step-label">Clear to Close</div>
-        </div>
-        <div class="closing-step" onclick="cycleStep(this)">
-          <div class="step-icon">💰</div>
-          <div class="step-label">Wire / Funds</div>
-        </div>
-        <div class="closing-step" onclick="cycleStep(this)">
-          <div class="step-icon">✍️</div>
-          <div class="step-label">Signing</div>
-        </div>
-        <div class="closing-step" onclick="cycleStep(this)">
-          <div class="step-icon">📬</div>
-          <div class="step-label">Recording</div>
-        </div>
-        <div class="closing-step" onclick="cycleStep(this)">
-          <div class="step-icon">🎉</div>
-          <div class="step-label">Funded / Closed</div>
-        </div>
-      </div>
-
-      <div class="section-divider">Parties Involved</div>
-
-      <div class="grid-2">
-        <div><label>Buyer's Agent / Broker</label><input id="buyerAgent" placeholder="Name & brokerage"></div>
-        <div><label>Seller's Agent / Broker</label><input id="sellerAgent" placeholder="Name & brokerage"></div>
-        <div><label>Escrow / Title Officer</label><input id="titleOfficer" placeholder="First American officer name"></div>
-        <div><label>Notary / Signing Agent</label><input id="notary" placeholder="Name (if applicable)"></div>
-      </div>
-
+    <div class="sec">Caller Details</div>
+    <div class="g2">
       <div>
-        <label>Transaction Notes</label>
-        <textarea id="txNotes" placeholder="Special instructions, title issues, curative items, HOA details, FIRPTA, etc."></textarea>
+        <label>Call Method</label>
+        <select id="callMethod">
+          <option value="office">Office Phone</option>
+          <option value="mobile">Mobile Phone</option>
+          <option value="unknown">Unknown</option>
+        </select>
       </div>
-    </div>
-  </div>
-
-  <!-- ── TAB: PRODUCTS & SERVICES ── -->
-  <div id="services" class="tab-content">
-    <div class="card">
-      <h3>🛠️ First American Portals & Products</h3>
-      <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">Click a portal to log a quick action for this customer interaction.</p>
-
-      <div class="portal-grid">
-        <div class="portal-tile" onclick="showToast('AgentNet® — eJackets & CPLs portal opened')">
-          <div class="tile-icon">📋</div>
-          <div class="tile-name">AgentNet®</div>
-          <div class="tile-desc">eJackets, CPLs, back title</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('Transactions Portal — Secure closing comms opened')">
-          <div class="tile-icon">🔐</div>
-          <div class="tile-name">Transactions Portal</div>
-          <div class="tile-desc">Secure closing communications</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('ClarityFirst® — Commercial transaction management opened')">
-          <div class="tile-icon">🏢</div>
-          <div class="tile-name">ClarityFirst®</div>
-          <div class="tile-desc">Commercial RE management</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('IgniteRE™ — Real estate tools suite opened')">
-          <div class="tile-icon">🔥</div>
-          <div class="tile-name">IgniteRE™</div>
-          <div class="tile-desc">Premier RE tools suite</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('DataTree — Property records & land data search opened')">
-          <div class="tile-icon">🗂️</div>
-          <div class="tile-name">DataTree®</div>
-          <div class="tile-desc">Nation's largest land records</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('Home Warranty portal opened — Coverage quote ready')">
-          <div class="tile-icon">🏡</div>
-          <div class="tile-name">Home Warranty</div>
-          <div class="tile-desc">Systems & appliance coverage</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('myFirstAm® — Customer self-service portal opened')">
-          <div class="tile-icon">👤</div>
-          <div class="tile-name">myFirstAm®</div>
-          <div class="tile-desc">Customer self-service</div>
-        </div>
-        <div class="portal-tile" onclick="showToast('Title Fee Calculator opened for this state')">
-          <div class="tile-icon">🧮</div>
-          <div class="tile-name">Fee Calculator</div>
-          <div class="tile-desc">State-specific title fees</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>📦 Product Details — Home Warranty</h3>
-      <div class="warn-alert">
-        <strong>⚠️ Home Warranty Reminder:</strong> First American Home Warranty covers major systems (HVAC, plumbing, electrical) and appliances — NOT homeowners insurance items like roof, structure, or liability. Over <strong>$1.9B in claims paid since 2011</strong>.
-      </div>
-
-      <div class="grid-3">
-        <div>
-          <label>Warranty Plan</label>
-          <select id="warrantyPlan">
-            <option value="">Select plan...</option>
-            <option value="starter">Starter Plan</option>
-            <option value="essential">Essential Plan</option>
-            <option value="premier" selected>Premier Plan</option>
-          </select>
-        </div>
-        <div>
-          <label>Warranty Status</label>
-          <select id="warrantyStatus">
-            <option value="">Select status...</option>
-            <option value="active" selected>Active</option>
-            <option value="new">New — Pending Closing</option>
-            <option value="renewal">Up for Renewal</option>
-            <option value="expired">Expired</option>
-            <option value="claim">Claim Open</option>
-          </select>
-        </div>
-        <div><label>Warranty Expiration Date</label><input id="warrantyExp" type="date"></div>
-      </div>
-
-      <div class="grid-2">
-        <div><label>Claim Number (if applicable)</label><input id="claimNum" placeholder="HW-CLAIM-######"></div>
-        <div><label>Claim Status</label>
-          <select id="claimStatus">
-            <option value="">Select...</option>
-            <option value="none">No Open Claim</option>
-            <option value="submitted">Submitted — Awaiting Review</option>
-            <option value="approved">Approved — Contractor Assigned</option>
-            <option value="in-progress">Repair In Progress</option>
-            <option value="resolved">Resolved / Closed</option>
-            <option value="denied">Denied — Appeal Available</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── TAB: CALL REASON ── -->
-  <div id="issue" class="tab-content">
-    <div class="card">
-      <h3>📋 Call Reason & Issue Details</h3>
-
-      <div class="grid-2">
-        <div>
-          <label>Primary Call Reason</label>
-          <select id="callType">
-            <option value="">Select reason...</option>
-            <optgroup label="Title & Escrow">
-              <option value="order-status">Order / Closing Status Update</option>
-              <option value="wire-instructions">Wire Instructions Inquiry</option>
-              <option value="closing-docs">Closing Documents / HUD / CD</option>
-              <option value="title-search">Title Search Questions</option>
-              <option value="title-issue">Title Issue / Cloud on Title</option>
-              <option value="title-claim">File a Title Insurance Claim</option>
-              <option value="policy-copy">Request Policy Copy</option>
-              <option value="recording">Recording / Deed Question</option>
-              <option value="eclosing">eClosing / Remote Online Notary</option>
-            </optgroup>
-            <optgroup label="Home Warranty">
-              <option value="warranty-claim">File Warranty Claim</option>
-              <option value="warranty-status">Claim Status Check</option>
-              <option value="warranty-coverage">Coverage Question</option>
-              <option value="warranty-renew">Renewal Inquiry</option>
-            </optgroup>
-            <optgroup label="Account & Access">
-              <option value="portal-access">Portal Login / Access Issue</option>
-              <option value="payment">Fee / Payment Question</option>
-              <option value="fraud-report">Report Wire Fraud / Phishing</option>
-              <option value="office-find">Find Local Office</option>
-              <option value="lender">Lender Solutions Inquiry</option>
-              <option value="data">Data Solutions / DataTree</option>
-              <option value="other">Other</option>
-            </optgroup>
-          </select>
-        </div>
-        <div>
-          <label>Priority Level</label>
-          <select id="priorityLevel">
-            <option value="low">Low — General Question</option>
-            <option value="medium">Medium — Closing Timeline Impact</option>
-            <option value="high">High — Blocking Closing</option>
-            <option value="urgent">🚨 URGENT — Wire Fraud / Active Threat</option>
-          </select>
-        </div>
-      </div>
-
       <div>
-        <label>Issue Description (Customer's Words)</label>
-        <textarea id="issueDescription" placeholder="Summarize the customer's issue in their words — include any specific amounts, dates, or party names mentioned..."></textarea>
-      </div>
-
-      <div class="grid-2">
-        <div>
-          <label>Resolution Status</label>
-          <select id="resolutionStatus">
-            <option value="">Select...</option>
-            <option value="resolved">Resolved on Call</option>
-            <option value="partial">Partially Resolved</option>
-            <option value="escalated">Escalated to Title Officer</option>
-            <option value="claims">Referred to Claims</option>
-            <option value="fraud-team">Referred to Fraud Team</option>
-            <option value="follow-up">Follow-Up Required</option>
-          </select>
-        </div>
-        <div>
-          <label>Follow-Up Required?</label>
-          <select id="followUp">
-            <option value="no">No Follow-Up Needed</option>
-            <option value="24hr">Yes — Within 24 Hours</option>
-            <option value="48hr">Yes — Within 48 Hours</option>
-            <option value="callback">Scheduled Callback</option>
-            <option value="closing-day">Yes — Day of Closing</option>
-          </select>
-        </div>
-      </div>
-
-      <h3 style="margin-top:22px;">⚡ Quick Actions</h3>
-      <div class="quick-links">
-        <div class="quick-link" onclick="showToast('Order status summary sent to customer email')">Email Order Status</div>
-        <div class="quick-link" onclick="showToast('Closing checklist emailed to all parties')">Send Closing Checklist</div>
-        <div class="quick-link" onclick="showToast('Wire instruction verification call initiated — DO NOT email')">Verify Wire (Phone)</div>
-        <div class="quick-link" onclick="showToastRed('Fraud alert flagged — Escalated to Fraud Team immediately')">🚨 Flag Fraud Alert</div>
-        <div class="quick-link" onclick="showToast('Title fee estimate sent via Title Fee Calculator')">Send Fee Estimate</div>
-        <div class="quick-link" onclick="showToast('eClosing / RON information sent to customer')">eClosing Info</div>
-        <div class="quick-link" onclick="showToast('Local First American office details sent')">Find Local Office</div>
-        <div class="quick-link" onclick="showToast('Home warranty quote sent to customer email')">Warranty Quote</div>
-        <div class="quick-link" onclick="showToast('Title claim form emailed — claims@firstam.com')">Start Title Claim</div>
-        <div class="quick-link" onclick="showToast('Homebuying guide and title education resources sent')">Send Buyer Guide</div>
-        <div class="quick-link" onclick="showToast('Policy copy request submitted — 5–7 business days')">Request Policy Copy</div>
-        <div class="quick-link" onclick="showToast('Escalated to assigned Title Officer')">Escalate to Officer</div>
+        <label>Employee Type</label>
+        <select id="empType">
+          <option value="fulltime">Full-Time</option>
+          <option value="parttime">Part-Time</option>
+          <option value="contractor">Contractor</option>
+        </select>
       </div>
     </div>
   </div>
 
-  <!-- ── TAB: FRAUD PROTOCOL ── -->
-  <div id="fraud" class="tab-content">
+  <!-- 2. WORKDAY CASE -->
+  <div class="card">
+    <div class="card-title">② Workday Case</div>
 
-    <div class="card" style="border: 3px solid var(--accent);">
-      <h3 style="color:var(--accent); border-color:var(--accent-light);">🚨 Wire Fraud / Phishing Response Protocol</h3>
-
-      <div class="info-alert" style="background:var(--danger-light); border-color:var(--accent); color:#7F1D1D; margin-bottom:16px;">
-        <strong>⚠️ Wire fraud is the #1 threat in real estate closings.</strong> If a customer reports sending wired funds to a fraudulent account or receiving suspicious wire instruction emails — treat this as a CRITICAL EMERGENCY. Every minute counts.
-      </div>
-
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 1:</strong> Stay calm — reassure the customer you are taking immediate action.</span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 2:</strong> Ask: When was the wire sent? How much? To which bank? Get wire reference number if available.</span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 3:</strong> Immediately contact First American's Fraud Team: <strong>1-800-854-3643</strong> — do not wait.</span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 4:</strong> Advise customer to call their bank immediately to attempt a wire recall — time is critical (window is typically under 24 hours).</span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 5:</strong> Advise customer to file a complaint at the FBI's IC3: <strong>ic3.gov</strong></span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 6:</strong> Log full details in CRM — flag ticket as FRAUD / URGENT. Note all parties, amounts, and timeline.</span></div>
-      <div class="fraud-item"><input type="checkbox"><span><strong>Step 7:</strong> Do NOT send or confirm any new wire instructions until fraud investigation is complete and parties are re-verified by phone.</span></div>
-
-      <div class="actions" style="margin-top:16px;">
-        <button class="btn btn-accent" onclick="showToastRed('🚨 Fraud ticket flagged URGENT — Fraud Team notified')">🚨 Escalate to Fraud Team</button>
-        <button class="btn btn-secondary" onclick="showToast('Fraud protection resources emailed to customer')">Send Fraud Protection Resources</button>
+    <div class="g2">
+      <div><label>Case Number (Workday)</label><input id="caseNum" placeholder="Auto-generated or enter manually"></div>
+      <div>
+        <label>Case Status</label>
+        <select id="caseStatus">
+          <option value="">— Select —</option>
+          <option value="open">Open</option>
+          <option value="in-progress">In Progress</option>
+          <option value="resolved">Resolved</option>
+          <option value="escalated">Escalated</option>
+        </select>
       </div>
     </div>
 
-    <div class="card">
-      <h3>🛡️ Wire Fraud Prevention — Customer Education</h3>
-      <div class="grid-2">
-        <div>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7;">
-            <strong style="color:var(--primary);">Red Flags to Share with Customers:</strong><br>
-            — Last-minute changes to wire instructions via email<br>
-            — Urgency pressure ("must wire today or deal dies")<br>
-            — Email addresses that look similar but aren't exact<br>
-            — Requests to keep the wire "confidential"<br>
-            — Unknown third parties claiming to handle funds
-          </p>
-        </div>
-        <div>
-          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.7;">
-            <strong style="color:var(--primary);">First American's Safe Practices:</strong><br>
-            — Always call a known number to verify wire instructions<br>
-            — Use the Transactions Portal for secure communications<br>
-            — Never wire based solely on emailed instructions<br>
-            — Enroll in First American's free title monitoring<br>
-            — Visit firstam.com/fraud-protection for resources
-          </p>
-        </div>
-      </div>
+    <div>
+      <label>Resolution / Notes</label>
+      <textarea id="caseNotes" placeholder="What was done to resolve the issue? Any follow-up needed?"></textarea>
     </div>
 
-    <div class="card">
-      <h3>🪪 Identity Theft & Phishing Protocol</h3>
-      <div class="check-item"><input type="checkbox"><span>If customer received a suspicious email claiming to be from First American — do NOT click any links. Forward to <strong>phishing@firstam.com</strong>.</span></div>
-      <div class="check-item"><input type="checkbox"><span>Verify caller identity using full legal name + property address + last 4 of SSN if accessing sensitive order data.</span></div>
-      <div class="check-item"><input type="checkbox"><span>If customer suspects their identity was used to open a fraudulent title order — escalate to Fraud Team immediately.</span></div>
-      <div class="check-item"><input type="checkbox"><span>Send customer link to First American's Security & Privacy Center: <strong>firstam.com/security-and-privacy</strong>.</span></div>
-      <div class="check-item"><input type="checkbox"><span>Log all details including suspicious email headers, phone numbers, or website URLs mentioned by the customer.</span></div>
-
-      <div class="actions" style="margin-top:14px;">
-        <button class="btn btn-primary" onclick="showToast('Identity theft report submitted — ticket flagged')">Report Identity Fraud</button>
-        <button class="btn btn-secondary" onclick="showToast('Security Center link sent to customer')">Send Security Resources</button>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ── TAB: CALL WORKFLOW ── -->
-  <div id="workflow" class="tab-content">
-    <div class="card">
-      <h3>📞 Customer Call Workflow</h3>
-
-      <div class="check-item"><input type="checkbox"><span><strong>Open:</strong> "Thank you for calling First American. My name is [Name] — how can I assist you today?"</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Fraud Screen:</strong> If customer mentions a wire, funds, or unusual email — immediately route to Fraud Protocol tab before anything else.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Verify Identity:</strong> Confirm full legal name + property address OR order number before accessing any account data.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Identify Role:</strong> Confirm whether the caller is buyer, seller, agent, lender, or attorney — context changes what information can be shared.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Listen Fully:</strong> Let the customer describe their issue completely before responding. Note key details: order numbers, dates, amounts, parties.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Confirm:</strong> Repeat the issue back: "So what I understand is [summary] — is that correct?"</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Review:</strong> Pull up the order in the relevant system (AgentNet®, ClarityFirst®, IgniteRE™, or Home Warranty portal).</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Update Closing Tracker:</strong> Confirm and update the closing progress steps in the Transaction tab.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Resolve or Escalate:</strong> Address the issue directly or escalate to the assigned title officer, claims department, or fraud team as appropriate.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Wire Reminder (every call):</strong> "As a reminder — never wire funds based on emailed instructions alone. Always call us at a known number to verify before sending any funds."</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Additional Needs:</strong> "Is there anything else I can help you with today regarding your transaction or any First American services?"</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Log Call:</strong> Document all interaction details, resolution, parties, and follow-up items in CRM system.</span></div>
-      <div class="check-item"><input type="checkbox"><span><strong>Close:</strong> "Thank you for choosing First American. We're proud to help protect one of your most important investments."</span></div>
-
-      <div class="actions">
-        <button class="btn btn-success"   onclick="showToast('Call notes saved successfully')">💾 Save Call Notes</button>
-        <button class="btn btn-gold"      onclick="showToast('Follow-up task scheduled')">📅 Schedule Follow-Up</button>
-        <button class="btn btn-primary"   onclick="showToast('Ticket escalated to Title Officer')">⬆️ Escalate to Officer</button>
-        <button class="btn btn-secondary" onclick="showToast('Call marked complete and logged')">✅ Complete & Close</button>
-      </div>
+    <div class="btn-row">
+      <button class="btn btn-black" onclick="showToast('Workday case saved ✓')">Save Case</button>
+      <button class="btn btn-ghost" onclick="showToast('Case escalated and routed')">Escalate & Route</button>
+      <button class="btn btn-green" onclick="markResolved()">✓ Mark Resolved</button>
     </div>
   </div>
 
-  <!-- ── TAB: CALL HISTORY ── -->
-  <div id="history" class="tab-content">
-    <div class="card">
-      <h3>📁 Recent Call History</h3>
+  <!-- 4. CALL WORKFLOW -->
+  <div class="card">
+    <div class="card-title">③ Call Checklist</div>
 
-      <div class="timeline">
-        <div class="event">
-          <div class="date">Mar 10, 2026 — 11:30 AM</div>
-          <div class="type">Closing Status</div>
-          <div class="summary">Buyer called requesting a status update on residential purchase closing in Scottsdale, AZ. Title exam still in progress — 2 minor liens identified on the property. Agent notified. Estimated clear-to-close by Mar 18. Customer advised to confirm funds with lender.</div>
-        </div>
-        <div class="event">
-          <div class="date">Mar 5, 2026 — 2:15 PM</div>
-          <div class="type">Wire Fraud Inquiry</div>
-          <div class="summary">Real estate agent called after receiving a suspicious email requesting updated wire instructions 1 day before closing. Confirmed First American had NOT sent the email. Initiated fraud protocol — escalated to Fraud Team. Closing postponed 24 hours pending wire re-verification. All parties notified via phone.</div>
-        </div>
-        <div class="event">
-          <div class="date">Feb 27, 2026 — 9:45 AM</div>
-          <div class="type">Home Warranty Claim</div>
-          <div class="summary">Homeowner filed a warranty claim for HVAC unit failure. Premier Plan confirmed active. Claim #HW-CLAIM-88421 opened. Contractor assigned — repair appointment scheduled for Mar 3. Customer satisfied with response time.</div>
-        </div>
-        <div class="event">
-          <div class="date">Feb 20, 2026 — 3:00 PM</div>
-          <div class="type">Title Claim</div>
-          <div class="summary">Property owner discovered an undisclosed easement affecting their backyard following purchase. Title insurance claim initiated. Referred to Claims department. Customer provided with claim reference and expected 10-business-day review timeline.</div>
-        </div>
-        <div class="event">
-          <div class="date">Feb 12, 2026 — 10:20 AM</div>
-          <div class="type">Portal Access</div>
-          <div class="summary">Lender's loan processor unable to access the AgentNet® portal to generate a CPL for an upcoming closing. Walked through credential reset. Access restored. Sent eClosing and portal quick-start guide. Closing on track.</div>
-        </div>
-      </div>
-
-      <div class="actions" style="margin-top:22px;">
-        <button class="btn btn-primary"   onclick="showToast('Full call history exported')">Export Call History</button>
-        <button class="btn btn-secondary" onclick="showToastRed('History filtered to fraud & claim events only')">Filter: Fraud & Claims</button>
-      </div>
-    </div>
+    <div class="check-item"><input type="checkbox"><span><strong>Greet:</strong> "Thank you for calling the VF HR Resource Center, how can I help you today?"</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Verify:</strong> Confirm Work Location + Date of Birth. If confidential info is involved, collect additional identifier.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Understand:</strong> Listen to the employee's issue and note key details.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Resolve:</strong> Use Workday and available resources to answer the question or open a ticket.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Log:</strong> Create a Workday case for every call before ending.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Close:</strong> "Is there anything else I can help you with today?"</span></div>
   </div>
 
-</div><!-- end container -->
+</div>
 
 <script>
-  /* TABS */
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById(tab.dataset.tab).classList.add("active");
-    });
-  });
+/* DYNAMIC FIELDS — overridable via URL params */
+const qp = new URLSearchParams(window.location.search);
+function qpOr(key, fallback) { const v = qp.get(key); return (v && v.trim()) ? v : fallback; }
 
-  /* QUERY PARAMS */
-  const qp = new URLSearchParams(window.location.search);
-  function getQP(...keys) { for (let k of keys) { const v = qp.get(k); if (v?.trim()) return v; } return ""; }
-  function cleanPhone(s="") { return s.replace(/[\[\]\(\)]/g,"").trim(); }
+document.getElementById('empFirst').value = qpOr('firstName', '');
+document.getElementById('empLast').value  = qpOr('lastName', '');
+document.getElementById('workLoc').value  = qpOr('workLocation', 'Denver, Colorado');
+document.getElementById('dob').value      = qpOr('dob', '1985-04-12');
 
-  /* DEFAULTS */
-  const defaults = {
-    firstName: "Alex",
-    lastName: "Johnson",
-    phoneNumber: "(714) 555-0192",
-    emailAddress: "alexjohnson@email.com",
-    dateOfBirth: "1984-07-22",
-    mailingAddress: "3725 Birch St, Irvine, CA 92602",
-    accountId: "FAM-20394857",
-    signupDate: "2026-02-28"
-  };
-
-  function setField(id, val) { const el = document.getElementById(id); if (el && val) el.value = val; }
-
-  setField("firstName",      getQP("firstName","FNAME")  || defaults.firstName);
-  setField("lastName",       getQP("lastName","LNAME")   || defaults.lastName);
-  setField("phoneNumber",    cleanPhone(getQP("phoneNumber","PHONE")) || defaults.phoneNumber);
-  setField("emailAddress",   getQP("emailAddress","EMAIL") || defaults.emailAddress);
-  setField("dateOfBirth",    getQP("dateOfBirth","DOB")  || defaults.dateOfBirth);
-  setField("mailingAddress", getQP("mailingAddress","address") || defaults.mailingAddress);
-  setField("accountId",      getQP("accountId","account") || defaults.accountId);
-  setField("signupDate",     getQP("signupDate") || defaults.signupDate);
-
-  /* ACCOUNT BADGE */
-  function updateAccountBadge() {
-    const status = document.getElementById("accountStatus").value;
-    const container = document.getElementById("accountBadgeContainer");
-    if (!status) { container.innerHTML = ""; return; }
-    const map = {
-      active:    { cls: "badge-active",  text: "📂 Active Order" },
-      pending:   { cls: "badge-pending", text: "🕐 Pending / In Process" },
-      closing:   { cls: "badge-gold",    text: "✅ Ready to Close" },
-      closed:    { cls: "badge-navy",    text: "🎉 Closed / Funded" },
-      hold:      { cls: "badge-pending", text: "⏸️ On Hold" },
-      cancelled: { cls: "badge-closed",  text: "❌ Cancelled" },
-      claim:     { cls: "badge-alert",   text: "⚠️ Claim Filed" },
-    };
-    const b = map[status] || { cls: "badge-navy", text: status };
-    container.innerHTML = `<span class="badge ${b.cls}">${b.text}</span>`;
+/* VERIFY TOGGLE */
+function toggleVerify(id) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('pass')) {
+    el.classList.remove('pass'); el.classList.add('fail');
+  } else if (el.classList.contains('fail')) {
+    el.classList.remove('fail');
+  } else {
+    el.classList.add('pass');
   }
-  window.updateAccountBadge = updateAccountBadge;
-  updateAccountBadge();
+  updateVerifyBadge();
+}
 
-  /* CLOSING STEP CYCLE */
-  function cycleStep(el) {
-    const steps = document.querySelectorAll('.closing-step');
-    const idx = Array.from(steps).indexOf(el);
-    steps.forEach((s, i) => {
-      s.classList.remove('done', 'active-step');
-      if (i < idx)  s.classList.add('done');
-      if (i === idx) s.classList.add('active-step');
-    });
-    showToast('Closing stage updated: ' + el.querySelector('.step-label').textContent);
-  }
-  window.cycleStep = cycleStep;
+function updateVerifyBadge() {
+  const work = document.getElementById('vWork');
+  const dob  = document.getElementById('vDob');
+  const badge = document.getElementById('verifyBadge');
+  const anyFail = [work, dob].some(b => b.classList.contains('fail'));
+  const allPass = work.classList.contains('pass') && dob.classList.contains('pass');
 
-  /* TOAST */
-  function showToast(text, type='') {
-    const container = document.getElementById("toastContainer");
-    const toast = document.createElement("div");
-    toast.className = "toast" + (type ? ' ' + type : '');
-    toast.innerText = text + (type === 'red' ? '' : ' ✓');
-    container.appendChild(toast);
-    setTimeout(() => toast.classList.add("show"), 10);
-    setTimeout(() => { toast.classList.remove("show"); setTimeout(() => toast.remove(), 300); }, 3500);
+  if (anyFail) {
+    badge.innerHTML = '<span class="badge badge-failed">⚠ Verification Failed — Do Not Proceed</span>';
+  } else if (allPass) {
+    badge.innerHTML = '<span class="badge badge-verified">✓ Identity Verified</span>';
+  } else {
+    badge.innerHTML = '<span class="badge badge-pending">◑ Pending Verification</span>';
   }
-  function showToastRed(text)  { showToast(text, 'red'); }
-  function showToastGold(text) { showToast(text, 'gold'); }
-  window.showToast = showToast;
-  window.showToastRed = showToastRed;
-  window.showToastGold = showToastGold;
+}
+
+/* REASON PILLS */
+function selectReason(el) {
+  document.querySelectorAll('.reason-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* MARK RESOLVED */
+function markResolved() {
+  document.getElementById('caseStatus').value = 'resolved';
+  showToast('Case marked as resolved ✓');
+}
+
+/* TOAST */
+function showToast(msg) {
+  const c = document.getElementById('toastCont');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  c.appendChild(t);
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 250); }, 2800);
+}
+
+window.toggleVerify = toggleVerify;
+window.selectReason = selectReason;
+window.markResolved = markResolved;
+window.showToast = showToast;
+
+/* Init badge */
+updateVerifyBadge();
 </script>
-
 </body>
 </html>
