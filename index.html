@@ -3,19 +3,23 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>VF Corporation — HR Support Script</title>
+<title>DIRECTV — Employee Support Script</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
+    --navy:    #003865;
+    --blue:    #00629B;
+    --cyan:    #00A6D6;
     --black:   #111111;
     --gray-1:  #333333;
     --gray-2:  #666666;
     --gray-3:  #999999;
     --gray-4:  #CCCCCC;
     --gray-5:  #F0F0F0;
-    --gray-6:  #F7F7F7;
+    --gray-6:  #F7F9FB;
     --white:   #FFFFFF;
-    --accent:  #111111;
+    --accent:  #00629B;
+    --accent-2:#00A6D6;
     --green:   #1A7A4A;
     --green-l: #EAF4EE;
     --amber:   #8A5C00;
@@ -39,9 +43,9 @@
 
   .wrap { max-width: 800px; margin: 0 auto; }
 
-  /* ── HEADER ── */
+  /* HEADER */
   .header {
-    background: var(--black);
+    background: linear-gradient(135deg, var(--navy), var(--blue), var(--cyan));
     color: var(--white);
     border-radius: var(--radius);
     padding: 20px 24px;
@@ -51,29 +55,32 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
+    box-shadow: var(--shadow);
   }
 
   .header-left { display: flex; align-items: center; gap: 14px; }
 
   .logo {
-    width: 40px; height: 40px;
-    background: var(--white);
-    border-radius: 6px;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1rem;
-    color: var(--black); letter-spacing: -1px;
+    font-weight: 700; font-size: 0.92rem;
+    color: var(--white); letter-spacing: -0.4px;
     flex-shrink: 0;
+    backdrop-filter: blur(3px);
   }
 
   .header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.3px; }
-  .header p  { font-size: 0.75rem; opacity: 0.6; margin-top: 2px; }
+  .header p  { font-size: 0.75rem; opacity: 0.88; margin-top: 2px; }
 
-  .header-right { font-size: 0.72rem; opacity: 0.55; text-align: right; line-height: 1.6; }
+  .header-right { font-size: 0.72rem; opacity: 0.9; text-align: right; line-height: 1.6; }
 
-  /* ── CARD ── */
+  /* CARD */
   .card {
     background: var(--white);
-    border: 1px solid #E8E8E8;
+    border: 1px solid #E8EDF2;
     border-radius: var(--radius);
     padding: 22px 24px;
     margin-bottom: 14px;
@@ -85,7 +92,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--gray-2);
+    color: var(--blue);
     margin-bottom: 16px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--gray-5);
@@ -94,7 +101,7 @@
     gap: 7px;
   }
 
-  /* ── FIELDS ── */
+  /* FIELDS */
   label {
     display: block;
     font-size: 0.7rem;
@@ -115,16 +122,19 @@
     color: var(--black);
     background: var(--white);
     margin-bottom: 14px;
-    transition: border-color 0.15s;
+    transition: border-color 0.15s, box-shadow 0.15s;
     outline: none;
   }
-  input:focus, select:focus, textarea:focus { border-color: var(--black); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(0,98,155,0.10);
+  }
   textarea { resize: vertical; min-height: 80px; }
 
   .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media(max-width:580px){ .g2 { grid-template-columns: 1fr; } }
 
-  /* ── SECTION LABEL ── */
+  /* SECTION LABEL */
   .sec {
     font-size: 0.65rem;
     font-weight: 700;
@@ -136,7 +146,7 @@
   }
   .sec::after { content:''; flex:1; height:1px; background: var(--gray-5); }
 
-  /* ── VERIFICATION STATUS ── */
+  /* VERIFICATION STATUS */
   .verify-row {
     display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
   }
@@ -145,49 +155,30 @@
     padding: 10px 14px;
     border-radius: 6px;
     border: 1.5px solid var(--gray-4);
-    background: var(--gray-6);
+    background: #F5FAFD;
     font-size: 0.8rem; font-weight: 600;
     cursor: pointer; transition: all 0.15s;
     font-family: 'Inter', sans-serif;
     text-align: center; color: var(--gray-1);
   }
-  .verify-btn:hover { border-color: var(--black); background: var(--white); }
+  .verify-btn:hover { border-color: var(--blue); background: var(--white); }
   .verify-btn.pass  { background: var(--green-l); border-color: var(--green); color: var(--green); }
   .verify-btn.fail  { background: var(--red-l);   border-color: var(--red);   color: var(--red);   }
 
-  /* ── CALL REASON PILLS ── */
-  .reason-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  .reason-pill {
-    padding: 10px 12px;
-    border: 1.5px solid var(--gray-4);
-    border-radius: 6px;
-    font-size: 0.8rem; font-weight: 500;
-    cursor: pointer; transition: all 0.15s;
-    text-align: center; color: var(--gray-1);
-    background: var(--white);
-  }
-  .reason-pill:hover   { border-color: var(--black); }
-  .reason-pill.active  { background: var(--black); color: var(--white); border-color: var(--black); }
-
-  /* ── CHECKLIST ── */
+  /* CHECKLIST */
   .check-item {
     display: flex; align-items: flex-start; gap: 10px;
     padding: 8px 10px; border-radius: 6px;
     margin-bottom: 4px; font-size: 0.86rem;
     transition: background 0.12s;
   }
-  .check-item:hover { background: var(--gray-6); }
+  .check-item:hover { background: #F5FAFD; }
   .check-item input[type="checkbox"] {
     width: 15px; height: 15px; margin-top: 2px;
-    accent-color: var(--black); cursor: pointer; flex-shrink: 0;
+    accent-color: var(--blue); cursor: pointer; flex-shrink: 0;
   }
 
-  /* ── BADGE ── */
+  /* BADGE */
   .badge {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 3px 10px; border-radius: 999px;
@@ -198,7 +189,7 @@
   .badge-pending  { background: var(--amber-l); color: var(--amber); }
   .badge-failed   { background: var(--red-l);   color: var(--red);   }
 
-  /* ── ACTION BUTTONS ── */
+  /* ACTION BUTTONS */
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
   .btn {
     padding: 10px 20px; border-radius: 6px; border: none;
@@ -206,17 +197,17 @@
     cursor: pointer; transition: all 0.15s;
     font-family: 'Inter', sans-serif;
   }
-  .btn-black  { background: var(--black); color: var(--white); }
-  .btn-black:hover { background: var(--gray-1); }
+  .btn-primary  { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: var(--navy); }
   .btn-ghost  { background: var(--white); border: 1.5px solid var(--gray-4); color: var(--gray-1); }
-  .btn-ghost:hover { border-color: var(--black); color: var(--black); }
+  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
   .btn-green  { background: var(--green-l); color: var(--green); border: 1.5px solid rgba(26,122,74,0.3); }
   .btn-green:hover { background: var(--green); color: var(--white); }
 
-  /* ── TOAST ── */
+  /* TOAST */
   .toast-container { position: fixed; top: 20px; right: 20px; z-index: 999; }
   .toast {
-    background: var(--black); color: var(--white);
+    background: var(--navy); color: var(--white);
     padding: 10px 18px; border-radius: 6px;
     font-size: 0.82rem; font-weight: 500;
     margin-bottom: 8px; opacity: 0;
@@ -235,15 +226,14 @@
   <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="logo">VF</div>
+      <div class="logo">DTV</div>
       <div>
-        <h1>VF HR Support</h1>
+        <h1>DIRECTV Employee Support</h1>
         <p>Internal Employee Support Script</p>
       </div>
     </div>
     <div class="header-right">
-      HR Resource Center<br>
-      5 Agents · ~725 calls/mo
+      DirectTV<br>
     </div>
   </div>
 
@@ -255,7 +245,7 @@
       <div><label>First Name</label><input id="empFirst" placeholder="First name"></div>
       <div><label>Last Name</label><input id="empLast" placeholder="Last name"></div>
       <div><label>Employee ID</label><input id="empId" value="EMP-482910"></div>
-      <div><label>HRC Number (15-digit)</label><input id="hrcNum" value="482-910-374-628-501" maxlength="19"></div>
+      <div><label>Employee Support Number</label><input id="hrcNum" value="482-910-374-628-501" maxlength="19"></div>
       <div><label>Work Location</label><input id="workLoc" placeholder="Office / site / remote"></div>
     </div>
 
@@ -266,7 +256,7 @@
     <div class="verify-row">
       <div class="verify-btn" id="vWork" onclick="toggleVerify('vWork')">📍 Work Location</div>
       <div class="verify-btn" id="vDob"  onclick="toggleVerify('vDob')">🎂 Date of Birth</div>
-      <div class="verify-btn" id="vConf" onclick="toggleVerify('vConf')">🔒 Confidential ID</div>
+      <div class="verify-btn" id="vConf" onclick="toggleVerify('vConf')">🔒 Additional Identifier</div>
     </div>
 
     <div id="verifyBadge"></div>
@@ -292,12 +282,12 @@
     </div>
   </div>
 
-  <!-- 2. WORKDAY CASE -->
+  <!-- 2. CASE MANAGEMENT -->
   <div class="card">
-    <div class="card-title">② Workday Case</div>
+    <div class="card-title">② Employee Case</div>
 
     <div class="g2">
-      <div><label>Case Number (Workday)</label><input id="caseNum" placeholder="Auto-generated or enter manually"></div>
+      <div><label>Case Number</label><input id="caseNum" placeholder="Auto-generated or enter manually"></div>
       <div>
         <label>Case Status</label>
         <select id="caseStatus">
@@ -316,28 +306,27 @@
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-black" onclick="showToast('Workday case saved ✓')">Save Case</button>
+      <button class="btn btn-primary" onclick="showToast('Employee case saved ✓')">Save Case</button>
       <button class="btn btn-ghost" onclick="showToast('Case escalated and routed')">Escalate & Route</button>
       <button class="btn btn-green" onclick="markResolved()">✓ Mark Resolved</button>
     </div>
   </div>
 
-  <!-- 4. CALL WORKFLOW -->
+  <!-- 3. CALL WORKFLOW -->
   <div class="card">
     <div class="card-title">③ Call Checklist</div>
 
-    <div class="check-item"><input type="checkbox"><span><strong>Greet:</strong> "Thank you for calling the VF HR Resource Center, how can I help you today?"</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Verify:</strong> Confirm Work Location + Date of Birth. If confidential info is involved, collect additional identifier.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Understand:</strong> Listen to the employee's issue and note key details.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Resolve:</strong> Use Workday and available resources to answer the question or open a ticket.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Log:</strong> Create a Workday case for every call before ending.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Greet:</strong> "Thank you for calling DIRECTV Employee Support, how can I help you today?"</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Verify:</strong> Confirm Work Location + Date of Birth. If confidential info is involved, collect an additional identifier.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Understand:</strong> Listen to the employee's issue and capture key details.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Resolve:</strong> Use available internal systems and resources to answer the question or open a ticket.</span></div>
+    <div class="check-item"><input type="checkbox"><span><strong>Log:</strong> Create a case for every call before ending.</span></div>
     <div class="check-item"><input type="checkbox"><span><strong>Close:</strong> "Is there anything else I can help you with today?"</span></div>
   </div>
 
 </div>
 
 <script>
-  /* ----- Query Params ----- */
   const qp = new URLSearchParams(window.location.search);
 
   function getQP(...keys) {
@@ -352,11 +341,10 @@
     return input.replace(/[\[\]\(\)]/g,"").trim();
   }
 
-  /* ----- Defaults ----- */
   const defaults = {
     empFirst: "",
     empLast:  "",
-    workLoc:  "Denver, Colorado",
+    workLoc:  "El Segundo, California",
     dob:      "04/12/1985",
     empId:    "EMP-482910",
     hrcNum:   "482-910-374-628-501"
@@ -374,65 +362,54 @@
   setField("empId",    getQP("employeeId", "ACCOUNT", "account")         || defaults.empId);
   setField("hrcNum",   getQP("hrcNumber", "HRC", "hrc")                  || defaults.hrcNum);
 
-/* VERIFY TOGGLE */
-function toggleVerify(id) {
-  const el = document.getElementById(id);
-  if (el.classList.contains('pass')) {
-    el.classList.remove('pass'); el.classList.add('fail');
-  } else if (el.classList.contains('fail')) {
-    el.classList.remove('fail');
-  } else {
-    el.classList.add('pass');
+  function toggleVerify(id) {
+    const el = document.getElementById(id);
+    if (el.classList.contains('pass')) {
+      el.classList.remove('pass'); el.classList.add('fail');
+    } else if (el.classList.contains('fail')) {
+      el.classList.remove('fail');
+    } else {
+      el.classList.add('pass');
+    }
+    updateVerifyBadge();
   }
+
+  function updateVerifyBadge() {
+    const work = document.getElementById('vWork');
+    const dob  = document.getElementById('vDob');
+    const badge = document.getElementById('verifyBadge');
+    const anyFail = [work, dob].some(b => b.classList.contains('fail'));
+    const allPass = work.classList.contains('pass') && dob.classList.contains('pass');
+
+    if (anyFail) {
+      badge.innerHTML = '<span class="badge badge-failed">⚠ Verification Failed — Do Not Proceed</span>';
+    } else if (allPass) {
+      badge.innerHTML = '<span class="badge badge-verified">✓ Identity Verified</span>';
+    } else {
+      badge.innerHTML = '<span class="badge badge-pending">◑ Pending Verification</span>';
+    }
+  }
+
+  function markResolved() {
+    document.getElementById('caseStatus').value = 'resolved';
+    showToast('Case marked as resolved ✓');
+  }
+
+  function showToast(msg) {
+    const c = document.getElementById('toastCont');
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    c.appendChild(t);
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 250); }, 2800);
+  }
+
+  window.toggleVerify = toggleVerify;
+  window.markResolved = markResolved;
+  window.showToast = showToast;
+
   updateVerifyBadge();
-}
-
-function updateVerifyBadge() {
-  const work = document.getElementById('vWork');
-  const dob  = document.getElementById('vDob');
-  const badge = document.getElementById('verifyBadge');
-  const anyFail = [work, dob].some(b => b.classList.contains('fail'));
-  const allPass = work.classList.contains('pass') && dob.classList.contains('pass');
-
-  if (anyFail) {
-    badge.innerHTML = '<span class="badge badge-failed">⚠ Verification Failed — Do Not Proceed</span>';
-  } else if (allPass) {
-    badge.innerHTML = '<span class="badge badge-verified">✓ Identity Verified</span>';
-  } else {
-    badge.innerHTML = '<span class="badge badge-pending">◑ Pending Verification</span>';
-  }
-}
-
-/* REASON PILLS */
-function selectReason(el) {
-  document.querySelectorAll('.reason-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-}
-
-/* MARK RESOLVED */
-function markResolved() {
-  document.getElementById('caseStatus').value = 'resolved';
-  showToast('Case marked as resolved ✓');
-}
-
-/* TOAST */
-function showToast(msg) {
-  const c = document.getElementById('toastCont');
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
-  c.appendChild(t);
-  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
-  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 250); }, 2800);
-}
-
-window.toggleVerify = toggleVerify;
-window.selectReason = selectReason;
-window.markResolved = markResolved;
-window.showToast = showToast;
-
-/* Init badge */
-updateVerifyBadge();
 </script>
 </body>
 </html>
