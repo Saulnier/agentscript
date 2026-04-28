@@ -3,31 +3,29 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DIRECTV — Employee Support Script</title>
+<title>Western Union — Agent Reference</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --navy:    #003865;
-    --blue:    #00629B;
-    --cyan:    #00A6D6;
     --black:   #111111;
     --gray-1:  #333333;
     --gray-2:  #666666;
     --gray-3:  #999999;
     --gray-4:  #CCCCCC;
-    --gray-5:  #F0F0F0;
-    --gray-6:  #F7F9FB;
+    --gray-5:  #EFEFEF;
+    --gray-6:  #F7F7F7;
     --white:   #FFFFFF;
-    --accent:  #00629B;
-    --accent-2:#00A6D6;
+    --gold:    #FFD700;
+    --gold-d:  #C9A800;
     --green:   #1A7A4A;
     --green-l: #EAF4EE;
-    --amber:   #8A5C00;
-    --amber-l: #FEF8EC;
-    --red:     #C0182A;
-    --red-l:   #FDEAED;
-    --radius:  8px;
-    --shadow:  0 2px 12px rgba(0,0,0,0.07);
+    --amber:   #854F0B;
+    --amber-l: #FAEEDA;
+    --amber-b: #EF9F27;
+    --red:     #A32D2D;
+    --red-l:   #FCEBEB;
+    --radius:  10px;
+    --shadow:  0 2px 16px rgba(0,0,0,0.07);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,379 +35,342 @@
     background: var(--gray-6);
     color: var(--black);
     padding: 24px 16px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
   }
 
-  .wrap { max-width: 800px; margin: 0 auto; }
+  .wrap { max-width: 900px; margin: 0 auto; }
 
   /* HEADER */
   .header {
-    background: linear-gradient(135deg, var(--navy), var(--blue), var(--cyan));
-    color: var(--white);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    margin-bottom: 16px;
+    background: var(--black);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 16px 22px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     gap: 12px;
-    box-shadow: var(--shadow);
+    flex-wrap: wrap;
   }
-
   .header-left { display: flex; align-items: center; gap: 14px; }
-
-  .logo {
-    width: 44px; height: 44px;
-    background: rgba(255,255,255,0.16);
-    border: 1px solid rgba(255,255,255,0.28);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.92rem;
-    color: var(--white); letter-spacing: -0.4px;
-    flex-shrink: 0;
-    backdrop-filter: blur(3px);
-  }
-
-  .header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.3px; }
-  .header p  { font-size: 0.75rem; opacity: 0.88; margin-top: 2px; }
-
-  .header-right { font-size: 0.72rem; opacity: 0.9; text-align: right; line-height: 1.6; }
-
-  /* CARD */
-  .card {
-    background: var(--white);
-    border: 1px solid #E8EDF2;
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    margin-bottom: 14px;
-    box-shadow: var(--shadow);
-  }
-
-  .card-title {
-    font-size: 0.68rem;
+  .wu-logo {
+    background: var(--gold);
+    color: var(--black);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--blue);
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--gray-5);
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .header-title { color: #fff; font-size: 14px; font-weight: 600; }
+  .header-sub { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 2px; }
+  .header-right { color: rgba(255,255,255,0.4); font-size: 11px; text-align: right; line-height: 1.7; }
+
+  /* STATUS BAR */
+  .status-bar {
+    background: var(--white);
+    border: 1px solid var(--gray-5);
+    border-top: none;
+    padding: 10px 22px;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 10px;
+    flex-wrap: wrap;
   }
-
-  /* FIELDS */
-  label {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--gray-2);
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    margin-bottom: 5px;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    border: 1.5px solid var(--gray-4);
-    border-radius: 6px;
-    padding: 9px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.88rem;
-    color: var(--black);
-    background: var(--white);
-    margin-bottom: 14px;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    outline: none;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(0,98,155,0.10);
-  }
-  textarea { resize: vertical; min-height: 80px; }
-
-  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media(max-width:580px){ .g2 { grid-template-columns: 1fr; } }
-
-  /* SECTION LABEL */
-  .sec {
-    font-size: 0.65rem;
+  .mtcn-label { font-size: 11px; color: var(--gray-2); }
+  .mtcn-val { font-weight: 600; font-size: 13px; letter-spacing: 0.5px; color: var(--black); }
+  .spacer { flex: 1; }
+  .pill {
+    font-size: 10px;
     font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gray-3);
-    margin: 18px 0 10px;
-    display: flex; align-items: center; gap: 8px;
+    letter-spacing: 0.6px;
   }
-  .sec::after { content:''; flex:1; height:1px; background: var(--gray-5); }
+  .pill-gray   { background: var(--gray-5); color: var(--gray-2); }
+  .pill-amber  { background: var(--amber-l); color: var(--amber); }
+  .pill-green  { background: var(--green-l); color: var(--green); }
+  .pill-red    { background: var(--red-l); color: var(--red); }
 
-  /* VERIFICATION STATUS */
-  .verify-row {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;
+  /* ALERT */
+  .alert {
+    background: var(--amber-l);
+    border-top: 3px solid var(--amber-b);
+    border-left: 1px solid var(--gray-5);
+    border-right: 1px solid var(--gray-5);
+    padding: 12px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
   }
-  .verify-btn {
-    flex: 1; min-width: 120px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1.5px solid var(--gray-4);
-    background: #F5FAFD;
-    font-size: 0.8rem; font-weight: 600;
-    cursor: pointer; transition: all 0.15s;
-    font-family: 'Inter', sans-serif;
-    text-align: center; color: var(--gray-1);
-  }
-  .verify-btn:hover { border-color: var(--blue); background: var(--white); }
-  .verify-btn.pass  { background: var(--green-l); border-color: var(--green); color: var(--green); }
-  .verify-btn.fail  { background: var(--red-l);   border-color: var(--red);   color: var(--red);   }
+  .alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .alert-title { font-weight: 700; font-size: 12px; color: #412402; margin-bottom: 2px; }
+  .alert-body  { font-size: 12px; color: var(--amber); line-height: 1.5; }
 
-  /* CHECKLIST */
-  .check-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 8px 10px; border-radius: 6px;
-    margin-bottom: 4px; font-size: 0.86rem;
-    transition: background 0.12s;
-  }
-  .check-item:hover { background: #F5FAFD; }
-  .check-item input[type="checkbox"] {
-    width: 15px; height: 15px; margin-top: 2px;
-    accent-color: var(--blue); cursor: pointer; flex-shrink: 0;
-  }
-
-  /* BADGE */
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 3px 10px; border-radius: 999px;
-    font-size: 0.68rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .badge-verified { background: var(--green-l); color: var(--green); }
-  .badge-pending  { background: var(--amber-l); color: var(--amber); }
-  .badge-failed   { background: var(--red-l);   color: var(--red);   }
-
-  /* ACTION BUTTONS */
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
-  .btn {
-    padding: 10px 20px; border-radius: 6px; border: none;
-    font-size: 0.82rem; font-weight: 600;
-    cursor: pointer; transition: all 0.15s;
-    font-family: 'Inter', sans-serif;
-  }
-  .btn-primary  { background: var(--blue); color: var(--white); }
-  .btn-primary:hover { background: var(--navy); }
-  .btn-ghost  { background: var(--white); border: 1.5px solid var(--gray-4); color: var(--gray-1); }
-  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
-  .btn-green  { background: var(--green-l); color: var(--green); border: 1.5px solid rgba(26,122,74,0.3); }
-  .btn-green:hover { background: var(--green); color: var(--white); }
-
-  /* TOAST */
-  .toast-container { position: fixed; top: 20px; right: 20px; z-index: 999; }
-  .toast {
-    background: var(--navy); color: var(--white);
-    padding: 10px 18px; border-radius: 6px;
-    font-size: 0.82rem; font-weight: 500;
-    margin-bottom: 8px; opacity: 0;
-    transform: translateY(-6px);
-    transition: all 0.2s; max-width: 280px;
+  /* BODY */
+  .body {
+    border: 1px solid var(--gray-5);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+    background: var(--white);
     box-shadow: var(--shadow);
   }
-  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* SECTION ROWS */
+  .section-row {
+    display: grid;
+    border-bottom: 1px solid var(--gray-5);
+  }
+  .section-row:last-child { border-bottom: none; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .col {
+    padding: 16px 22px;
+    border-right: 1px solid var(--gray-5);
+  }
+  .col:last-child { border-right: none; }
+
+  .col-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--gray-3);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gray-5);
+  }
+
+  /* FIELD ROWS */
+  .field {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px solid #F4F4F4;
+    gap: 8px;
+  }
+  .field:last-child { border-bottom: none; }
+  .fl { font-size: 11px; color: var(--gray-2); white-space: nowrap; flex-shrink: 0; }
+  .fv { font-size: 11px; font-weight: 600; color: var(--black); text-align: right; }
+  .fv.red    { color: var(--red); }
+  .fv.green  { color: var(--green); }
+  .fv.amber  { color: var(--amber); }
+
+  @media(max-width:600px){
+    .cols-2, .cols-3 { grid-template-columns: 1fr; }
+    .col { border-right: none; border-bottom: 1px solid var(--gray-5); }
+    .col:last-child { border-bottom: none; }
+  }
 </style>
 </head>
 <body>
-
-<div class="toast-container" id="toastCont"></div>
 <div class="wrap">
 
   <!-- HEADER -->
   <div class="header">
     <div class="header-left">
-      <div class="logo">DTV</div>
+      <div class="wu-logo">WESTERN UNION</div>
       <div>
-        <h1>DIRECTV Employee Support</h1>
-        <p>Internal Employee Support Script</p>
+        <div class="header-title">Customer Account Reference</div>
+        <div class="header-sub">Genesys Cloud IVR Data Actions — Agent View — Confidential</div>
       </div>
     </div>
     <div class="header-right">
-      DirectTV<br>
+      HR Resource Center<br>
+      Agent-facing · Read only
     </div>
   </div>
 
-  <!-- 1. IDENTITY VERIFICATION -->
-  <div class="card">
-    <div class="card-title">① Identity Verification</div>
-
-    <div class="g2">
-      <div><label>First Name</label><input id="empFirst" placeholder="First name"></div>
-      <div><label>Last Name</label><input id="empLast" placeholder="Last name"></div>
-      <div><label>Employee ID</label><input id="empId" value="EMP-482910"></div>
-      <div><label>Employee Support Number</label><input id="hrcNum" value="482-910-374-628-501" maxlength="19"></div>
-      <div><label>Work Location</label><input id="workLoc" placeholder="Office / site / remote"></div>
-    </div>
-
-    <div><label>Date of Birth (required for all calls)</label><input id="dob" type="text" placeholder="MM/DD/YYYY" style="max-width:220px"></div>
-
-    <div class="sec">Verification Status</div>
-
-    <div class="verify-row">
-      <div class="verify-btn" id="vWork" onclick="toggleVerify('vWork')">📍 Work Location</div>
-      <div class="verify-btn" id="vDob"  onclick="toggleVerify('vDob')">🎂 Date of Birth</div>
-      <div class="verify-btn" id="vConf" onclick="toggleVerify('vConf')">🔒 Additional Identifier</div>
-    </div>
-
-    <div id="verifyBadge"></div>
-
-    <div class="sec">Caller Details</div>
-    <div class="g2">
-      <div>
-        <label>Call Method</label>
-        <select id="callMethod">
-          <option value="office">Office Phone</option>
-          <option value="mobile">Mobile Phone</option>
-          <option value="unknown">Unknown</option>
-        </select>
-      </div>
-      <div>
-        <label>Employee Type</label>
-        <select id="empType">
-          <option value="fulltime">Full-Time</option>
-          <option value="parttime">Part-Time</option>
-          <option value="contractor">Contractor</option>
-        </select>
-      </div>
-    </div>
+  <!-- STATUS BAR -->
+  <div class="status-bar">
+    <span class="mtcn-label">MTCN:</span>
+    <span class="mtcn-val" id="mtcn">4589127346</span>
+    <div class="spacer"></div>
+    <span class="pill pill-gray" id="tierPill">Silver</span>
+    <span class="pill pill-amber" id="statusPill">Pending Correction</span>
   </div>
 
-  <!-- 2. CASE MANAGEMENT -->
-  <div class="card">
-    <div class="card-title">② Employee Case</div>
-
-    <div class="g2">
-      <div><label>Case Number</label><input id="caseNum" placeholder="Auto-generated or enter manually"></div>
-      <div>
-        <label>Case Status</label>
-        <select id="caseStatus">
-          <option value="">— Select —</option>
-          <option value="open">Open</option>
-          <option value="in-progress">In Progress</option>
-          <option value="resolved">Resolved</option>
-          <option value="escalated">Escalated</option>
-        </select>
-      </div>
-    </div>
-
+  <!-- ALERT -->
+  <div class="alert" id="alertBox">
+    <div class="alert-icon">⚠</div>
     <div>
-      <label>Resolution / Notes</label>
-      <textarea id="caseNotes" placeholder="What was done to resolve the issue? Any follow-up needed?"></textarea>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="showToast('Employee case saved ✓')">Save Case</button>
-      <button class="btn btn-ghost" onclick="showToast('Case escalated and routed')">Escalate & Route</button>
-      <button class="btn btn-green" onclick="markResolved()">✓ Mark Resolved</button>
+      <div class="alert-title" id="alertTitle">Receiver name mismatch — transfer blocked</div>
+      <div class="alert-body" id="alertBody">Transfer is blocked until receiver name is corrected. Customer has contacted because receiver could not collect. Correction required before funds can be released.</div>
     </div>
   </div>
 
-  <!-- 3. CALL WORKFLOW -->
-  <div class="card">
-    <div class="card-title">③ Call Checklist</div>
+  <div class="body">
 
-    <div class="check-item"><input type="checkbox"><span><strong>Greet:</strong> "Thank you for calling DIRECTV Employee Support, how can I help you today?"</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Verify:</strong> Confirm Work Location + Date of Birth. If confidential info is involved, collect an additional identifier.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Understand:</strong> Listen to the employee's issue and capture key details.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Resolve:</strong> Use available internal systems and resources to answer the question or open a ticket.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Log:</strong> Create a case for every call before ending.</span></div>
-    <div class="check-item"><input type="checkbox"><span><strong>Close:</strong> "Is there anything else I can help you with today?"</span></div>
+    <!-- ROW 1: Customer + Sender + Receiver -->
+    <div class="section-row cols-3">
+      <div class="col">
+        <div class="col-label">Customer Profile</div>
+        <div class="field"><span class="fl">Customer ID</span><span class="fv" id="custId">WU-208517</span></div>
+        <div class="field"><span class="fl">Phone</span><span class="fv" id="custPhone">+1 (602) 555-0182</span></div>
+        <div class="field"><span class="fl">Email</span><span class="fv" id="custEmail">david.ramirez@emaildemo.com</span></div>
+        <div class="field"><span class="fl">Loyalty</span><span class="fv" id="custLoyalty">2 years</span></div>
+        <div class="field"><span class="fl">Country</span><span class="fv" id="custCountry">United States</span></div>
+        <div class="field"><span class="fl">Language</span><span class="fv" id="custLang">English</span></div>
+      </div>
+      <div class="col">
+        <div class="col-label">Sender Details</div>
+        <div class="field"><span class="fl">Name</span><span class="fv" id="senderName">David Ramirez</span></div>
+        <div class="field"><span class="fl">Location</span><span class="fv" id="senderLoc">Phoenix, Arizona, US</span></div>
+        <div class="field"><span class="fl">ID Verification</span><span class="fv green" id="senderIdV">Verified</span></div>
+        <div class="field"><span class="fl">KYC Status</span><span class="fv green" id="senderKYC">Current</span></div>
+      </div>
+      <div class="col">
+        <div class="col-label">Receiver Details</div>
+        <div class="field"><span class="fl">Name</span><span class="fv" id="receiverName">Sofia Ramirez</span></div>
+        <div class="field"><span class="fl">Location</span><span class="fv" id="receiverLoc">Guadalajara, Mexico</span></div>
+        <div class="field"><span class="fl">Payout Method</span><span class="fv" id="receiverPayout">Cash Pickup</span></div>
+        <div class="field"><span class="fl">Name Match</span><span class="fv red" id="receiverNameMatch">Mismatch</span></div>
+      </div>
+    </div>
+
+    <!-- ROW 2: Transfer Status -->
+    <div class="section-row cols-2">
+      <div class="col">
+        <div class="col-label">Transfer Details</div>
+        <div class="field"><span class="fl">Amount</span><span class="fv" id="txAmount">$320.00 USD</span></div>
+        <div class="field"><span class="fl">Fee</span><span class="fv" id="txFee">$10.50</span></div>
+        <div class="field"><span class="fl">Exchange Rate</span><span class="fv" id="txRate">1 USD = 16.88 MXN</span></div>
+        <div class="field"><span class="fl">Destination Currency</span><span class="fv" id="txDest">MXN</span></div>
+        <div class="field"><span class="fl">Send Date</span><span class="fv" id="txSendDate">May 13, 2026 — 4:10 PM UTC</span></div>
+        <div class="field"><span class="fl">Est. Availability</span><span class="fv" id="txAvailDate">May 13, 2026 — 4:35 PM UTC</span></div>
+        <div class="field"><span class="fl">Purpose</span><span class="fv" id="txPurpose">Family Support</span></div>
+        <div class="field"><span class="fl">Funding Source</span><span class="fv" id="txFunding">Bank Account</span></div>
+        <div class="field"><span class="fl">Corridor</span><span class="fv" id="txCorridor">US-MX</span></div>
+      </div>
+      <div class="col">
+        <div class="col-label">Transfer Status</div>
+        <div class="field"><span class="fl">Current Status</span><span class="fv red" id="txStatus">Pending Correction</span></div>
+        <div class="field"><span class="fl">Status Reason</span><span class="fv red" id="txReason">Receiver Name Mismatch</span></div>
+        <div class="field"><span class="fl">Receiver Paid</span><span class="fv" id="txPaid">Not Paid</span></div>
+        <div class="field"><span class="fl">Availability</span><span class="fv red" id="txAvail">Blocked Until Updated</span></div>
+        <div class="field"><span class="fl">Compliance Hold</span><span class="fv" id="txComp">No</span></div>
+        <div class="field"><span class="fl">Fraud Review</span><span class="fv" id="txFraud">No</span></div>
+      </div>
+    </div>
+
+    <!-- ROW 3: Case + Ticket -->
+    <div class="section-row cols-2">
+      <div class="col">
+        <div class="col-label">Case Summary</div>
+        <div class="field"><span class="fl">Case ID</span><span class="fv" id="caseId">CASE-883227</span></div>
+        <div class="field"><span class="fl">Case Status</span><span class="fv amber" id="caseStat">Pending Customer Update</span></div>
+        <div class="field"><span class="fl">Created</span><span class="fv" id="caseCreated">May 13, 2026 — 4:50 PM UTC</span></div>
+        <div class="field"><span class="fl">Last Updated</span><span class="fv" id="caseUpdated">May 13, 2026 — 5:15 PM UTC</span></div>
+        <div class="field"><span class="fl">Assigned Queue</span><span class="fv" id="caseQueue">Name Correction Review Queue</span></div>
+        <div class="field"><span class="fl">Reopen Count</span><span class="fv" id="caseReopen">0</span></div>
+        <div class="field"><span class="fl">Contact Reason</span><span class="fv" id="caseReason">Receiver could not collect due to name mismatch</span></div>
+      </div>
+      <div class="col">
+        <div class="col-label">Ticket Disposition</div>
+        <div class="field"><span class="fl">Code</span><span class="fv" id="ticketCode">TD-311</span></div>
+        <div class="field"><span class="fl">Label</span><span class="fv" id="ticketLabel">Receiver Name Mismatch</span></div>
+        <div class="field"><span class="fl">Issue Category</span><span class="fv" id="ticketCat">Receiver Details</span></div>
+        <div class="field"><span class="fl">Resolution Type</span><span class="fv" id="ticketRes">Correction Required</span></div>
+        <div class="field"><span class="fl">Containment Eligible</span><span class="fv green" id="ticketContain">Yes</span></div>
+        <div class="field"><span class="fl">Escalation Required</span><span class="fv" id="ticketEsc">No</span></div>
+      </div>
+    </div>
+
   </div>
-
 </div>
 
 <script>
-  const qp = new URLSearchParams(window.location.search);
+const qp = new URLSearchParams(window.location.search);
 
-  function getQP(...keys) {
-    for (let k of keys) {
-      const v = qp.get(k);
-      if (v && v.trim() !== "") return v;
-    }
-    return "";
+function gp(keys, def) {
+  for (let k of (Array.isArray(keys) ? keys : [keys])) {
+    const v = qp.get(k);
+    if (v && v.trim()) return v.trim();
   }
+  return def;
+}
 
-  function cleanPhone(input="") {
-    return input.replace(/[\[\]\(\)]/g,"").trim();
-  }
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el && val !== undefined) el.textContent = val;
+}
 
-  const defaults = {
-    empFirst: "",
-    empLast:  "",
-    workLoc:  "Denver, Colorado",
-    dob:      "04/12/1985",
-    empId:    "EMP-482910",
-    hrcNum:   "482-910-374-628-501"
-  };
+set('mtcn',           gp(['mtcn','MTCN'], '4589127346'));
+set('custId',         gp(['customerId','custId'], 'WU-208517'));
+set('custPhone',      gp(['phone','PHONE'], '+1 (602) 555-0182'));
+set('custEmail',      gp(['email','EMAIL'], 'david.ramirez@emaildemo.com'));
+set('custLoyalty',    gp(['loyalty'], '2 years'));
+set('custCountry',    gp(['country'], 'United States'));
+set('custLang',       gp(['language','lang'], 'English'));
+set('senderName',     gp(['senderName','FNAME'], 'David Ramirez'));
+set('senderLoc',      gp(['senderLocation','senderLoc'], 'Phoenix, Arizona, US'));
+set('senderIdV',      gp(['idVerification'], 'Verified'));
+set('senderKYC',      gp(['kycStatus'], 'Current'));
+set('receiverName',   gp(['receiverName'], 'Sofia Ramirez'));
+set('receiverLoc',    gp(['receiverLocation'], 'Guadalajara, Mexico'));
+set('receiverPayout', gp(['payoutMethod'], 'Cash Pickup'));
+set('receiverNameMatch', gp(['nameMatch'], 'Mismatch'));
+set('txAmount',       gp(['amount'], '$320.00 USD'));
+set('txFee',          gp(['fee'], '$10.50'));
+set('txRate',         gp(['exchangeRate'], '1 USD = 16.88 MXN'));
+set('txDest',         gp(['destCurrency'], 'MXN'));
+set('txSendDate',     gp(['sendDate'], 'May 13, 2026 — 4:10 PM UTC'));
+set('txAvailDate',    gp(['availDate'], 'May 13, 2026 — 4:35 PM UTC'));
+set('txPurpose',      gp(['purpose'], 'Family Support'));
+set('txFunding',      gp(['fundingSource'], 'Bank Account'));
+set('txCorridor',     gp(['corridor'], 'US-MX'));
+set('txStatus',       gp(['txStatus','status'], 'Pending Correction'));
+set('txReason',       gp(['statusReason'], 'Receiver Name Mismatch'));
+set('txPaid',         gp(['receiverPaid'], 'Not Paid'));
+set('txAvail',        gp(['availability'], 'Blocked Until Updated'));
+set('txComp',         gp(['complianceHold'], 'No'));
+set('txFraud',        gp(['fraudReview'], 'No'));
+set('caseId',         gp(['caseId','CASE'], 'CASE-883227'));
+set('caseStat',       gp(['caseStatus'], 'Pending Customer Update'));
+set('caseCreated',    gp(['caseCreated'], 'May 13, 2026 — 4:50 PM UTC'));
+set('caseUpdated',    gp(['caseUpdated'], 'May 13, 2026 — 5:15 PM UTC'));
+set('caseQueue',      gp(['caseQueue'], 'Name Correction Review Queue'));
+set('caseReopen',     gp(['reopenCount'], '0'));
+set('caseReason',     gp(['contactReason'], 'Receiver could not collect due to name mismatch'));
+set('ticketCode',     gp(['ticketCode'], 'TD-311'));
+set('ticketLabel',    gp(['ticketLabel'], 'Receiver Name Mismatch'));
+set('ticketCat',      gp(['issueCategory'], 'Receiver Details'));
+set('ticketRes',      gp(['resolutionType'], 'Correction Required'));
+set('ticketContain',  gp(['containmentEligible'], 'Yes'));
+set('ticketEsc',      gp(['escalationRequired'], 'No'));
 
-  function setField(id, val) {
-    const el = document.getElementById(id);
-    if (el) el.value = val;
-  }
+// Tier pill
+const tier = gp(['tier'], 'Silver');
+document.getElementById('tierPill').textContent = tier;
 
-  setField("empFirst", getQP("firstName", "FNAME", "fname")              || defaults.empFirst);
-  setField("empLast",  getQP("lastName",  "LNAME", "lname")              || defaults.empLast);
-  setField("workLoc",  getQP("workLocation", "ADDRESS", "address")       || defaults.workLoc);
-  setField("dob",      getQP("dateOfBirth", "DOB", "dob", "START_DATE")  || defaults.dob);
-  setField("empId",    getQP("employeeId", "ACCOUNT", "account")         || defaults.empId);
-  setField("hrcNum",   getQP("hrcNumber", "HRC", "hrc")                  || defaults.hrcNum);
+// Status pill color
+const status = gp(['txStatus','status'], 'Pending Correction');
+const statusEl = document.getElementById('statusPill');
+statusEl.textContent = status;
+const sl = status.toLowerCase();
+if (sl.includes('pending') || sl.includes('blocked') || sl.includes('correction')) {
+  statusEl.className = 'pill pill-amber';
+} else if (sl.includes('paid') || sl.includes('complete') || sl.includes('available')) {
+  statusEl.className = 'pill pill-green';
+} else if (sl.includes('fraud') || sl.includes('hold') || sl.includes('fail')) {
+  statusEl.className = 'pill pill-red';
+} else {
+  statusEl.className = 'pill pill-gray';
+}
 
-  function toggleVerify(id) {
-    const el = document.getElementById(id);
-    if (el.classList.contains('pass')) {
-      el.classList.remove('pass'); el.classList.add('fail');
-    } else if (el.classList.contains('fail')) {
-      el.classList.remove('fail');
-    } else {
-      el.classList.add('pass');
-    }
-    updateVerifyBadge();
-  }
-
-  function updateVerifyBadge() {
-    const work = document.getElementById('vWork');
-    const dob  = document.getElementById('vDob');
-    const badge = document.getElementById('verifyBadge');
-    const anyFail = [work, dob].some(b => b.classList.contains('fail'));
-    const allPass = work.classList.contains('pass') && dob.classList.contains('pass');
-
-    if (anyFail) {
-      badge.innerHTML = '<span class="badge badge-failed">⚠ Verification Failed — Do Not Proceed</span>';
-    } else if (allPass) {
-      badge.innerHTML = '<span class="badge badge-verified">✓ Identity Verified</span>';
-    } else {
-      badge.innerHTML = '<span class="badge badge-pending">◑ Pending Verification</span>';
-    }
-  }
-
-  function markResolved() {
-    document.getElementById('caseStatus').value = 'resolved';
-    showToast('Case marked as resolved ✓');
-  }
-
-  function showToast(msg) {
-    const c = document.getElementById('toastCont');
-    const t = document.createElement('div');
-    t.className = 'toast';
-    t.textContent = msg;
-    c.appendChild(t);
-    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
-    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 250); }, 2800);
-  }
-
-  window.toggleVerify = toggleVerify;
-  window.markResolved = markResolved;
-  window.showToast = showToast;
-
-  updateVerifyBadge();
+// Alert
+const alertTitle = gp(['alertTitle'], 'Receiver name mismatch — transfer blocked');
+const alertBody  = gp(['alertBody'], 'Transfer is blocked until receiver name is corrected. Customer has contacted because receiver could not collect. Correction required before funds can be released.');
+set('alertTitle', alertTitle);
+set('alertBody', alertBody);
+if (alertTitle === 'none') {
+  document.getElementById('alertBox').style.display = 'none';
+}
 </script>
 </body>
 </html>
